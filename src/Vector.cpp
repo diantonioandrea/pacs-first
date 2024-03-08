@@ -135,8 +135,6 @@ namespace pacs {
             ost << vector.elements[j] << ", ";
         }
 
-        ost << vector.elements[vector.size - 1];
-
-        return ost << ")";
+        return ost << vector.elements[vector.size - 1] << ")";
     }
 }
