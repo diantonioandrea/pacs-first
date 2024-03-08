@@ -1,6 +1,10 @@
+/* 
+PACS - First Challenge.
+Andrea Di Antonio, 10655477.
+*/
+
 #include <iostream>
 
-// Custom headers.
 #include "include/Vector.hpp"
 
 int main(int argc, char **argv) {

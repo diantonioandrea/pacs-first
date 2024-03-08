@@ -1,3 +1,4 @@
+# PACS - First Challenge
 .PHONY: all
 CPPFLAGS ?= -Wall -pedantic -std=c++20 -O2 -pipe -mtune=native -march=native
 

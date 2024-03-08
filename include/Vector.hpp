@@ -1,3 +1,8 @@
+/* 
+PACS - First Challenge.
+Andrea Di Antonio, 10655477.
+*/
+
 #ifndef VECTOR_PACS
 #define VECTOR_PACS
 
