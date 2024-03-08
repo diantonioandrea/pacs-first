@@ -16,6 +16,10 @@ Andrea Di Antonio, 10655477.
 
 namespace pacs {
 
+    // Aliases.
+    using Strategy = Real (*) (const Data &, const Parameters &);
+    using Routine = Vector (*) (const Data &);
+
     // Solver's data.
     // Data that changes during the solver's main cycle.
     struct Data {
@@ -33,7 +37,7 @@ namespace pacs {
 
     // SOLVER.
 
-    std::pair<Vector, bool> solver(const Target &, const Parameters &, Vector (*routine) (const Data &), Real (*strategy) (const Data &, const Parameters &));
+    std::pair<Vector, bool> solver(const Target &, const Parameters &, Routine routine, Strategy strategy);
     std::pair<Vector, bool> solver(const Target &, const Parameters &); // Default routine and strategy.
 
     // ROUTINES: Return X_{k + 1}.

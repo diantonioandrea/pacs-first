@@ -9,7 +9,7 @@ namespace pacs {
 
     // SOLVER.
 
-    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Vector (*routine) (const Data &), Real (*strategy) (const Data &, const Parameters &)) {
+    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Routine routine, Strategy strategy) {
         // X_0.
         Vector point = parameters.start, next = point;
 
