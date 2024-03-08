@@ -10,7 +10,7 @@ Andrea Di Antonio, 10655477.
 #include <cmath>
 
 // Real type, parameters and vectors.
-#include "Types.hpp"
+#include "Type.hpp"
 #include "Parameters.hpp"
 #include "Vector.hpp"
 

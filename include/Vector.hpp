@@ -23,7 +23,7 @@ Andrea Di Antonio, 10655477.
 #include <iostream>
 
 // Real type.
-#include "Types.hpp"
+#include "Type.hpp"
 
 namespace pacs {
 

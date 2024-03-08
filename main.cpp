@@ -8,7 +8,7 @@ Andrea Di Antonio, 10655477.
 #include <vector>
 
 // PACS headers.
-#include "include/Types.hpp"
+#include "include/Type.hpp"
 #include "include/Vector.hpp"
 #include "include/Parameters.hpp"
 #include "include/Solver.hpp"

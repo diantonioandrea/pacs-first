@@ -7,7 +7,7 @@ Andrea Di Antonio, 10655477.
 #define PARAMETERS_PACS
 
 // Real type and vectors.
-#include "Types.hpp"
+#include "Type.hpp"
 #include "Vector.hpp"
 
 namespace pacs {
