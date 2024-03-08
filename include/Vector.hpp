@@ -279,6 +279,14 @@ namespace pacs {
             Vector &operator /=(const std::floating_point auto &operand) {
                 return *this = *this / operand;
             }
+
+            friend Vector operator *(const std::integral auto &operand, const Vector &vector) {
+                return *this * static_cast<Real>(operand);
+            }
+
+            friend Vector operator *(const std::floating_point auto &operand, const Vector &vector) {
+                return *this * static_cast<Real>(operand);
+            }
             
             // Constexpr methods.
             constexpr size_t get_size() const {
