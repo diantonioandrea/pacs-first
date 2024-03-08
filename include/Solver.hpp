@@ -16,28 +16,28 @@ Andrea Di Antonio, 10655477.
 
 namespace pacs {
 
-    // Data.
-    struct Solver_Data {
+    // Solver's data.
+    struct Data {
         Target target; // f(x), Df(x).
         Vector point; // X_k.
-        size_t step; // K.
+        size_t step; // K-th step.
     };
 
     // SOLVERS.
 
     // Newton.
-    std::pair<Vector, bool> newton_solver(const Target &, const Parameters &, Real (*strategy) (const Solver_Data &, const Parameters &));
+    std::pair<Vector, bool> newton_solver(const Target &, const Parameters &, Real (*strategy) (const Data &, const Parameters &));
     
     // STRATEGIES.
 
     // Exponential.
-    Real exponential_strategy(const Solver_Data &, const Parameters &);
+    Real exponential_strategy(const Data &, const Parameters &);
 
     // Inverse.
-    Real inverse_strategy(const Solver_Data &, const Parameters &);
+    Real inverse_strategy(const Data &, const Parameters &);
 
     // Armijo.
-    Real armijo_strategy(const Solver_Data &, const Parameters &);
+    Real armijo_strategy(const Data &, const Parameters &);
 
 }
 

@@ -290,7 +290,7 @@ namespace pacs {
             }
             
             // Constexpr methods.
-            constexpr size_t get_size() const {
+            constexpr size_t length() const {
                 return this->size;
             }
 

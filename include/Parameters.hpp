@@ -35,13 +35,13 @@ namespace pacs {
     // Default target function and its gradient.
     struct Target {
         Real target_function(const Vector &x) const {
-            assert(x.get_size() == 2);
+            assert(x.length() == 2);
 
             return x[0] * x[1] + 4 * std::pow(x[0], 4) + std::pow(x[1], 2) + 3 * x[0];
         }
 
         Vector target_gradient(const Vector &x) const {
-            assert(x.get_size() == 2);
+            assert(x.length() == 2);
 
             Vector gradient = Vector(2);
 
