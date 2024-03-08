@@ -32,15 +32,14 @@ namespace pacs {
         Real strategy_sigma = 0.25L; // Armijo.
     };
 
+    // Default target function and its gradient.
     struct Target {
-        // Default target function.
         Real target_function(const Vector &x) const {
             assert(x.get_size() == 2);
 
             return x[0] * x[1] + 4 * std::pow(x[0], 4) + std::pow(x[1], 2) + 3 * x[0];
         }
 
-        // Default target gradient function.
         Vector target_gradient(const Vector &x) const {
             assert(x.get_size() == 2);
 
