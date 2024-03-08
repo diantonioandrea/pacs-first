@@ -21,5 +21,13 @@ int main(int argc, char **argv) {
     std::cout << pacs::solver(target, parameters, pacs::newton_routine, pacs::inverse_strategy).first << std::endl;
     std::cout << pacs::solver(target, parameters, pacs::newton_routine, pacs::armijo_strategy).first << std::endl;
 
+    std::cout << pacs::solver(target, parameters, pacs::hb_routine, pacs::exponential_strategy).first << std::endl;
+    std::cout << pacs::solver(target, parameters, pacs::hb_routine, pacs::inverse_strategy).first << std::endl;
+    std::cout << pacs::solver(target, parameters, pacs::hb_routine, pacs::armijo_strategy).first << std::endl;
+
+    std::cout << pacs::solver(target, parameters, pacs::nesterov_routine, pacs::exponential_strategy).first << std::endl;
+    std::cout << pacs::solver(target, parameters, pacs::nesterov_routine, pacs::inverse_strategy).first << std::endl;
+    std::cout << pacs::solver(target, parameters, pacs::nesterov_routine, pacs::armijo_strategy).first << std::endl;
+
     return 0;
 }
