@@ -22,10 +22,10 @@ Andrea Di Antonio, 10655477.
 // Output.
 #include <iostream>
 
-namespace pacs {
+// Real type.
+#include "Types.hpp"
 
-    // Real alias.
-    using Real = long double;
+namespace pacs {
 
     // Real vectors.
     class Vector {
