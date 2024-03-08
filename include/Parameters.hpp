@@ -10,7 +10,7 @@ Andrea Di Antonio, 10655477.
 
 namespace pacs {
     
-    // Slpha strategy.
+    // Alpha strategy.
     enum Strategy {Exponential, Inverse, Armijo};
 
     // Default parameters.
@@ -28,7 +28,7 @@ namespace pacs {
         // Maximum number of iterations.
         size_t max_iter = 10000;
 
-        // Alpha rule.
+        // Alpha strategy.
         Strategy strategy = Armijo;
 
         // Strategy parameters.
