@@ -16,6 +16,9 @@ Andrea Di Antonio, 10655477.
 #include <initializer_list>
 #include <concepts>
 
+// Math.
+#include <cmath>
+
 // Output.
 #include <iostream>
 
@@ -211,9 +214,8 @@ namespace pacs {
             Real &operator [](const size_t &);
 
             // METHODS.
-            
-            // Dot product.
             Real dot(const Vector &) const;
+            Real norm() const;
             
             // OPERATIONS.
 

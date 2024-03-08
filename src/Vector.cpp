@@ -63,6 +63,11 @@ namespace pacs {
         return result;
     }
 
+    Real Vector::norm() const {
+        return std::sqrt(this->dot(*this));
+    }
+
+
     // Unary operations.
     Vector Vector::operator +() const {
         return *this;
