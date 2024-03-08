@@ -7,10 +7,12 @@ Andrea Di Antonio, 10655477.
 #include <iostream>
 #include <vector>
 
-// PACS headers.
+// Real type, vectors and default parameters.
 #include "include/Type.hpp"
 #include "include/Vector.hpp"
 #include "include/Parameters.hpp"
+
+// Solver.
 #include "include/Solver.hpp"
 
 int main(int argc, char **argv) {
