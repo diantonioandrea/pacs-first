@@ -17,9 +17,9 @@ int main(int argc, char **argv) {
     pacs::Target target;
     pacs::Parameters parameters;
 
-    std::cout << pacs::newton_solver(target, parameters, pacs::exponential_strategy).first << std::endl;
-    std::cout << pacs::newton_solver(target, parameters, pacs::inverse_strategy).first << std::endl;
-    std::cout << pacs::newton_solver(target, parameters, pacs::armijo_strategy).first << std::endl;
+    std::cout << pacs::solver(target, parameters, pacs::exponential_strategy).first << std::endl;
+    std::cout << pacs::solver(target, parameters, pacs::inverse_strategy).first << std::endl;
+    std::cout << pacs::solver(target, parameters, pacs::armijo_strategy).first << std::endl;
 
     return 0;
 }

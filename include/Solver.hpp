@@ -23,10 +23,9 @@ namespace pacs {
         size_t step; // K-th step.
     };
 
-    // SOLVERS.
+    // SOLVER.
 
-    // Newton.
-    std::pair<Vector, bool> newton_solver(const Target &, const Parameters &, Real (*strategy) (const Data &, const Parameters &));
+    std::pair<Vector, bool> solver(const Target &, const Parameters &, Real (*strategy) (const Data &, const Parameters &));
     
     // STRATEGIES.
 

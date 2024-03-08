@@ -11,7 +11,7 @@ namespace pacs {
     // SOLVERS.
 
     // Newton.
-    std::pair<Vector, bool> newton_solver(const Target &target, const Parameters &parameters, Real (*strategy) (const Data &, const Parameters &)) {
+    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Real (*strategy) (const Data &, const Parameters &)) {
         // X_k.
         Vector point = parameters.start;
 
