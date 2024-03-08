@@ -38,24 +38,27 @@ namespace pacs {
         Real strategy_sigma = 0.25L; // Armijo.
     };
 
-    // Default target function.
-    Real target(const Vector &x) {
-        assert(x.get_size() == 2);
+    struct Target {
+        // Default target function.
+        Real target_function(const Vector &x) {
+            assert(x.get_size() == 2);
 
-        return x[0] * x[1] + 4 * std::pow(x[0], 4) + std::pow(x[1], 2) + 3 * x[0];
-    }
+            return x[0] * x[1] + 4 * std::pow(x[0], 4) + std::pow(x[1], 2) + 3 * x[0];
+        }
 
-    // Default target gradient function.
-    Vector target_gradient(const Vector &x) {
-        assert(x.get_size() == 2);
+        // Default target gradient function.
+        Vector target_gradient(const Vector &x) {
+            assert(x.get_size() == 2);
 
-        Vector gradient = Vector(2);
+            Vector gradient = Vector(2);
 
-        gradient[0] = x[1] + 16 * std::pow(x[0], 3) + 3;
-        gradient[1] = x[0] + (2 * x[1]);
+            gradient[0] = x[1] + 16 * std::pow(x[0], 3) + 3;
+            gradient[1] = x[0] + (2 * x[1]);
 
-        return gradient;
-    }
+            return gradient;
+        }
+    };
+    
 }
 
 #endif

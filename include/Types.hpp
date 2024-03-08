@@ -10,6 +10,7 @@ namespace pacs {
     
     // Real alias.
     using Real = long double;
+    
 }
 
 #endif
