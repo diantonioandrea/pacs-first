@@ -281,11 +281,11 @@ namespace pacs {
             }
 
             friend Vector operator *(const std::integral auto &operand, const Vector &vector) {
-                return *this * static_cast<Real>(operand);
+                return vector * static_cast<Real>(operand);
             }
 
             friend Vector operator *(const std::floating_point auto &operand, const Vector &vector) {
-                return *this * static_cast<Real>(operand);
+                return vector * static_cast<Real>(operand);
             }
             
             // Constexpr methods.
