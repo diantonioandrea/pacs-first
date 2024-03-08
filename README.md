@@ -12,7 +12,7 @@
 
 This code implements a few methods for the solution of the following problem:
 
-$\underline{x} = \argmin \{ f(\underline{y}) \colon \underline{y} \in \R \}$.
+$\underline{x} = \text{argmin} \{ f(\underline{y}) \colon \underline{y} \in \mathbb{R} \}$.
 
 In particular, it implements the following routines:
 
