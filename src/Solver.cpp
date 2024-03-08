@@ -11,23 +11,23 @@ namespace pacs {
 
     std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Routine routine, Strategy strategy) {
         // X_0.
-        Vector point = parameters.start, next = point;
+        Vector current = parameters.start, next = current;
 
         // Alpha_0.
         Real step_size = parameters.alpha;
 
         // Return value.
-        std::pair<Vector, bool> result = {point, true};
+        std::pair<Vector, bool> result = {current, true};
 
         // Solver's data initialization.
-        Data data{target, point, point, step_size, 0};
+        Data data{target, current, current, step_size, 0};
 
         for(size_t k = 0; k < parameters.max_iter; ++k) {
             // Evaluates the next point with the given routine.
             next = routine(data); // X_{k + 1}.
 
             // Control on the step length.
-            if((next - point).norm() < parameters.step_tolerance) {
+            if((next - current).norm() < parameters.step_tolerance) {
                 result.first = next;
                 return result;
             }
@@ -39,11 +39,11 @@ namespace pacs {
             }
 
             // X_{k - 1} and X_{k}.
-            data.previous = point;
-            data.point = next;
+            data.previous = current;
+            data.current = next;
 
             // X_{k + 1} -> X_k.
-            point = next;
+            current = next;
 
             // Updates data.step*.
             data.step_size = step_size;
@@ -68,22 +68,22 @@ namespace pacs {
 
     // Newton.
     Vector newton_routine(const Data &data) {
-        return data.point - (data.step_size * data.target.target_gradient(data.point));
+        return data.current - (data.step_size * data.target.target_gradient(data.current));
     }
 
     // Heavy-Ball.
     Vector hb_routine(const Data &data) {
         Real strategy_eta = (data.step_size < 1.0L) ? 1.0L - data.step_size : 0.9L;
 
-        return data.point - (data.step_size * data.target.target_gradient(data.point)) + strategy_eta * (data.point - data.previous);
+        return data.current - (data.step_size * data.target.target_gradient(data.current)) + strategy_eta * (data.current - data.previous);
     }
 
     // Nesterov.
     Vector nesterov_routine(const Data &data) {
         Real strategy_eta = (data.step_size < 1.0L) ? 1.0L - data.step_size : 0.9L;
 
-        Vector partial = data.point + strategy_eta * (data.point - data.previous);
-        return partial - data.step_size * data.target.target_gradient(data.point);
+        Vector partial = data.current + strategy_eta * (data.current - data.previous);
+        return partial - data.step_size * data.target.target_gradient(data.current);
     }
 
     // STRATEGIES.
@@ -101,14 +101,14 @@ namespace pacs {
     // Armijo.
     Real armijo_strategy(const Data &data, const Parameters &parameters) {
         // Target function and gradient at X_k.
-        Real target_point = data.target.target_function(data.point);
-        Vector gradient_point = data.target.target_gradient(data.point);
+        Real target_point = data.target.target_function(data.current);
+        Vector gradient_point = data.target.target_gradient(data.current);
 
         // Alpha_k.
         Real step_size = parameters.alpha;
 
         // Armijo strategy.
-        while(target_point - data.target.target_function(data.point - step_size * gradient_point) < parameters.strategy_sigma * step_size * std::pow(gradient_point.norm(), 2)) {
+        while(target_point - data.target.target_function(data.current - step_size * gradient_point) < parameters.strategy_sigma * step_size * std::pow(gradient_point.norm(), 2)) {
             step_size /= 2.0L;
         }
 

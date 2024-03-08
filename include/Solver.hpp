@@ -16,10 +16,6 @@ Andrea Di Antonio, 10655477.
 
 namespace pacs {
 
-    // Aliases.
-    using Strategy = Real (*) (const Data &, const Parameters &);
-    using Routine = Vector (*) (const Data &);
-
     // Solver's data.
     // Data that changes during the solver's main cycle.
     struct Data {
@@ -27,13 +23,17 @@ namespace pacs {
         const Target target;
 
         // Points.
-        Vector point; // X_k.
+        Vector current; // X_k.
         Vector previous; // X_{k - 1}.
 
         // Step data.
         Real step_size; // K-th step size.
         size_t step_index; // K-th step index (K).
     };
+
+    // Aliases.
+    using Strategy = Real (*) (const Data &, const Parameters &);
+    using Routine = Vector (*) (const Data &);
 
     // SOLVER.
 
