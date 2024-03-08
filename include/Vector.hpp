@@ -9,8 +9,10 @@
 
 // For constructors.
 #include <initializer_list>
-
 #include <concepts>
+
+// Output.
+#include <iostream>
 
 namespace pacs {
 
@@ -25,6 +27,8 @@ namespace pacs {
 
         public:
             
+            // CONSTRUCTORS and COPY.
+
             // Constructors.
             Vector();
             Vector(const size_t &);
@@ -197,36 +201,85 @@ namespace pacs {
                 return *this;
             }
 
-            // Methods.
-            // ...
+            // Access.
+            Real operator [](const size_t &) const;
+            Real &operator [](const size_t &);
+
+            // METHODS.
+            
+            // Dot product.
+            Real dot(const Vector &) const;
+            
+            // OPERATIONS.
 
             // Unary operations.
             Vector operator +() const;
             Vector operator -() const;
 
-            // Operations.
+            // Binary operations.
+
+            // Vector sums.
             Vector operator +(const Vector &) const;
             Vector operator -(const Vector &) const;
-
-            Vector operator *(const std::floating_point auto &) const;
-            Vector operator /(const std::floating_point auto &) const;
-
-            Vector operator *(const std::integral auto &) const;
-            Vector operator /(const std::integral auto &) const;
-
             Vector &operator +=(const Vector &);
             Vector &operator -=(const Vector &);
 
-            Vector &operator *=(const std::floating_point auto &);
-            Vector &operator /=(const std::floating_point auto &);
+            // Scalar products.
+            Vector operator *(const std::floating_point auto &operand) const {
+                Vector result = Vector(this->size);
 
-            Vector &operator *=(const std::integral auto &);
-            Vector &operator /=(const std::integral auto &);
+                auto elements_it = this->elements.begin();
+
+                for(auto &result_it: result.elements) {
+                    result_it = (*elements_it++) * static_cast<Real>(operand);
+                }
+
+                return result;
+            }
+
+            Vector operator /(const std::floating_point auto &operand) const {
+                Vector result = Vector(this->size);
+                
+                auto elements_it = this->elements.begin();
+
+                for(auto &result_it: result.elements) {
+                    result_it = (*elements_it++) / static_cast<Real>(operand);
+                }
+
+                return result;
+            }
+
+            Vector operator *(const std::integral auto &operand) const {
+                return *this * static_cast<Real>(operand);
+            }
+
+            Vector operator /(const std::integral auto &operand) const {
+                return *this / static_cast<Real>(operand);
+            }
+
+            Vector &operator *=(const std::integral auto &operand) {
+                return *this = *this * operand;
+            }
+
+            Vector &operator /=(const std::integral auto &operand) {
+                return *this = *this / operand;
+            }
+
+            Vector &operator *=(const std::floating_point auto &operand) {
+                return *this = *this * operand;
+            }
+
+            Vector &operator /=(const std::floating_point auto &operand) {
+                return *this = *this / operand;
+            }
             
             // Constexpr methods.
             constexpr size_t get_size() const {
                 return this->size;
-            } 
+            }
+
+            // Output.
+            friend std::ostream &operator <<(std::ostream &, const Vector &);
     };
 
 }

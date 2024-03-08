@@ -31,6 +31,51 @@ namespace pacs {
         return *this;
     }
 
+    // Access.
+    Real Vector::operator [](const size_t &index) const {
+        assert(index < this->size);
+
+        return this->elements[index];
+    }
+
+    Real &Vector::operator [](const size_t &index) {
+        assert(index < this->size);
+
+        return this->elements[index];
+    }
+
+    // Methods.
+    Real Vector::dot(const Vector &vector) const {
+        assert(this->size == vector.size);
+
+        Real result = 0.0L;
+
+        auto values_it = vector.elements.begin();
+        for(auto &elements_it: this->elements) {
+            result += elements_it * *values_it++;
+        }
+
+        return result;
+    }
+
+    // Unary operations.
+    Vector Vector::operator +() const {
+        return *this;
+    }
+
+    Vector Vector::operator -() const {
+        Vector result = Vector(this->size);
+
+        auto elements_it = this->elements.begin();
+
+        for(auto &result_it: result.elements) {
+            result_it = -(*elements_it++);
+        }
+
+        return result;
+    }
+
+
     // Operations.
     Vector Vector::operator +(const Vector &operand) const {
         assert(this->size == operand.size);
@@ -60,38 +105,6 @@ namespace pacs {
         return result;
     }
 
-    Vector Vector::operator *(const std::floating_point auto &operand) const {
-        Vector result = Vector(this->size);
-
-        auto elements_it = this->elements.begin();
-
-        for(auto &result_it: result.elements) {
-            result_it = (*elements_it++) * static_cast<Real>(operand);
-        }
-
-        return result;
-    }
-
-    Vector Vector::operator /(const std::floating_point auto &operand) const {
-        Vector result = Vector(this->size);
-        
-        auto elements_it = this->elements.begin();
-
-        for(auto &result_it: result.elements) {
-            result_it = (*elements_it++) / static_cast<Real>(operand);
-        }
-
-        return result;
-    }
-
-    Vector Vector::operator *(const std::integral auto &operand) const {
-        return *this * static_cast<Real>(operand);
-    }
-
-    Vector Vector::operator /(const std::integral auto &operand) const {
-        return *this / static_cast<Real>(operand);
-    }
-
     Vector &Vector::operator +=(const Vector &operand) {
         assert(this->size == operand.size);
 
@@ -104,21 +117,16 @@ namespace pacs {
         return *this = *this - operand;
     }
 
-    Vector &Vector::operator *=(const std::integral auto &operand) {
-        return *this = *this * operand;
+    // Output.
+    std::ostream &operator <<(std::ostream &ost, const Vector &vector) {
+        ost << "(";
+
+        for(size_t j = 0; j < vector.size - 1; ++j) {
+            ost << vector.elements[j] << ", ";
+        }
+
+        ost << vector.elements[vector.size - 1];
+
+        return ost << ")";
     }
-
-    Vector &Vector::operator /=(const std::integral auto &operand) {
-        return *this = *this / operand;
-    }
-
-    Vector &Vector::operator *=(const std::floating_point auto &operand) {
-        return *this = *this * operand;
-    }
-
-    Vector &Vector::operator /=(const std::floating_point auto &operand) {
-        return *this = *this / operand;
-    }
-
-
 }
