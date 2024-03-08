@@ -46,10 +46,13 @@ namespace pacs {
             template<std::floating_point type>
             Vector(const size_t &N, const std::vector<type> &values): size(N) {
                 // Initializes a vector from a std::vector.
+                #ifndef NDEBUG
                 assert(N > 0);
                 assert(N == values.size());
+                #endif
 
-                this->elements.clear();
+                // Clears and resizes the elements vector.
+                this->elements.clear(); // Probably useless.
                 this->elements.resize(N);
 
                 auto values_it = values.begin();
@@ -61,8 +64,10 @@ namespace pacs {
             template<std::integral type>
             Vector(const size_t &N, const std::vector<type> &values): size(N) {
                 // Initializes a vector from an integral std::vector.
+                #ifndef NDEBUG
                 assert(N > 0);
                 assert(N == values.size());
+                #endif
 
                 this->elements.clear();
                 this->elements.resize(N);
@@ -76,8 +81,10 @@ namespace pacs {
             template<std::floating_point type>
             Vector(const size_t &N, const std::initializer_list<type> &values): size(N) {
                 // Initializes a vector from a std::initializer_list.
+                #ifndef NDEBUG
                 assert(N > 0);
                 assert(N == values.size());
+                #endif
 
                 this->elements.clear();
                 this->elements.resize(N);
@@ -91,8 +98,10 @@ namespace pacs {
             template<std::integral type>
             Vector(const size_t &N, const std::initializer_list<type> &values): size(N) {
                 // Initializes a vector from an integral std::initializer_list.
+                #ifndef NDEBUG
                 assert(N > 0);
                 assert(N == values.size());
+                #endif
 
                 this->elements.clear();
                 this->elements.resize(N);
@@ -106,8 +115,10 @@ namespace pacs {
             template<std::floating_point type, size_t M>
             Vector(const size_t &N, const std::array<type, M> &values): size(N) {
                 // Initializes a vector from a std::array.
+                #ifndef NDEBUG
                 assert(N > 0);
                 assert(N == M);
+                #endif
 
                 this->elements.clear();
                 this->elements.resize(N);
@@ -121,8 +132,10 @@ namespace pacs {
             template<std::integral type, size_t M>
             Vector(const size_t &N, const std::array<type, M> &values): size(N) {
                 // Initializes a vector from an integral std::array.
+                #ifndef NDEBUG
                 assert(N > 0);
                 assert(N == M);
+                #endif
 
                 this->elements.clear();
                 this->elements.resize(N);
@@ -140,7 +153,9 @@ namespace pacs {
             // Behave in a similar fashion as previous constructors.
             template<std::floating_point type>
             Vector &operator =(const std::vector<type> &values) {
+                #ifndef NDEBUG
                 assert(this->size == values.size());
+                #endif
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -152,7 +167,9 @@ namespace pacs {
 
             template<std::integral type>
             Vector &operator =(const std::vector<type> &values) {
+                #ifndef NDEBUG
                 assert(this->size == values.size());
+                #endif
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -164,7 +181,9 @@ namespace pacs {
 
             template<std::floating_point type>
             Vector &operator =(const std::initializer_list<type> &values) {
+                #ifndef NDEBUG
                 assert(this->size == values.size());
+                #endif
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -176,7 +195,9 @@ namespace pacs {
 
             template<std::integral type>
             Vector &operator =(const std::initializer_list<type> &values) {
+                #ifndef NDEBUG
                 assert(this->size == values.size());
+                #endif
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -188,7 +209,9 @@ namespace pacs {
 
             template<std::floating_point type, size_t M>
             Vector &operator =(const std::array<type, M> &values) {
-                static_assert(this->size == M);
+                #ifndef NDEBUG
+                assert(this->size == M);
+                #endif
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -200,7 +223,9 @@ namespace pacs {
 
             template<std::integral type, size_t M>
             Vector &operator =(const std::array<type, M> &values) {
-                static_assert(this->size == M);
+                #ifndef NDEBUG
+                assert(this->size == M);
+                #endif
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {

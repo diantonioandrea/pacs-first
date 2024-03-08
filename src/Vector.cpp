@@ -18,7 +18,9 @@ namespace pacs {
 
     Vector::Vector(const size_t &N): size(N) {
         // Initializes an empty vector.
+        #ifndef NDEBUG
         assert(N > 0);
+        #endif
 
         this->elements.clear();
         this->elements.resize(N);
@@ -37,7 +39,9 @@ namespace pacs {
 
     // Copy (=).
     Vector &Vector::operator =(const Vector &vector) {
+        #ifndef NDEBUG
         assert(this->size == vector.size);
+        #endif
 
         auto values_it = vector.elements.begin();
         for(auto &elements_it: this->elements) {
@@ -49,20 +53,26 @@ namespace pacs {
 
     // Access.
     Real Vector::operator [](const size_t &index) const {
+        #ifndef NDEBUG
         assert(index < this->size);
+        #endif
 
         return this->elements[index];
     }
 
     Real &Vector::operator [](const size_t &index) {
+        #ifndef NDEBUG
         assert(index < this->size);
+        #endif
 
         return this->elements[index];
     }
 
     // Methods.
     Real Vector::dot(const Vector &vector) const {
+        #ifndef NDEBUG
         assert(this->size == vector.size);
+        #endif
 
         Real result = 0.0L;
 
@@ -77,7 +87,6 @@ namespace pacs {
     Real Vector::norm() const {
         return std::sqrt(this->dot(*this));
     }
-
 
     // Unary operations.
     Vector Vector::operator +() const {
@@ -99,7 +108,10 @@ namespace pacs {
 
     // Operations.
     Vector Vector::operator +(const Vector &vector) const {
+        #ifndef NDEBUG
         assert(this->size == vector.size);
+        #endif
+
         Vector result = Vector(this->size);
 
         auto values_it = vector.elements.begin();
@@ -113,7 +125,10 @@ namespace pacs {
     }
 
     Vector Vector::operator -(const Vector &vector) const {
+        #ifndef NDEBUG
         assert(this->size == vector.size);
+        #endif
+
         Vector result = Vector(this->size);
 
         auto values_it = vector.elements.begin();
@@ -127,13 +142,17 @@ namespace pacs {
     }
 
     Vector &Vector::operator +=(const Vector &vector) {
+        #ifndef NDEBUG
         assert(this->size == vector.size);
+        #endif
 
         return *this = *this + vector;
     }
 
     Vector &Vector::operator -=(const Vector &vector) {
+        #ifndef NDEBUG
         assert(this->size == vector.size);
+        #endif
 
         return *this = *this - vector;
     }
