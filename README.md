@@ -12,23 +12,23 @@
 
 This code implements a few methods for the solution of the following problem:
 
-$\bm{x} = \argmin \{ f(\bm{y}) \colon \bm{y} \in \R \}$.
+$\underline{x} = \argmin \{ f(\underline{y}) \colon \underline{y} \in \R \}$.
 
 In particular, it implements the following routines:
 
 - Newton: 
     
-    $\bm{x}_{k + 1} = \bm{x}_k - \alpha_k \bm{\nabla} f(\bm{x})$;
+    $\underline{x}_{k + 1} = \underline{x}_k - \alpha_k \underline{\nabla} f(\underline{x})$;
 
 - Heavy-Ball:
 
-    $\bm{x}_{k + 1} = \bm{x}_k - \alpha_k \bm{\nabla} f(\bm{x}) + \eta (x_k - x_{k - 1})$;
+    $\underline{x}_{k + 1} = \underline{x}_k - \alpha_k \underline{\nabla} f(\underline{x}) + \eta (x_k - x_{k - 1})$;
 
 - Nesterov:
 
-    $\bm{y} = \bm{x}_k + \eta (x_k - x_{k - 1})$,
+    $\underline{y} = \underline{x}_k + \eta (x_k - x_{k - 1})$,
 
-    $\bm{x}_{k + 1} = \bm{y} - \alpha_k \bm{\nabla} f(\bm{y})$.
+    $\underline{x}_{k + 1} = \underline{y} - \alpha_k \underline{\nabla} f(\underline{y})$.
 
 With the following strategies for $\alpha_k$, given $\mu$ and $\sigma$:
 
@@ -42,7 +42,7 @@ With the following strategies for $\alpha_k$, given $\mu$ and $\sigma$:
 
 - Armijo:
 
-    $\alpha_{k} = \alpha \colon f(\bm{x_k}) - f(\bm{x_k} - \alpha \bm{\nabla} f(\bm{x}_k)) \geq \sigma \alpha \lVert \bm{\nabla} f(\bm{x}_k) \rVert^2$.
+    $\alpha_{k} = \alpha \colon f(\underline{x_k}) - f(\underline{x_k} - \alpha \underline{\nabla} f(\underline{x}_k)) \geq \sigma \alpha \lVert \underline{\nabla} f(\underline{x}_k) \rVert^2$.
 
 ## Getting Started
 
