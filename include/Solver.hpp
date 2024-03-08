@@ -26,23 +26,24 @@ namespace pacs {
         Vector previous; // X_{k - 1}.
 
         // Step data.
-        size_t step; // K-th step.
+        Real step_size; // K-th step size.
+        size_t step_index; // K-th step index (K).
     };
 
     // SOLVER.
 
-    std::pair<Vector, bool> solver(const Target &, const Parameters &, Vector (*routine) (const Data &, const Real &), Real (*strategy) (const Data &, const Parameters &));
+    std::pair<Vector, bool> solver(const Target &, const Parameters &, Vector (*routine) (const Data &), Real (*strategy) (const Data &, const Parameters &));
 
     // ROUTINES: Return X_{k + 1}.
 
     // Newton.
-    Vector newton_routine(const Data &, const Real &);
+    Vector newton_routine(const Data &);
 
     // Heavy-Ball.
-    Vector hb_routine(const Data &, const Real &);
+    Vector hb_routine(const Data &);
 
     // Nesterov.
-    Vector nesterov_routine(const Data &, const Real &);
+    Vector nesterov_routine(const Data &);
     
     // STRATEGIES: Return Alpha_{k + 1}.
 
