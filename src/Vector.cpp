@@ -82,11 +82,11 @@ namespace pacs {
 
 
     // Operations.
-    Vector Vector::operator +(const Vector &operand) const {
-        assert(this->size == operand.size);
+    Vector Vector::operator +(const Vector &vector) const {
+        assert(this->size == vector.size);
         Vector result = Vector(this->size);
 
-        auto values_it = operand.elements.begin();
+        auto values_it = vector.elements.begin();
         auto elements_it = this->elements.begin();
 
         for(auto &result_it: result.elements) {
@@ -96,11 +96,11 @@ namespace pacs {
         return result;
     }
 
-    Vector Vector::operator -(const Vector &operand) const {
-        assert(this->size == operand.size);
+    Vector Vector::operator -(const Vector &vector) const {
+        assert(this->size == vector.size);
         Vector result = Vector(this->size);
 
-        auto values_it = operand.elements.begin();
+        auto values_it = vector.elements.begin();
         auto elements_it = this->elements.begin();
 
         for(auto &result_it: result.elements) {
@@ -110,16 +110,16 @@ namespace pacs {
         return result;
     }
 
-    Vector &Vector::operator +=(const Vector &operand) {
-        assert(this->size == operand.size);
+    Vector &Vector::operator +=(const Vector &vector) {
+        assert(this->size == vector.size);
 
-        return *this = *this + operand;
+        return *this = *this + vector;
     }
 
-    Vector &Vector::operator -=(const Vector &operand) {
-        assert(this->size == operand.size);
+    Vector &Vector::operator -=(const Vector &vector) {
+        assert(this->size == vector.size);
 
-        return *this = *this - operand;
+        return *this = *this - vector;
     }
 
     // Output.
