@@ -11,9 +11,9 @@ namespace pacs {
     // SOLVERS.
 
     // Newton.
-    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Real (*strategy) (const Data &, const Parameters &)) {
+    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Vector (*routine) (const Data &, const Real &), Real (*strategy) (const Data &, const Parameters &)) {
         // X_k.
-        Vector point = parameters.start;
+        Vector point = parameters.start, next = parameters.start;
 
         // Alpha_k.
         Real step_size = parameters.alpha;
@@ -22,11 +22,11 @@ namespace pacs {
         std::pair<Vector, bool> result = {point, true};
 
         // Solver's data.
-        Data data{target, point, 0};
+        Data data{target, point, point, 0};
 
         for(size_t k = 0; k < parameters.max_iter; ++k) {
-            Vector gradient_point = target.target_gradient(point);
-            Vector next = point - (step_size * gradient_point); // X_{k + 1}.
+            // Evaluates the next point with the given routine.
+            next = routine(data, step_size); // X_{k + 1}.
 
             // Control on the step length.
             if((next - point).norm() < parameters.step_tolerance) {
@@ -35,10 +35,13 @@ namespace pacs {
             }
 
             // Control on the residual.
-            if((gradient_point).norm() < parameters.residual_tolerance) {
+            if((target.target_gradient(next)).norm() < parameters.residual_tolerance) {
                 result.first = next;
                 return result;
             }
+
+            // X_{k - 1}.
+            data.previous = point;
 
             // X_{k + 1} -> X_k.
             point = next;
@@ -55,6 +58,28 @@ namespace pacs {
         // Returns just the initial guess.
         result.second = false;
         return result;
+    }
+
+    // ROUTINES.
+
+    // Newton.
+    Vector newton_routine(const Data &data, const Real &step_size) {
+        return data.point - (step_size * data.target.target_gradient(data.point));
+    }
+
+    // Heavy-Ball.
+    Vector hb_routine(const Data &data, const Real &step_size) {
+        Real strategy_eta = (step_size < 1.0L) ? 1.0L - step_size : 0.9L;
+
+        return data.point - (step_size * data.target.target_gradient(data.point)) + strategy_eta * (data.point - data.previous);
+    }
+
+    // Nesterov.
+    Vector nesterov_routine(const Data &data, const Real &step_size) {
+        Real strategy_eta = (step_size < 1.0L) ? 1.0L - step_size : 0.9L;
+
+        Vector partial = data.point + strategy_eta * (data.point - data.previous);
+        return partial - step_size * data.target.target_gradient(data.point);
     }
 
     // STRATEGIES.
