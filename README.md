@@ -19,7 +19,7 @@ git clone https://github.com/diantonioandrea/pacs-first
 Compile the code with:
 
 ```bash
-make compile
+make all
 ```
 
 Or simply by:
