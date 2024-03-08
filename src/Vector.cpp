@@ -24,6 +24,17 @@ namespace pacs {
         this->elements.resize(N);
     }
 
+    Vector::Vector(const Vector &vector): size(vector.size) {
+        // Initializes a vector from a vector.
+        this->elements.clear();
+        this->elements.resize(this->size);
+
+        auto values_it = vector.elements.begin();
+        for(auto &elements_it: this->elements) {
+            elements_it = static_cast<Real>(*values_it++);
+        }
+    }
+
     // Copy (=).
     Vector &Vector::operator =(const Vector &vector) {
         assert(this->size == vector.size);

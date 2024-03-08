@@ -40,6 +40,7 @@ namespace pacs {
             // Constructors.
             Vector();
             Vector(const size_t &);
+            Vector(const Vector &);
 
             // Concept constructors.
             template<std::floating_point type>
