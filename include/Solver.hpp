@@ -17,9 +17,10 @@ Andrea Di Antonio, 10655477.
 namespace pacs {
 
     // Solver's data.
+    // Data that changes during the solver's main cycle.
     struct Data {
         // Functions.
-        Target target; // f(x), Df(x).
+        const Target target;
 
         // Points.
         Vector point; // X_k.
@@ -33,28 +34,19 @@ namespace pacs {
     // SOLVER.
 
     std::pair<Vector, bool> solver(const Target &, const Parameters &, Vector (*routine) (const Data &), Real (*strategy) (const Data &, const Parameters &));
+    std::pair<Vector, bool> solver(const Target &, const Parameters &); // Default routine and strategy.
 
     // ROUTINES: Return X_{k + 1}.
 
-    // Newton.
-    Vector newton_routine(const Data &);
-
-    // Heavy-Ball.
-    Vector hb_routine(const Data &);
-
-    // Nesterov.
-    Vector nesterov_routine(const Data &);
+    Vector newton_routine(const Data &); // Newton.
+    Vector hb_routine(const Data &); // Heavy-Ball.
+    Vector nesterov_routine(const Data &); // Nesterov.
     
     // STRATEGIES: Return Alpha_{k + 1}.
 
-    // Exponential.
-    Real exponential_strategy(const Data &, const Parameters &);
-
-    // Inverse.
-    Real inverse_strategy(const Data &, const Parameters &);
-
-    // Armijo.
-    Real armijo_strategy(const Data &, const Parameters &);
+    Real exponential_strategy(const Data &, const Parameters &); // Exponential.
+    Real inverse_strategy(const Data &, const Parameters &); // Inverse.
+    Real armijo_strategy(const Data &, const Parameters &); // Armijo.
 
 }
 

@@ -4,13 +4,11 @@ Andrea Di Antonio, 10655477.
 */
 
 #include "../include/Solver.hpp"
-#include <iostream>
 
 namespace pacs {
 
-    // SOLVERS.
+    // SOLVER.
 
-    // Newton.
     std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Vector (*routine) (const Data &), Real (*strategy) (const Data &, const Parameters &)) {
         // X_0.
         Vector point = parameters.start, next = point;
@@ -40,16 +38,16 @@ namespace pacs {
                 return result;
             }
 
-            // X_{k - 1}.
+            // X_{k - 1} and X_{k}.
             data.previous = point;
+            data.point = next;
 
             // X_{k + 1} -> X_k.
             point = next;
 
-            // Updates data.
+            // Updates data.step*.
             data.step_size = step_size;
             data.step_index = k;
-            data.point = next;
 
             // Evaluates the next step size with the given strategy.
             step_size = strategy(data, parameters);
@@ -59,6 +57,11 @@ namespace pacs {
         // Returns just the initial guess.
         result.second = false;
         return result;
+    }
+
+    // Default routine (Newton) and strategy (Armijo).
+    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters) {
+        return solver(target, parameters, newton_routine, armijo_strategy);
     }
 
     // ROUTINES.
