@@ -121,11 +121,13 @@ namespace pacs {
             }
 
             // Copy (=).
+            Vector &operator =(const Vector &);
+
             // Methods which copy values from the following structures into this->elements.
             // Behave in a similar fashion as previous constructors.
             template<std::floating_point type>
             Vector &operator =(const std::vector<type> &values) {
-                assert(this->get_size() == values.size());
+                assert(this->size == values.size());
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -137,7 +139,7 @@ namespace pacs {
 
             template<std::integral type>
             Vector &operator =(const std::vector<type> &values) {
-                assert(this->get_size() == values.size());
+                assert(this->size == values.size());
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -149,7 +151,7 @@ namespace pacs {
 
             template<std::floating_point type>
             Vector &operator =(const std::initializer_list<type> &values) {
-                assert(this->get_size() == values.size());
+                assert(this->size == values.size());
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -161,7 +163,7 @@ namespace pacs {
 
             template<std::integral type>
             Vector &operator =(const std::initializer_list<type> &values) {
-                assert(this->get_size() == values.size());
+                assert(this->size == values.size());
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -173,7 +175,7 @@ namespace pacs {
 
             template<std::floating_point type, size_t M>
             Vector &operator =(const std::array<type, M> &values) {
-                static_assert(this->get_size() == M);
+                static_assert(this->size == M);
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -185,7 +187,7 @@ namespace pacs {
 
             template<std::integral type, size_t M>
             Vector &operator =(const std::array<type, M> &values) {
-                static_assert(this->get_size() == M);
+                static_assert(this->size == M);
                 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -198,9 +200,29 @@ namespace pacs {
             // Methods.
             // ...
 
-            // Operations.
-            // ...
+            // Unary operations.
+            Vector operator +() const;
+            Vector operator -() const;
 
+            // Operations.
+            Vector operator +(const Vector &) const;
+            Vector operator -(const Vector &) const;
+
+            Vector operator *(const std::floating_point auto &) const;
+            Vector operator /(const std::floating_point auto &) const;
+
+            Vector operator *(const std::integral auto &) const;
+            Vector operator /(const std::integral auto &) const;
+
+            Vector &operator +=(const Vector &);
+            Vector &operator -=(const Vector &);
+
+            Vector &operator *=(const std::floating_point auto &);
+            Vector &operator /=(const std::floating_point auto &);
+
+            Vector &operator *=(const std::integral auto &);
+            Vector &operator /=(const std::integral auto &);
+            
             // Constexpr methods.
             constexpr size_t get_size() const {
                 return this->size;
