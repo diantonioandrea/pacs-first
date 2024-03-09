@@ -6,6 +6,8 @@ Andrea Di Antonio, 10655477.
 #ifndef PARAMETERS_PACS
 #define PARAMETERS_PACS
 
+#include <iostream>
+
 // Real type and vectors.
 #include "Vector.hpp"
 
@@ -31,6 +33,11 @@ namespace pacs {
         Real strategy_sigma = 0.25L; // Armijo.
     };
     
+    // Reading parameters from a JSON file.
+    Parameters read_json(std::string const &filename);
+
+    // Parameters output.
+    std::ostream &operator <<(std::ostream &, const Parameters &);
 }
 
 #endif

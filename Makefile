@@ -8,7 +8,7 @@ SOURCE = main.cpp
 OBJECT = main.o
 
 # Headers' .cpp files to be compiled.
-OBJECTS = Vector.o Solver.o
+OBJECTS = Vector.o Solver.o Parameters.o
 
 # Rules.
 all: $(EXEC)
