@@ -18,7 +18,7 @@ namespace pacs {
         std::ifstream file(filename);
         if(!(file)) {
             if(verbose)
-                std::cout << "Loaded default parameters:\n" << defaults << std::endl;
+                std::cout << "\nLoaded default parameters:\n" << defaults;
 
             return defaults;
         }
@@ -36,7 +36,7 @@ namespace pacs {
         returns.strategy_sigma = json_file.value("strategy_sigma", defaults.strategy_sigma);
 
         if(verbose)
-            std::cout << "Loaded:\n" << defaults << std::endl;
+            std::cout << "\nLoaded:\n" << returns;
 
         return returns;
     }
