@@ -9,13 +9,21 @@ namespace pacs {
 
     // Vector.
 
-    // Simple constrcutors.
+    /**
+     * @brief Construct a new Vector object.
+     * 
+     */
     Vector::Vector(): size(1) {
         // Initializes an empty 1D vector.
         this->elements.clear();
         this->elements.resize(1);
     }
 
+    /**
+     * @brief Construct a new Vector object of a given size.
+     * 
+     * @param N 
+     */
     Vector::Vector(const size_t &N): size(N) {
         // Initializes an empty vector.
         #ifndef NDEBUG
@@ -30,6 +38,11 @@ namespace pacs {
         }
     }
 
+    /**
+     * @brief Construct a new Vector object from a given vector.
+     * 
+     * @param vector 
+     */
     Vector::Vector(const Vector &vector): size(vector.size) {
         // Initializes a vector from a vector.
         this->elements.clear();
@@ -41,7 +54,12 @@ namespace pacs {
         }
     }
 
-    // Copy (=).
+    /**
+     * @brief Vector copy.
+     * 
+     * @param vector 
+     * @return Vector& 
+     */
     Vector &Vector::operator =(const Vector &vector) {
         #ifndef NDEBUG
         assert(this->size == vector.size);
@@ -55,7 +73,12 @@ namespace pacs {
         return *this;
     }
 
-    // Access.
+    /**
+     * @brief Const [] access operator.
+     * 
+     * @param index 
+     * @return Real 
+     */
     Real Vector::operator [](const size_t &index) const {
         #ifndef NDEBUG
         assert(index < this->size);
@@ -64,6 +87,12 @@ namespace pacs {
         return this->elements[index];
     }
 
+    /**
+     * @brief [] access operator.
+     * 
+     * @param index 
+     * @return Real& 
+     */
     Real &Vector::operator [](const size_t &index) {
         #ifndef NDEBUG
         assert(index < this->size);
@@ -72,7 +101,12 @@ namespace pacs {
         return this->elements[index];
     }
 
-    // Methods.
+    /**
+     * @brief Dot product.
+     * 
+     * @param vector 
+     * @return Real 
+     */
     Real Vector::dot(const Vector &vector) const {
         #ifndef NDEBUG
         assert(this->size == vector.size);
@@ -88,15 +122,29 @@ namespace pacs {
         return result;
     }
 
+    /**
+     * @brief Euclidean norm.
+     * 
+     * @return Real 
+     */
     Real Vector::norm() const {
         return std::sqrt(this->dot(*this));
     }
 
-    // Unary operations.
+    /**
+     * @brief Unary + operator.
+     * 
+     * @return Vector 
+     */
     Vector Vector::operator +() const {
         return *this;
     }
 
+    /**
+     * @brief Unary - operator.
+     * 
+     * @return Vector 
+     */
     Vector Vector::operator -() const {
         Vector result = Vector(this->size);
 
@@ -109,8 +157,12 @@ namespace pacs {
         return result;
     }
 
-
-    // Operations.
+    /**
+     * @brief + operator.
+     * 
+     * @param vector 
+     * @return Vector 
+     */
     Vector Vector::operator +(const Vector &vector) const {
         #ifndef NDEBUG
         assert(this->size == vector.size);
@@ -128,6 +180,12 @@ namespace pacs {
         return result;
     }
 
+    /**
+     * @brief - operator.
+     * 
+     * @param vector 
+     * @return Vector 
+     */
     Vector Vector::operator -(const Vector &vector) const {
         #ifndef NDEBUG
         assert(this->size == vector.size);
@@ -145,6 +203,12 @@ namespace pacs {
         return result;
     }
 
+    /**
+     * @brief += operator.
+     * 
+     * @param vector 
+     * @return Vector& 
+     */
     Vector &Vector::operator +=(const Vector &vector) {
         #ifndef NDEBUG
         assert(this->size == vector.size);
@@ -153,6 +217,12 @@ namespace pacs {
         return *this = *this + vector;
     }
 
+    /**
+     * @brief -= operator.
+     * 
+     * @param vector 
+     * @return Vector& 
+     */
     Vector &Vector::operator -=(const Vector &vector) {
         #ifndef NDEBUG
         assert(this->size == vector.size);
@@ -161,7 +231,13 @@ namespace pacs {
         return *this = *this - vector;
     }
 
-    // Output.
+    /**
+     * @brief << operator.
+     * 
+     * @param ost 
+     * @param vector 
+     * @return std::ostream& 
+     */
     std::ostream &operator <<(std::ostream &ost, const Vector &vector) {
         ost << "(";
 

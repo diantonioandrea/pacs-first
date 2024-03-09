@@ -1,14 +1,19 @@
 #include "../include/Parameters.hpp"
 
-// Files.
 #include <string>
 #include <fstream>
 
-// JSON.
 #include "../include/json.hpp"
 
 namespace pacs {
-    // Reading parameters from a JSON file.
+    
+    /**
+     * @brief Reads parameters from a JSON file.
+     * 
+     * @param filename 
+     * @param verbose 
+     * @return Parameters 
+     */
     Parameters read_json(std::string const &filename, const bool &verbose) {
 
         // Default and return values.
@@ -41,7 +46,13 @@ namespace pacs {
         return returns;
     }
 
-    // Parameters output.
+    /**
+     * @brief Prints a parameters struct.
+     * 
+     * @param ost 
+     * @param params 
+     * @return std::ostream& 
+     */
     std::ostream &operator <<(std::ostream &ost, const Parameters &params) {
         ost << "start: " << params.start << std::endl;
 

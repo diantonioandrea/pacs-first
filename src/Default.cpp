@@ -2,7 +2,12 @@
 
 namespace pacs {
 
-    // Default functions definition.
+    /**
+     * @brief Default target function.
+     * 
+     * @param x 
+     * @return Real 
+     */
     Real target_func(const Vector &x) {
         #ifndef NDEBUG
         assert(x.length() == 2);
@@ -11,6 +16,12 @@ namespace pacs {
         return x[0] * x[1] + 4 * std::pow(x[0], 4) + std::pow(x[1], 2) + 3 * x[0];
     }
 
+    /**
+     * @brief Default target gradient.
+     * 
+     * @param x 
+     * @return Vector 
+     */
     Vector target_grad(const Vector &x) {
         #ifndef NDEBUG
         assert(x.length() == 2);

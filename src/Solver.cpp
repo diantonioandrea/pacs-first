@@ -7,17 +7,16 @@ Andrea Di Antonio, 10655477.
 
 namespace pacs {
 
-    // SOLVER.
-
+    /**
+     * @brief Solver function for the minimum problem.
+     * 
+     * @param target Target struct containing the target function and gradient.
+     * @param params Parameters struct containing the solver parameters.
+     * @param routine Solver routine for the next X value.
+     * @param strategy Solver strategy for the next Alpha value.
+     * @return Data 
+     */
     Data solver(const Target &target, const Parameters &params, Routine routine, Strategy strategy) {
-        /*
-        Arguments:
-        - Target target: The target function (target.function) and its gradient (target.gradient).
-        - Parameters params: The solver parameters such as the starting value for both X and Alpha, the values for mu and sigma,
-            the value of maximum iterations and the tolerances.
-        - Routine routine: The routine which evaluates the next point for the gradient descent.
-        - Strategy strategy: The strategy which evaluates the next value for Alpha.
-        */
         #ifndef NDEBUG
         assert(params.alpha > 0.0L);
 
@@ -64,26 +63,45 @@ namespace pacs {
         return data;
     }
 
-    // Default routine (Newton) and strategy (Armijo).
+    /**
+     * @brief Default solver routine (Newton) and strategy (Armijo).
+     * 
+     * @param target 
+     * @param params 
+     * @return Data 
+     */
     Data solver(const Target &target, const Parameters &params) {
         return solver(target, params, newton_routine, armijo_strategy);
     }
 
-    // ROUTINES.
-
-    // Newton.
+    /**
+     * @brief Newton routine.
+     * 
+     * @param data 
+     * @return Vector 
+     */
     Vector newton_routine(const Data &data) {
         return data.current - (data.size * data.target.gradient(data.current));
     }
 
-    // Heavy-Ball.
+    /**
+     * @brief Heavy-Ball routine.
+     * 
+     * @param data 
+     * @return Vector 
+     */
     Vector hb_routine(const Data &data) {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
         return data.current - (data.size * data.target.gradient(data.current)) + strategy_eta * (data.current - data.previous);
     }
 
-    // Nesterov.
+    /**
+     * @brief Nesterov routine.
+     * 
+     * @param data 
+     * @return Vector 
+     */
     Vector nesterov_routine(const Data &data) {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
@@ -91,19 +109,35 @@ namespace pacs {
         return partial - data.size * data.target.gradient(data.current);
     }
 
-    // STRATEGIES.
-
-    // Exponential decay.
+    /**
+     * @brief Exponential decay strategy.
+     * 
+     * @param data 
+     * @param params 
+     * @return Real 
+     */
     Real exponential_strategy(const Data &data, const Parameters &params) {
         return params.alpha * std::exp(- params.strategy_mu * static_cast<Real>(data.index));
     }
 
-    // Inverse decay.
+    /**
+     * @brief Inverse decay strategy.
+     * 
+     * @param data 
+     * @param params 
+     * @return Real 
+     */
     Real inverse_strategy(const Data &data, const Parameters &params) {
         return params.alpha / (1.0L + params.strategy_mu * static_cast<Real>(data.index));
     }
 
-    // Armijo.
+    /**
+     * @brief Armijo strategy.
+     * 
+     * @param data 
+     * @param params 
+     * @return Real 
+     */
     Real armijo_strategy(const Data &data, const Parameters &params) {
         // Target function and gradient at X_k.
         Real target_point = data.target.function(data.current);

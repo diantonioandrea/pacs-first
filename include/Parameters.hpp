@@ -8,35 +8,25 @@ Andrea Di Antonio, 10655477.
 
 #include <iostream>
 
-// Real type and vectors.
 #include "Vector.hpp"
 
 namespace pacs {
 
-    // Default parameters.
+    /**
+     * @brief Parameters structure.
+     * 
+     */
     struct Parameters {
-        // X_0.
         Vector start = Vector(2);
-
-        // Alpha_0.
         Real alpha = 1.0E-1L;
-
-        // Tolerances.
         Real step_tolerance = 1.0E-6L;
         Real residual_tolerance = 1.0E-6L;
-        
-        // Maximum number of iterations.
         size_t max_iterations = 10000;
-
-        // Strategy parameters.
-        Real strategy_mu = 0.2L; // Decays.
-        Real strategy_sigma = 0.25L; // Armijo.
+        Real strategy_mu = 0.2L;
+        Real strategy_sigma = 0.25L;
     };
     
-    // Reading parameters from a JSON file.
     Parameters read_json(const std::string &, const bool &);
-
-    // Parameters output.
     std::ostream &operator <<(std::ostream &, const Parameters &);
 }
 

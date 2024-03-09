@@ -8,12 +8,10 @@ Andrea Di Antonio, 10655477.
 
 #include <iostream>
 
-// Real type and vectors.
 #include "Vector.hpp"
 
 namespace pacs {
 
-    // Default targets.
     Real target_func(const Vector &x);
     Vector target_grad(const Vector &x);
 

@@ -7,16 +7,16 @@ Andrea Di Antonio, 10655477.
 #define ARGUMENTS_PACS
 
 #include <iostream>
-
-// Filename.
 #include <string>
 
-// Routines and strategies
 #include "../include/Solver.hpp"
 
 namespace pacs {
 
-    // Arguments struct.
+    /**
+     * @brief Arguments structure.
+     * 
+     */
     struct Arguments {
         bool verbose = false;
         bool s_strategy = false;

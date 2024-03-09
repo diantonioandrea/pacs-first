@@ -4,14 +4,9 @@ Implementation of a *gradient method for the minimization of a multivariate func
 
 ## Contents
 
-- [Description](#description)
 - [Getting Started](#getting-started)
     - [Cloning the repository](#cloning-the-repository)
     - [Compiling and Executing the Code](#compiling-and-executing-the-code)
-
-## Description
-
-Refer to [DOCS.md](./docs/DOCS.md)
 
 ## Getting Started
 
