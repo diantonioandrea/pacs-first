@@ -21,7 +21,10 @@ pacs::Vector target_grad(const pacs::Vector &x);
 
 int main(int argc, char **argv) {
     pacs::Target target;
-    pacs::Parameters parameters;
+    pacs::Parameters parameters = pacs::read_json("parameters.json");
+
+    // Prints the current parameters.
+    std::cout << "Parameters:\n" << parameters << std::endl;
 
     // Using default targets.
     target.function = target_func;
