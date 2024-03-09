@@ -9,27 +9,27 @@ namespace pacs {
 
     // SOLVER.
 
-    Data solver(const Target &target, const Parameters &parameters, Routine routine, Strategy strategy) {
+    Data solver(const Target &target, const Parameters &params, Routine routine, Strategy strategy) {
         #ifndef NDEBUG
-        assert(parameters.alpha > 0.0L);
+        assert(params.alpha > 0.0L);
 
-        assert(parameters.step_tolerance > 0.0L);
-        assert(parameters.residual_tolerance > 0.0L);
+        assert(params.step_tolerance > 0.0L);
+        assert(params.residual_tolerance > 0.0L);
 
-        assert(parameters.max_iterations > 0);
+        assert(params.max_iterations > 0);
 
-        assert(parameters.strategy_mu > 0);
-        assert(parameters.strategy_sigma > 0);
-        assert(parameters.strategy_sigma < 0.5);
+        assert(params.strategy_mu > 0);
+        assert(params.strategy_sigma > 0);
+        assert(params.strategy_sigma < 0.5);
         #endif
 
         // Solver's data initialization.
-        Data data{target, parameters.start, parameters.start, parameters.start, parameters.alpha, 0};
+        Data data{target, params.start, params.start, params.start, params.alpha, 0};
 
         // Controls and tolerances.
         Real step_con = 0.0L, res_con = 0.0L;
-        Real step_tol = parameters.step_tolerance, res_tol = parameters.residual_tolerance;
-        size_t max_it = parameters.max_iterations;
+        Real step_tol = params.step_tolerance, res_tol = params.residual_tolerance;
+        size_t max_it = params.max_iterations;
 
         do {
             // Evaluates the next point with the given routine.
@@ -50,7 +50,7 @@ namespace pacs {
             data.index++; // Also updates step.
 
             // Evaluates the next step size with the given strategy.
-            data.size = strategy(data, parameters);
+            data.size = strategy(data, params);
         } while((data.index < max_it) && (step_con >= step_tol) && (res_con >= res_tol));
 
         // Achieved convergence.
@@ -61,8 +61,8 @@ namespace pacs {
     }
 
     // Default routine (Newton) and strategy (Armijo).
-    Data solver(const Target &target, const Parameters &parameters) {
-        return solver(target, parameters, newton_routine, armijo_strategy);
+    Data solver(const Target &target, const Parameters &params) {
+        return solver(target, params, newton_routine, armijo_strategy);
     }
 
     // ROUTINES.
@@ -90,26 +90,26 @@ namespace pacs {
     // STRATEGIES.
 
     // Exponential.
-    Real exponential_strategy(const Data &data, const Parameters &parameters) {
-        return parameters.alpha * std::exp(- parameters.strategy_mu * static_cast<Real>(data.index));
+    Real exponential_strategy(const Data &data, const Parameters &params) {
+        return params.alpha * std::exp(- params.strategy_mu * static_cast<Real>(data.index));
     }
 
     // Inverse.
-    Real inverse_strategy(const Data &data, const Parameters &parameters) {
-        return parameters.alpha / (1.0L + parameters.strategy_mu * static_cast<Real>(data.index));
+    Real inverse_strategy(const Data &data, const Parameters &params) {
+        return params.alpha / (1.0L + params.strategy_mu * static_cast<Real>(data.index));
     }
 
     // Armijo.
-    Real armijo_strategy(const Data &data, const Parameters &parameters) {
+    Real armijo_strategy(const Data &data, const Parameters &params) {
         // Target function and gradient at X_k.
         Real target_point = data.target.function(data.current);
         Vector gradient_point = data.target.gradient(data.current);
 
         // Alpha_k.
-        Real step_size = parameters.alpha;
+        Real step_size = params.alpha;
 
         // Armijo strategy.
-        while(target_point - data.target.function(data.current - step_size * gradient_point) < parameters.strategy_sigma * step_size * std::pow(gradient_point.norm(), 2)) {
+        while(target_point - data.target.function(data.current - step_size * gradient_point) < params.strategy_sigma * step_size * std::pow(gradient_point.norm(), 2)) {
             step_size /= 2.0L;
         }
 
