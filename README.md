@@ -11,7 +11,7 @@ Implementation of a *gradient method for the minimization of a multivariate func
 
 ## Description
 
-Refer to [DOCS.md](./DOCS.md)
+Refer to [DOCS.md](./docs/DOCS.md)
 
 ## Getting Started
 
@@ -41,4 +41,4 @@ and run it with:
 ./main
 ```
 
-or refer to [USAGE.md](./USAGE.md) for non-default options and parameters.
+or refer to [USAGE.md](./docs/USAGE.md) for non-default options and parameters.
