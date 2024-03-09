@@ -25,4 +25,4 @@ $(OBJECTS): %.o: ./src/%.cpp
 # Clean.
 clean:
 	$(RM) *.o
-	$(RM) main
+	$(RM) $(EXEC)
