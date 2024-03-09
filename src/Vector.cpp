@@ -24,6 +24,10 @@ namespace pacs {
 
         this->elements.clear();
         this->elements.resize(N);
+
+        for(auto &elements_it: this->elements) {
+            elements_it = 0.0L;
+        }
     }
 
     Vector::Vector(const Vector &vector): size(vector.size) {

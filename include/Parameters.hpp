@@ -14,7 +14,7 @@ namespace pacs {
     // Default parameters.
     struct Parameters {
         // X_0.
-        Vector start = Vector(2, {0.0L, 0.0L});
+        Vector start = Vector(2);
 
         // Alpha_0.
         Real alpha = 1.0E-1L;

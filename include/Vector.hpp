@@ -42,16 +42,11 @@ namespace pacs {
 
             // Concept constructors.
             template<std::floating_point type>
-            Vector(const size_t &N, const std::vector<type> &values): size(N) {
+            Vector(const std::vector<type> &values): size(values.size()) {
                 // Initializes a vector from a std::vector.
-                #ifndef NDEBUG
-                assert(N > 0);
-                assert(N == values.size());
-                #endif
-
                 // Clears and resizes the elements vector.
                 this->elements.clear(); // Probably useless.
-                this->elements.resize(N);
+                this->elements.resize(values.size());
 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -60,15 +55,10 @@ namespace pacs {
             }
 
             template<std::integral type>
-            Vector(const size_t &N, const std::vector<type> &values): size(N) {
+            Vector(const std::vector<type> &values): size(values.size()) {
                 // Initializes a vector from an integral std::vector.
-                #ifndef NDEBUG
-                assert(N > 0);
-                assert(N == values.size());
-                #endif
-
                 this->elements.clear();
-                this->elements.resize(N);
+                this->elements.resize(values.size());
 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -77,15 +67,10 @@ namespace pacs {
             }
 
             template<std::floating_point type>
-            Vector(const size_t &N, const std::initializer_list<type> &values): size(N) {
+            Vector(const std::initializer_list<type> &values): size(values.size()) {
                 // Initializes a vector from a std::initializer_list.
-                #ifndef NDEBUG
-                assert(N > 0);
-                assert(N == values.size());
-                #endif
-
                 this->elements.clear();
-                this->elements.resize(N);
+                this->elements.resize(values.size());
 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -94,15 +79,10 @@ namespace pacs {
             }
 
             template<std::integral type>
-            Vector(const size_t &N, const std::initializer_list<type> &values): size(N) {
+            Vector(const std::initializer_list<type> &values): size(values.size()) {
                 // Initializes a vector from an integral std::initializer_list.
-                #ifndef NDEBUG
-                assert(N > 0);
-                assert(N == values.size());
-                #endif
-
                 this->elements.clear();
-                this->elements.resize(N);
+                this->elements.resize(values.size());
 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -111,15 +91,10 @@ namespace pacs {
             }
             
             template<std::floating_point type, size_t M>
-            Vector(const size_t &N, const std::array<type, M> &values): size(N) {
+            Vector(const std::array<type, M> &values): size(values.size()) {
                 // Initializes a vector from a std::array.
-                #ifndef NDEBUG
-                assert(N > 0);
-                assert(N == M);
-                #endif
-
                 this->elements.clear();
-                this->elements.resize(N);
+                this->elements.resize(values.size());
 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
@@ -128,15 +103,10 @@ namespace pacs {
             }
 
             template<std::integral type, size_t M>
-            Vector(const size_t &N, const std::array<type, M> &values): size(N) {
+            Vector(const std::array<type, M> &values): size(values.size()) {
                 // Initializes a vector from an integral std::array.
-                #ifndef NDEBUG
-                assert(N > 0);
-                assert(N == M);
-                #endif
-
                 this->elements.clear();
-                this->elements.resize(N);
+                this->elements.resize(values.size());
 
                 auto values_it = values.begin();
                 for(auto &elements_it: this->elements) {
