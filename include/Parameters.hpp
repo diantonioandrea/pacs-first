@@ -25,7 +25,7 @@ namespace pacs {
         Real residual_tolerance = 1.0E-6L;
         
         // Maximum number of iterations.
-        size_t max_iter = 10000;
+        size_t max_iterations = 10000;
 
         // Strategy parameters.
         Real strategy_mu = 0.2L; // Decays.

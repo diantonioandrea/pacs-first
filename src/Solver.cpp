@@ -16,7 +16,7 @@ namespace pacs {
         assert(parameters.step_tolerance > 0.0L);
         assert(parameters.residual_tolerance > 0.0L);
 
-        assert(parameters.max_iter > 0);
+        assert(parameters.max_iterations > 0);
 
         assert(parameters.strategy_mu > 0);
         assert(parameters.strategy_sigma > 0);
@@ -36,16 +36,18 @@ namespace pacs {
         // Step index.
         size_t step = 0;
 
-        // Controls.
-        Real step_control = 0.0L, residual_control = 0.0L;
+        // Controls and tolerances.
+        Real step_con = 0.0L, res_con = 0.0L;
+        Real step_tol = parameters.step_tolerance, res_tol = parameters.residual_tolerance;
+        size_t max_it = parameters.max_iterations;
 
         do {
             // Evaluates the next point with the given routine.
             next = routine(data); // X_{k + 1}.
 
             // Control values.
-            step_control = (next - current).norm();
-            residual_control = target.target_gradient(next).norm();
+            step_con = (next - current).norm();
+            res_con = target.target_gradient(next).norm();
 
             // X_{k - 1} and X_{k}.
             data.previous = current;
@@ -60,11 +62,9 @@ namespace pacs {
 
             // Evaluates the next step size with the given strategy.
             step_size = strategy(data, parameters);
-        } while((step < parameters.max_iter) && \
-            (step_control >= parameters.step_tolerance) && \
-            (residual_control >= parameters.residual_tolerance));
+        } while((step < max_it) && (step_con >= step_tol) && (res_con >= res_tol));
 
-        if(step < parameters.max_iter) { // Achieved convergence.
+        if(step < max_it) { // Achieved convergence.
             result.first = next;
             result.second = true;
         }
