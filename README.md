@@ -37,9 +37,7 @@ make
 and run it with:
 
 ```bash
-./main [OPTIONS]
+./main
 ```
 
-### Usage
-
-Refer to [USAGE.md](./USAGE.md)
+or refer to [USAGE.md](./USAGE.md) for non-default options and parameters.
