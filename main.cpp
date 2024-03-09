@@ -18,10 +18,17 @@ Andrea Di Antonio, 10655477.
 // Solver.
 #include "include/Solver.hpp"
 
+// Parser.
+#include "include/Arguments.hpp"
+
+// Results printer.
+void print_results(const pacs::Data &);
+
+
 int main(int argc, char **argv) {
     // "Help".
     if(argc <= 1) {
-        std::cout << "Usage: ./main  [-v]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
+        std::cout << "Usage: ./main  [-v]  [-p FILENAME]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
         std::cout << "\nExamples:" << std::endl;
         std::cout << "\t./main -v --all" << std::endl;
         std::cout << "\t./main --r_newton --armijo" << std::endl;
@@ -37,139 +44,64 @@ int main(int argc, char **argv) {
     std::vector<pacs::Routine> routines = {pacs::newton_routine, pacs::hb_routine, pacs::nesterov_routine};
     std::vector<pacs::Strategy> strategies = {pacs::exponential_strategy, pacs::inverse_strategy, pacs::armijo_strategy};
 
-    // Default routine and strategy.
-    pacs::Routine routine = pacs::newton_routine;
-    pacs::Strategy strategy = pacs::armijo_strategy;
-
     // Default filename.
     std::string filename = "parameters.json";
 
-    // Options.
-    bool s_routine = false, s_strategy = false, s_all = false;
-    bool verbose = false;
+    // Arguments and parameters.
+    pacs::Arguments args = pacs::parse(argc, argv);
+    pacs::Parameters parameters = pacs::read_json(args.filename, args.verbose);
 
-    // Looks for the verbose flag separately.
-    for(size_t j = 1; j < argc; j++) {        
-        std::string option = argv[j];
-
-        if(option == "-v")
-            verbose = true;
-    }
-
-    // Parses argv.
-    for(size_t j = 1; j < argc; j++) {        
-        std::string option = argv[j];
-
-        if(option == "--all") {
-            if(verbose)
-                std::cout << "\nUsing every routine and strategy." << std::endl;
-
-            s_all = true;
-        }
-
-        // Routine.
-        if(!s_routine) {
-            if(option == "--r_newton") { // Default.
-                if(verbose)
-                    std::cout << "\nUsing the Newton routine." << std::endl;
-
-                s_routine = true;
-            }
-        
-            if(option == "--r_hb") {
-                if(verbose)
-                    std::cout << "\nUsing the Heavy-Ball routine." << std::endl;
-
-                routine = pacs::hb_routine;
-                s_routine = true;
-            }
-                
-            
-            if(option == "--r_nesterov") {
-                if(verbose)
-                    std::cout << "\nUsing the Nesterov routine." << std::endl;
-
-                routine = pacs::hb_routine;
-                s_routine = true;
-            }
-        }
-
-        // Strategy.
-        if(!s_strategy) {
-            if(option == "--exponential") {
-                if(verbose)
-                    std::cout << "\nUsing the Exponential Decay strategy." << std::endl;
-
-                strategy = pacs::exponential_strategy;
-                s_strategy = true;
-            }
-        
-            if(option == "--inverse") {
-                if(verbose)
-                    std::cout << "\nUsing the Inverse Decay strategy." << std::endl;
-
-                strategy = pacs::inverse_strategy;
-                s_strategy = true;
-            }
-                
-            if(option == "--armijo") { // Default.
-                if(verbose)
-                    std::cout << "\nUsing the Armijo strategy." << std::endl;
-
-                s_strategy = true;
-            }
-        }
-    }
-
-    // Target and parameters.
+    // Target.
     pacs::Target target;
-    pacs::Parameters parameters = pacs::read_json(filename, verbose);
 
     // Using default targets.
     target.function = pacs::target_func;
     target.gradient = pacs::target_grad;
 
     // Execution.
-    if(s_all) { // "--all" case.
+    if(args.s_all) {
+
+        // Runs every strategy and routine (--all).
         for(auto &routine_it: routines) {
-            for(auto &strategy_it: strategies) {
-                pacs::Data result = pacs::solver(target, parameters, routine_it, strategy_it);
-                
-                std::cout << "\nMinimum: " << result.next << std::endl;
-                std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
-            }
+            for(auto &strategy_it: strategies)
+                print_results(pacs::solver(target, parameters, routine_it, strategy_it));
         }
-    } else if(s_routine || s_strategy) {
-        if(!s_strategy) { // Runs the specified routine on every strategy.
-            if(verbose)
+
+    } else if(args.s_routine || args.s_strategy) {
+
+        if(!args.s_strategy) {
+            if(args.verbose)
                     std::cout << "Using every strategy." << std::endl;
 
-            for(auto &strategy_it: strategies) {
-                pacs::Data result = pacs::solver(target, parameters, routine, strategy_it);
-                
-                std::cout << "\nMinimum: " << result.next << std::endl;
-                std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
-            }
-        } else if(!s_routine) { // Runs the specified strategy with every routine.
-            if(verbose)
+            // Runs the specified routine on every strategy.
+            for(auto &strategy_it: strategies)
+                print_results(pacs::solver(target, parameters, args.routine, strategy_it));
+
+        } else if(!args.s_routine) {
+
+            if(args.verbose)
                     std::cout << "Using every routine." << std::endl;
 
-            for(auto &routine_it: routines) {
-                pacs::Data result = pacs::solver(target, parameters, routine_it, strategy);
-                
-                std::cout << "\nMinimum: " << result.next << std::endl;
-                std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
-            }
-        } else { // Runs only the specified routine and strategy.
-            pacs::Data result = pacs::solver(target, parameters, routine, strategy);
-                    
-            std::cout << "\nMinimum: " << result.next << std::endl;
-            std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
-        }
-    } else {
+            // Runs the specified strategy with every routine.
+            for(auto &routine_it: routines)
+                print_results(pacs::solver(target, parameters, routine_it, args.strategy));
+
+        } else
+
+            // Runs only the specified routine and strategy.
+            print_results(pacs::solver(target, parameters, args.routine, args.strategy));
+
+    } else { // Arguments error.
         std::cerr << "\nCheck your arguments!" << std::endl;
         return -1;
     }
 
     return 0;
+}
+
+
+// Prints the result of a single run.
+void print_results(const pacs::Data &result) {
+    std::cout << "\nMinimum: " << result.next << std::endl;
+    std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
 }
