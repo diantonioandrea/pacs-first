@@ -4,8 +4,6 @@ CPPFLAGS ?= -Wall -pedantic -std=c++20 -O2 -pipe -mtune=native -march=native
 EXEC = main
 SOURCE = main.cpp
 OBJECT = main.o
-
-# Headers' .cpp files to be compiled.
 OBJECTS = Vector.o Solver.o Parameters.o Default.o Arguments.o
 
 # Rules.
