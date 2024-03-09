@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
         std::cout << "Usage: ./main  [-v]  [-p FILENAME]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
         std::cout << "\nExamples:" << std::endl;
         std::cout << "\t./main -v --all" << std::endl;
-        std::cout << "\t./main --r_newton --armijo" << std::endl;
+        std::cout << "\t./main --r_nesterov --armijo" << std::endl;
         return 0;
     }
 
@@ -44,19 +44,12 @@ int main(int argc, char **argv) {
     std::vector<pacs::Routine> routines = {pacs::newton_routine, pacs::hb_routine, pacs::nesterov_routine};
     std::vector<pacs::Strategy> strategies = {pacs::exponential_strategy, pacs::inverse_strategy, pacs::armijo_strategy};
 
-    // Default filename.
-    std::string filename = "parameters.json";
-
     // Arguments and parameters.
     pacs::Arguments args = pacs::parse(argc, argv);
     pacs::Parameters parameters = pacs::read_json(args.filename, args.verbose);
 
-    // Target.
-    pacs::Target target;
-
-    // Using default targets.
-    target.function = pacs::target_func;
-    target.gradient = pacs::target_grad;
+    // Default targets.
+    pacs::Target target{pacs::target_func, pacs::target_grad};
 
     // Execution.
     if(args.s_all) {
