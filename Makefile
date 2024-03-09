@@ -1,5 +1,3 @@
-# PACS - First Challenge.
-# Andrea Di Antonio, 10655477.
 .PHONY: all clean
 CPPFLAGS ?= -Wall -pedantic -std=c++20 -O2 -pipe -mtune=native -march=native
 

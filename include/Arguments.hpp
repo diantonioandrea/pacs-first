@@ -1,7 +1,12 @@
-/* 
-PACS - First Challenge.
-Andrea Di Antonio, 10655477.
-*/
+/**
+ * @file Arguments.hpp
+ * @author Andrea Di Antonio (github.com/diantonioandrea)
+ * @brief 
+ * @date 2024-03-09
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 
 #ifndef ARGUMENTS_PACS
 #define ARGUMENTS_PACS
