@@ -61,8 +61,8 @@ namespace pacs {
     
     // STRATEGIES: Return Alpha_{k + 1}.
 
-    Real exponential_strategy(const Data &, const Parameters &); // Exponential.
-    Real inverse_strategy(const Data &, const Parameters &); // Inverse.
+    Real exponential_strategy(const Data &, const Parameters &); // Exponential decay.
+    Real inverse_strategy(const Data &, const Parameters &); // Inverse decay.
     Real armijo_strategy(const Data &, const Parameters &); // Armijo.
 
 }

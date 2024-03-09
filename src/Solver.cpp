@@ -10,6 +10,14 @@ namespace pacs {
     // SOLVER.
 
     Data solver(const Target &target, const Parameters &params, Routine routine, Strategy strategy) {
+        /*
+        Arguments:
+        - Target target: The target function (target.function) and its gradient (target.gradient).
+        - Parameters params: The solver parameters such as the starting value for both X and Alpha, the values for mu and sigma,
+            the value of maximum iterations and the tolerances.
+        - Routine routine: The routine which evaluates the next point for the gradient descent.
+        - Strategy strategy: The strategy which evaluates the next value for Alpha.
+        */
         #ifndef NDEBUG
         assert(params.alpha > 0.0L);
 
@@ -40,7 +48,7 @@ namespace pacs {
             res_con = target.gradient(data.next).norm();
 
             // X_{k - 1} and X_{k}.
-            data.previous = data.current;
+            data.previous = data.current; // Needed for Heavy-Ball and Nesterov.
             data.current = data.next;
 
             // Updates data.size and data.index.
@@ -85,12 +93,12 @@ namespace pacs {
 
     // STRATEGIES.
 
-    // Exponential.
+    // Exponential decay.
     Real exponential_strategy(const Data &data, const Parameters &params) {
         return params.alpha * std::exp(- params.strategy_mu * static_cast<Real>(data.index));
     }
 
-    // Inverse.
+    // Inverse decay.
     Real inverse_strategy(const Data &data, const Parameters &params) {
         return params.alpha / (1.0L + params.strategy_mu * static_cast<Real>(data.index));
     }
@@ -100,12 +108,13 @@ namespace pacs {
         // Target function and gradient at X_k.
         Real target_point = data.target.function(data.current);
         Vector gradient_point = data.target.gradient(data.current);
+        Real gradient_point_norm = std::pow(gradient_point.norm(), 2);
 
         // Alpha_k.
         Real step_size = params.alpha;
 
         // Armijo strategy.
-        while(target_point - data.target.function(data.current - step_size * gradient_point) < params.strategy_sigma * step_size * std::pow(gradient_point.norm(), 2)) {
+        while(target_point - data.target.function(data.current - step_size * gradient_point) < params.strategy_sigma * step_size * gradient_point_norm) {
             step_size /= 2.0L;
         }
 

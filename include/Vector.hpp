@@ -27,6 +27,11 @@ namespace pacs {
 
     // Real vectors.
     class Vector {
+        /*
+        This is a simple Vector class which has been written for this challenge.
+        This class works as a wrapper for the std::vector<long double> class and implements 
+        basic vector operations such as sums, scalar products and the euclidean norm.
+        */
         private:
             const size_t size;
             std::vector<Real> elements;
