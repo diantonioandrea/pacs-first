@@ -17,16 +17,16 @@ Andrea Di Antonio, 10655477.
 namespace pacs {
 
     // Target aliases.
-    using Target_Function = Real (*) (const Vector &);
-    using Target_Gradient = Vector (*) (const Vector &);
+    using Function = Real (*) (const Vector &);
+    using Gradient = Vector (*) (const Vector &);
 
-    // Target function and its gradient.
+    // Target struct.
     struct Target {
-        Target_Function target_function;
-        Target_Gradient target_gradient;
+        Function target_function;
+        Gradient target_gradient;
     };
 
-    // Solver's data.
+    // Solver's data struct.
     // Data that changes during the solver's main cycle.
     struct Data {
         // Functions.
@@ -47,8 +47,8 @@ namespace pacs {
 
     // SOLVER.
 
-    std::pair<Vector, bool> solver(const Target &, const Parameters &, Routine routine, Strategy strategy);
-    std::pair<Vector, bool> solver(const Target &, const Parameters &); // Default routine and strategy.
+    std::pair<Vector, bool> solver(const Target &, const Parameters &, Routine, Strategy);
+    std::pair<Vector, bool> solver(const Target &, const Parameters &); // Default routine (Newton) and strategy (Armijo).
 
     // ROUTINES: Return X_{k + 1}.
 
