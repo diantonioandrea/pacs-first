@@ -41,4 +41,4 @@ and run it with:
 ./main
 ```
 
-or refer to [USAGE.md](./docs/USAGE.md) for non-default options and parameters.
+Refer to [USAGE.md](./docs/USAGE.md) for options and parameters.
