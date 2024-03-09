@@ -10,6 +10,19 @@ namespace pacs {
     // SOLVER.
 
     std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Routine routine, Strategy strategy) {
+        #ifndef NDEBUG
+        assert(parameters.alpha > 0.0L);
+
+        assert(parameters.step_tolerance > 0.0L);
+        assert(parameters.residual_tolerance > 0.0L);
+
+        assert(parameters.max_iter > 0);
+
+        assert(parameters.strategy_mu > 0);
+        assert(parameters.strategy_sigma > 0);
+        assert(parameters.strategy_sigma < 0.5);
+        #endif
+        
         // X_0.
         Vector current = parameters.start, next = current;
 
@@ -17,26 +30,25 @@ namespace pacs {
         Real step_size = parameters.alpha;
 
         // Return value.
-        std::pair<Vector, bool> result = {current, true};
+        std::pair<Vector, bool> result = {parameters.start, false};
 
         // Solver's data initialization.
         Data data{target, current, current, step_size, 0};
 
-        for(size_t k = 0; k < parameters.max_iter; ++k) {
+        // Step index.
+        size_t step = 0;
+
+        // Controls.
+        Real step_control = 0.0L;
+        Real residual_control = 0.0L;
+
+        do {
             // Evaluates the next point with the given routine.
             next = routine(data); // X_{k + 1}.
 
-            // Control on the step length.
-            if((next - current).norm() < parameters.step_tolerance) {
-                result.first = next;
-                return result;
-            }
-
-            // Control on the residual.
-            if((target.target_gradient(next)).norm() < parameters.residual_tolerance) {
-                result.first = next;
-                return result;
-            }
+            // Control values.
+            step_control = (next - current).norm();
+            residual_control = target.target_gradient(next).norm();
 
             // X_{k - 1} and X_{k}.
             data.previous = current;
@@ -45,17 +57,24 @@ namespace pacs {
             // X_{k + 1} -> X_k.
             current = next;
 
-            // Updates data.step*.
+            // Updates data.step_size and data.step_index.
             data.step_size = step_size;
-            data.step_index = k;
+            data.step_index = step;
 
             // Evaluates the next step size with the given strategy.
             step_size = strategy(data, parameters);
-        }
 
-        // Failure.
-        // Returns just the initial guess.
-        result.second = false;
+            ++step;
+        } while((step < parameters.max_iter) && \
+            (step_control >= parameters.step_tolerance) && \
+            (residual_control >= parameters.residual_tolerance));
+
+        // Achieved convergence.
+        if(step < parameters.max_iter) {
+            result.first = next;
+            result.second = true;
+        }
+        
         return result;
     }
 
