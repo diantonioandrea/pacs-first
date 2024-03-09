@@ -9,7 +9,7 @@ namespace pacs {
 
     // SOLVER.
 
-    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters, Routine routine, Strategy strategy) {
+    Data solver(const Target &target, const Parameters &parameters, Routine routine, Strategy strategy) {
         #ifndef NDEBUG
         assert(parameters.alpha > 0.0L);
 
@@ -22,9 +22,6 @@ namespace pacs {
         assert(parameters.strategy_sigma > 0);
         assert(parameters.strategy_sigma < 0.5);
         #endif
-
-        // Return value.
-        std::pair<Vector, bool> result = {parameters.start, false};
 
         // Solver's data initialization.
         Data data{target, parameters.start, parameters.start, parameters.start, parameters.alpha, 0};
@@ -56,16 +53,15 @@ namespace pacs {
             data.size = strategy(data, parameters);
         } while((data.index < max_it) && (step_con >= step_tol) && (res_con >= res_tol));
 
-        if(data.index < max_it) { // Achieved convergence.
-            result.first = data.next;
-            result.second = true;
-        }
+        // Achieved convergence.
+        if(data.index < max_it)
+            data.status = true;
         
-        return result;
+        return data;
     }
 
     // Default routine (Newton) and strategy (Armijo).
-    std::pair<Vector, bool> solver(const Target &target, const Parameters &parameters) {
+    Data solver(const Target &target, const Parameters &parameters) {
         return solver(target, parameters, newton_routine, armijo_strategy);
     }
 

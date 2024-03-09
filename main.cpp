@@ -33,9 +33,9 @@ int main(int argc, char **argv) {
 
     for(auto &routine_it: routines) {
         for(auto &strategy_it: strategies) {
-            std::pair<pacs::Vector, bool> result = pacs::solver(target, parameters, routine_it, strategy_it);
-            std::cout << "Point: " << result.first << std::endl;
-            std::cout << "Convergence: " << ((result.second) ? "Yes" : "No") << std::endl << std::endl;
+            pacs::Data result = pacs::solver(target, parameters, routine_it, strategy_it);
+            std::cout << "Point: " << result.next << std::endl;
+            std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl << std::endl;
         }
     }
 

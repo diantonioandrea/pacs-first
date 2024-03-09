@@ -39,6 +39,9 @@ namespace pacs {
         // Step data.
         Real size; // K-th step size.
         size_t index; // K-th step index (K).
+
+        // Output.
+        bool status = false;
     };
 
     // Solver aliases.
@@ -47,8 +50,8 @@ namespace pacs {
 
     // SOLVER.
 
-    std::pair<Vector, bool> solver(const Target &, const Parameters &, Routine, Strategy);
-    std::pair<Vector, bool> solver(const Target &, const Parameters &); // Default routine (Newton) and strategy (Armijo).
+    Data solver(const Target &, const Parameters &, Routine, Strategy);
+    Data solver(const Target &, const Parameters &); // Default routine (Newton) and strategy (Armijo).
 
     // ROUTINES: Return X_{k + 1}.
 
