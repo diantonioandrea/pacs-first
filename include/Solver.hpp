@@ -16,6 +16,16 @@ Andrea Di Antonio, 10655477.
 
 namespace pacs {
 
+    // Target aliases.
+    using Target_Function = Real (*) (const Vector &);
+    using Target_Gradient = Vector (*) (const Vector &);
+
+    // Target function and its gradient.
+    struct Target {
+        Target_Function target_function;
+        Target_Gradient target_gradient;
+    };
+
     // Solver's data.
     // Data that changes during the solver's main cycle.
     struct Data {
@@ -31,7 +41,7 @@ namespace pacs {
         size_t step_index; // K-th step index (K).
     };
 
-    // Aliases.
+    // Solver aliases.
     using Strategy = Real (*) (const Data &, const Parameters &);
     using Routine = Vector (*) (const Data &);
 
