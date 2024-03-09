@@ -33,7 +33,7 @@ void print_results(const pacs::Data &);
 int main(int argc, char **argv) {
     // "Help".
     if(argc <= 1) {
-        std::cout << "Usage: ./main  [-v]  [-p FILENAME]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
+        std::cout << "Usage: ./main  [-v]  [-p (FILENAME)]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
         std::cout << "\nExamples:" << std::endl;
         std::cout << "\t./main -v --all" << std::endl;
         std::cout << "\t./main --r_nesterov --armijo" << std::endl;
