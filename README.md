@@ -1,5 +1,7 @@
 # Advanced Programming for Scientific Computing - First Challenge
 
+Implementation of a *gradient method for the minimization of a multivariate function*.
+
 ## Contents
 
 - [Description](#description)
