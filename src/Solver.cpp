@@ -23,10 +23,8 @@ namespace pacs {
         assert(parameters.strategy_sigma < 0.5);
         #endif
         
-        // X_0.
+        // X_0 and Alpha_0.
         Vector current = parameters.start, next = current;
-
-        // Alpha_0.
         Real step_size = parameters.alpha;
 
         // Return value.
@@ -39,8 +37,7 @@ namespace pacs {
         size_t step = 0;
 
         // Controls.
-        Real step_control = 0.0L;
-        Real residual_control = 0.0L;
+        Real step_control = 0.0L, residual_control = 0.0L;
 
         do {
             // Evaluates the next point with the given routine.
@@ -59,18 +56,15 @@ namespace pacs {
 
             // Updates data.step_size and data.step_index.
             data.step_size = step_size;
-            data.step_index = step;
+            data.step_index = step++; // Also updates step.
 
             // Evaluates the next step size with the given strategy.
             step_size = strategy(data, parameters);
-
-            ++step;
         } while((step < parameters.max_iter) && \
             (step_control >= parameters.step_tolerance) && \
             (residual_control >= parameters.residual_tolerance));
 
-        // Achieved convergence.
-        if(step < parameters.max_iter) {
+        if(step < parameters.max_iter) { // Achieved convergence.
             result.first = next;
             result.second = true;
         }
