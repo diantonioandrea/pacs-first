@@ -6,7 +6,6 @@
 - [Getting Started](#getting-started)
     - [Cloning the repository](#cloning-the-repository)
     - [Compiling and Executing the Code](#compiling-and-executing-the-code)
-    - [Usage](#usage)
 
 ## Description
 
