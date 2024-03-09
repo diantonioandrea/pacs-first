@@ -57,7 +57,7 @@ namespace pacs {
 
             // Updates data.size and data.index.
             data.index++;
-            data.size = strategy(data, params); // Evaluates the next step size with the given strategy.
+            data.size = strategy(data, params); // Evaluates the next Alpha with the given strategy.
             
         } while((data.index < max_it) && (step_con >= step_tol) && (res_con >= res_tol));
 

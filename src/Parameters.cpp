@@ -43,6 +43,7 @@ namespace pacs {
         file >> json_file;
 
         // Search for values.
+        returns.start = json_file.value("start", defaults.start.get_elements());
         returns.alpha = json_file.value("alpha", defaults.alpha);
         returns.step_tolerance = json_file.value("step_tolerance", defaults.step_tolerance);
         returns.residual_tolerance = json_file.value("residual_tolerance", defaults.residual_tolerance);

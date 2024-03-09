@@ -404,12 +404,21 @@ namespace pacs {
             }
             
             /**
-             * @brief Returns the length of the Vector.
+             * @brief Returns the size of the Vector.
              * 
              * @return constexpr size_t 
              */
-            constexpr size_t length() const {
+            constexpr size_t get_size() const {
                 return this->size;
+            }
+            
+            /**
+             * @brief Returns the elements of the Vector.
+             * 
+             * @return std::vector<Real> 
+             */
+            std::vector<Real> get_elements() const {
+                return this->elements;
             }
 
             friend std::ostream &operator <<(std::ostream &, const Vector &);
