@@ -1,71 +1,64 @@
 # Advanced Programming for Scientific Computing - First Challenge
 
-Implementation of a *gradient method for the minimization of a multivariate function*.
+*A gradient method for minimizing multivariate functions.*
 
 ## Contents
 
 - [Getting Started](#getting-started)
-    - [Cloning the repository](#cloning-the-repository)
+    - [Cloning the Repository](#cloning-the-repository)
     - [Compiling and Executing the Code](#compiling-and-executing-the-code)
 - [Usage](#usage)
     - [Parameters](#parameters)
     - [Options](#options)
 
-
 ## Getting Started
 
-### Cloning the [Repository](https://github.com/diantonioandrea/pacs-first)
+### Cloning the Repository
 
-```bash
-git clone https://github.com/diantonioandrea/pacs-first
-```
+To get started, clone the repository from [here](https://github.com/diantonioandrea/pacs-first):
+
+    git clone https://github.com/diantonioandrea/pacs-first
 
 ### Compiling and Executing the Code
 
-Compile the code with:
+You can compile the code by running:
 
-```bash
-make all
-```
+    make all
 
-Or simply by:
+Or simply:
 
-```bash
-make
-```
+    make
 
-and run it with:
+To execute the code, use:
 
-```bash
-./main
-```
+    ./main
 
-Refer to [Usage](#usage) for options and parameters.
+For further details on options and parameters, refer to [Usage](#usage).
 
 ## Usage
 
-It follows a brief summary of the parameters and command line options for the first challenge.
+Below is a summary of parameters and command-line options for the first challenge.
 
 ### Parameters
 
-Parameters are stored under a [parameters.json](/parameters.json) file which gets parsed on execution.
+Parameters are specified in a [parameters.json](/parameters.json) file, which is parsed during execution.
 
 ### Options
 
-`./main` accepts the following options:
+The `./main` executable supports the following options:
 
-- `-v` Enables verbosity.
+- `-v`: Enables verbosity.
 
-- `-p (FILENAME)` Specifies the parameters filename. It defaults on `parameters.json`.
+- `-p (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
 
-- `--all` Runs the algorithm with every routine and strategy.
+- `--all`: Executes the algorithm with every routine and strategy.
 
-- `--r_(ROUTINE)` Specifies a particular routine. Possibilities are:
-    - `--r_newton` For the **Newton** routine.
-    - `--r_hb` For the **Heavy-Ball** routine.
-    - `--r_nesterov` For the **Nesterov** routine.
+- `--r_(ROUTINE)`: Specifies a particular routine, including:
+    - `--r_newton` for Newton's routine.
+    - `--r_hb` for Heavy-Ball routine.
+    - `--r_nesterov` for Nesterov's routine.
 
-- `--(STRATEGY)` Specifies a particular routine. Possibilities are:
-    - `--exponential` For the **Exponential Decay** strategy.
-    - `--inverse` For the **Inverse Decay** strategy.
-    - `--armijo` For the **Armijo** strategy.
+- `--(STRATEGY)`: Specifies a particular strategy, including:
+    - `--exponential` for the **Exponential Decay** strategy.
+    - `--inverse` for the **Inverse Decay** strategy.
+    - `--armijo` for the **Armijo** strategy.
