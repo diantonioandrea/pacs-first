@@ -34,7 +34,7 @@ namespace pacs {
     };
     
     // Reading parameters from a JSON file.
-    Parameters read_json(std::string const &filename);
+    Parameters read_json(const std::string &, const bool &);
 
     // Parameters output.
     std::ostream &operator <<(std::ostream &, const Parameters &);

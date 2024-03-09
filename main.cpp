@@ -7,28 +7,28 @@ Andrea Di Antonio, 10655477.
 #include <iostream>
 #include <vector>
 
-// Real type, vectors and default parameters.
+// Real type, vectors and parameters.
 #include "include/Vector.hpp"
 #include "include/Parameters.hpp"
+
+// Default targets.
+#include "include/Default.hpp"
 
 // Solver.
 #include "include/Solver.hpp"
 
-// Default function.
-pacs::Real target_func(const pacs::Vector &x);
-pacs::Vector target_grad(const pacs::Vector &x);
-
-
 int main(int argc, char **argv) {
-    pacs::Target target;
-    pacs::Parameters parameters = pacs::read_json("parameters.json");
+    // "Splash".
+    std::cout << "PACS - First Challenge." << std::endl;
+    std::cout << "A gradient method for the minimization of a multivariate function." << std::endl;
+    std::cout << "Andrea Di Antonio, 10655477." << std::endl;
 
-    // Prints the current parameters.
-    std::cout << "Parameters:\n" << parameters << std::endl;
+    pacs::Target target;
+    pacs::Parameters parameters = pacs::read_json("parameters.json", false);
 
     // Using default targets.
-    target.function = target_func;
-    target.gradient = target_grad;
+    target.function = pacs::target_func;
+    target.gradient = pacs::target_grad;
 
     // Routines and strategies.
     std::vector<pacs::Routine> routines = {pacs::newton_routine, pacs::hb_routine, pacs::nesterov_routine};
@@ -37,33 +37,11 @@ int main(int argc, char **argv) {
     for(auto &routine_it: routines) {
         for(auto &strategy_it: strategies) {
             pacs::Data result = pacs::solver(target, parameters, routine_it, strategy_it);
-            std::cout << "Point: " << result.next << std::endl;
-            std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl << std::endl;
+            
+            std::cout << "\nPoint: " << result.next << std::endl;
+            std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
         }
     }
 
     return 0;
-}
-
-
-// Default functions definition.
-pacs::Real target_func(const pacs::Vector &x) {
-    #ifndef NDEBUG
-    assert(x.length() == 2);
-    #endif
-
-    return x[0] * x[1] + 4 * std::pow(x[0], 4) + std::pow(x[1], 2) + 3 * x[0];
-}
-
-pacs::Vector target_grad(const pacs::Vector &x) {
-    #ifndef NDEBUG
-    assert(x.length() == 2);
-    #endif
-
-    pacs::Vector gradient = pacs::Vector(2);
-
-    gradient[0] = x[1] + 16.0L * std::pow(x[0], 3) + 3.0L;
-    gradient[1] = x[0] + 2.0L * x[1];
-
-    return gradient;
 }

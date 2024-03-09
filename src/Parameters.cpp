@@ -9,7 +9,7 @@
 
 namespace pacs {
     // Reading parameters from a JSON file.
-    Parameters read_json(std::string const &filename) {
+    Parameters read_json(std::string const &filename, const bool &verbose) {
 
         // Default and return values.
         Parameters defaults, returns;
@@ -17,6 +17,9 @@ namespace pacs {
         // File check.
         std::ifstream file(filename);
         if(!(file)) {
+            if(verbose)
+                std::cout << "Loaded default parameters:\n" << defaults << std::endl;
+
             return defaults;
         }
 
@@ -31,6 +34,9 @@ namespace pacs {
         returns.max_iterations = json_file.value("max_iterations", defaults.max_iterations);
         returns.strategy_mu = json_file.value("strategy_mu", defaults.strategy_mu);
         returns.strategy_sigma = json_file.value("strategy_sigma", defaults.strategy_sigma);
+
+        if(verbose)
+            std::cout << "Loaded:\n" << defaults << std::endl;
 
         return returns;
     }
