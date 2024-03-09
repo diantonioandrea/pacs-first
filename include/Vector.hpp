@@ -9,10 +9,8 @@ Andrea Di Antonio, 10655477.
 // Assertions.
 #include <cassert>
 
-// std::vector.
-#include <vector>
-
 // For constructors.
+#include <vector>
 #include <initializer_list>
 #include <concepts>
 
@@ -22,10 +20,10 @@ Andrea Di Antonio, 10655477.
 // Output.
 #include <iostream>
 
-// Real type.
-#include "Type.hpp"
-
 namespace pacs {
+
+    // Real alias.
+    using Real = long double;
 
     // Real vectors.
     class Vector {

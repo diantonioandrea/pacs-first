@@ -8,7 +8,6 @@ Andrea Di Antonio, 10655477.
 #include <vector>
 
 // Real type, vectors and default parameters.
-#include "include/Type.hpp"
 #include "include/Vector.hpp"
 #include "include/Parameters.hpp"
 
