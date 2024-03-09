@@ -32,6 +32,7 @@ namespace pacs {
         std::string filename = "parameters.json";
     };
 
+    void splash(char **);
     Arguments parse(const int &, char **);
 }
 

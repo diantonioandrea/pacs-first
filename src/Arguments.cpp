@@ -12,6 +12,28 @@
 
 namespace pacs {
 
+    /**
+     * @brief Prints a "splash" on missing arguments.
+     * 
+     */
+    void splash(char **argv) {
+        std::cout << "PACS - First Challenge." << std::endl;
+        std::cout << "A gradient method for the minimization of a multivariate function." << std::endl;
+        std::cout << "Andrea Di Antonio, 10655477.\n" << std::endl;
+        
+        std::cout << "Usage: " << argv[0] << "  [-v]  [-p (FILENAME)]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
+        std::cout << "\nExamples:" << std::endl;
+        std::cout << "\t./main -v --all" << std::endl;
+        std::cout << "\t./main --r_nesterov --armijo" << std::endl;
+    }
+
+    /**
+     * @brief Parses argv looking for arguments needed by this program.
+     * 
+     * @param argc 
+     * @param argv 
+     * @return Arguments 
+     */
     Arguments parse(const int &argc, char **argv) {
         Arguments arguments;
 
@@ -29,23 +51,23 @@ namespace pacs {
 
             if(option == "--all") {
                 if(arguments.verbose)
-                    std::cout << "\nUsing every routine and strategy." << std::endl;
+                    std::cout << "Using every routine and strategy." << std::endl;
 
                 arguments.s_all = true;
             }
 
             // Routine.
             if(!arguments.s_routine) {
-                if(option == "--r_newton") { // Default.
+                if(option == "--r_newton") {
                     if(arguments.verbose)
-                        std::cout << "\nUsing the Newton routine." << std::endl;
+                        std::cout << "Using the Newton routine." << std::endl;
 
                     arguments.s_routine = true;
                 }
             
                 if(option == "--r_hb") {
                     if(arguments.verbose)
-                        std::cout << "\nUsing the Heavy-Ball routine." << std::endl;
+                        std::cout << "Using the Heavy-Ball routine." << std::endl;
 
                     arguments.routine = pacs::hb_routine;
                     arguments.s_routine = true;
@@ -54,7 +76,7 @@ namespace pacs {
                 
                 if(option == "--r_nesterov") {
                     if(arguments.verbose)
-                        std::cout << "\nUsing the Nesterov routine." << std::endl;
+                        std::cout << "Using the Nesterov routine." << std::endl;
 
                     arguments.routine = pacs::hb_routine;
                     arguments.s_routine = true;
@@ -65,7 +87,7 @@ namespace pacs {
             if(!arguments.s_strategy) {
                 if(option == "--exponential") {
                     if(arguments.verbose)
-                        std::cout << "\nUsing the Exponential Decay strategy." << std::endl;
+                        std::cout << "Using the Exponential Decay strategy." << std::endl;
 
                     arguments.strategy = pacs::exponential_strategy;
                     arguments.s_strategy = true;
@@ -73,15 +95,15 @@ namespace pacs {
             
                 if(option == "--inverse") {
                     if(arguments.verbose)
-                        std::cout << "\nUsing the Inverse Decay strategy." << std::endl;
+                        std::cout << "Using the Inverse Decay strategy." << std::endl;
 
                     arguments.strategy = pacs::inverse_strategy;
                     arguments.s_strategy = true;
                 }
                     
-                if(option == "--armijo") { // Default.
+                if(option == "--armijo") {
                     if(arguments.verbose)
-                        std::cout << "\nUsing the Armijo strategy." << std::endl;
+                        std::cout << "Using the Armijo strategy." << std::endl;
 
                     arguments.s_strategy = true;
                 }

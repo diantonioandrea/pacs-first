@@ -160,4 +160,14 @@ namespace pacs {
         return step_size;
     }
 
+    /**
+     * @brief Prints the results of a single run.
+     * 
+     * @param result 
+     */
+    void show(const Data &result) {
+        std::cout << "\nMinimum at: " << result.next << std::endl;
+        std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
+    }
+
 }

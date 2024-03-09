@@ -64,17 +64,17 @@ namespace pacs {
      * @return std::ostream& 
      */
     std::ostream &operator <<(std::ostream &ost, const Parameters &params) {
-        ost << "start: " << params.start << std::endl;
+        ost << "\tstart: " << params.start << std::endl;
 
-        ost << "alpha: " << params.alpha << std::endl;
+        ost << "\talpha: " << params.alpha << std::endl;
 
-        ost << "step_tolerance: " << params.step_tolerance << std::endl;
-        ost << "residual_tolerance: " << params.residual_tolerance << std::endl;
+        ost << "\tstep_tolerance: " << params.step_tolerance << std::endl;
+        ost << "\tresidual_tolerance: " << params.residual_tolerance << std::endl;
 
-        ost << "max_iterations: " << params.max_iterations << std::endl;
+        ost << "\tmax_iterations: " << params.max_iterations << std::endl;
 
-        ost << "strategy_mu: " << params.strategy_mu << std::endl;
-        ost << "strategy_sigma: " << params.strategy_sigma << std::endl;
+        ost << "\tstrategy_mu: " << params.strategy_mu << std::endl;
+        ost << "\tstrategy_sigma: " << params.strategy_sigma << std::endl;
 
         return ost;
     }

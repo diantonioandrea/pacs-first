@@ -62,6 +62,7 @@ namespace pacs {
     Real inverse_strategy(const Data &, const Parameters &);
     Real armijo_strategy(const Data &, const Parameters &);
 
+    void show(const Data &);
 }
 
 #endif
