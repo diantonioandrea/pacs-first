@@ -25,8 +25,8 @@ int main(int argc, char **argv) {
     pacs::Parameters parameters;
 
     // Using default targets.
-    target.target_function = target_func;
-    target.target_gradient = target_grad;
+    target.function = target_func;
+    target.gradient = target_grad;
 
     // Routines and strategies.
     std::vector<pacs::Routine> routines = {pacs::newton_routine, pacs::hb_routine, pacs::nesterov_routine};

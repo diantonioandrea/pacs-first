@@ -22,8 +22,8 @@ namespace pacs {
 
     // Target struct.
     struct Target {
-        Function target_function;
-        Gradient target_gradient;
+        Function function;
+        Gradient gradient;
     };
 
     // Solver's data struct.
@@ -33,12 +33,13 @@ namespace pacs {
         const Target target;
 
         // Points.
+        Vector next; // X_k.
         Vector current; // X_k.
         Vector previous; // X_{k - 1}.
 
         // Step data.
-        Real step_size; // K-th step size.
-        size_t step_index; // K-th step index (K).
+        Real size; // K-th step size.
+        size_t index; // K-th step index (K).
     };
 
     // Solver aliases.
