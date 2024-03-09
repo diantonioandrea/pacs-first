@@ -19,17 +19,16 @@ int main(int argc, char **argv) {
     pacs::Target target;
     pacs::Parameters parameters;
 
-    std::cout << pacs::solver(target, parameters, pacs::newton_routine, pacs::exponential_strategy).first << std::endl;
-    std::cout << pacs::solver(target, parameters, pacs::newton_routine, pacs::inverse_strategy).first << std::endl;
-    std::cout << pacs::solver(target, parameters, pacs::newton_routine, pacs::armijo_strategy).first << std::endl;
+    std::vector<pacs::Routine> routines = {pacs::newton_routine, pacs::hb_routine, pacs::nesterov_routine};
+    std::vector<pacs::Strategy> strategies = {pacs::exponential_strategy, pacs::inverse_strategy, pacs::armijo_strategy};
 
-    std::cout << pacs::solver(target, parameters, pacs::hb_routine, pacs::exponential_strategy).first << std::endl;
-    std::cout << pacs::solver(target, parameters, pacs::hb_routine, pacs::inverse_strategy).first << std::endl;
-    std::cout << pacs::solver(target, parameters, pacs::hb_routine, pacs::armijo_strategy).first << std::endl;
-
-    std::cout << pacs::solver(target, parameters, pacs::nesterov_routine, pacs::exponential_strategy).first << std::endl;
-    std::cout << pacs::solver(target, parameters, pacs::nesterov_routine, pacs::inverse_strategy).first << std::endl;
-    std::cout << pacs::solver(target, parameters, pacs::nesterov_routine, pacs::armijo_strategy).first << std::endl;
+    for(auto &routine_it: routines) {
+        for(auto &strategy_it: strategies) {
+            std::pair<pacs::Vector, bool> result = pacs::solver(target, parameters, routine_it, strategy_it);
+            std::cout << "Point: " << result.first << std::endl;
+            std::cout << "Convergence: " << ((result.second) ? "Yes" : "No") << std::endl << std::endl;
+        }
+    }
 
     return 0;
 }
