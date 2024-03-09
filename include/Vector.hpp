@@ -6,46 +6,37 @@ Andrea Di Antonio, 10655477.
 #ifndef VECTOR_PACS
 #define VECTOR_PACS
 
-// Assertions.
 #include <cassert>
-
-// For constructors.
 #include <vector>
 #include <initializer_list>
 #include <concepts>
-
-// Math.
 #include <cmath>
-
-// Output.
 #include <iostream>
 
 namespace pacs {
 
-    // Real alias.
     using Real = long double;
 
-    // Real vectors.
+    /**
+     * @brief Vector class.
+     * 
+     */
     class Vector {
-        /*
-        This is a simple Vector class which has been written for this challenge.
-        This class works as a wrapper for the std::vector<long double> class and implements 
-        basic vector operations such as sums, scalar products and the euclidean norm.
-        */
         private:
             const size_t size;
             std::vector<Real> elements;
 
         public:
-            
-            // CONSTRUCTORS and COPY.
-
-            // Constructors.
             Vector();
             Vector(const size_t &);
             Vector(const Vector &);
 
-            // Concept constructors.
+            /**
+             * @brief Construct a new Vector object from a floating point std::vector.
+             * 
+             * @tparam type 
+             * @param values 
+             */
             template<std::floating_point type>
             Vector(const std::vector<type> &values): size(values.size()) {
                 // Initializes a vector from a std::vector.
@@ -58,7 +49,13 @@ namespace pacs {
                     elements_it = static_cast<Real>(*values_it++);
                 }
             }
-
+            
+            /**
+             * @brief Construct a new Vector object from an integral std::vector.
+             * 
+             * @tparam type 
+             * @param values 
+             */
             template<std::integral type>
             Vector(const std::vector<type> &values): size(values.size()) {
                 // Initializes a vector from an integral std::vector.
@@ -71,6 +68,12 @@ namespace pacs {
                 }
             }
 
+            /**
+             * @brief Construct a new Vector object from a floating-point std::initializer_list.
+             * 
+             * @tparam type 
+             * @param values 
+             */
             template<std::floating_point type>
             Vector(const std::initializer_list<type> &values): size(values.size()) {
                 // Initializes a vector from a std::initializer_list.
@@ -82,7 +85,13 @@ namespace pacs {
                     elements_it = static_cast<Real>(*values_it++);
                 }
             }
-
+            
+            /**
+             * @brief Construct a new Vector object from an integral std::initializer_list.
+             * 
+             * @tparam type 
+             * @param values 
+             */
             template<std::integral type>
             Vector(const std::initializer_list<type> &values): size(values.size()) {
                 // Initializes a vector from an integral std::initializer_list.
@@ -95,6 +104,12 @@ namespace pacs {
                 }
             }
             
+            /**
+             * @brief Construct a new Vector object from a floating-point std::array.
+             * 
+             * @tparam type 
+             * @param values 
+             */
             template<std::floating_point type, size_t M>
             Vector(const std::array<type, M> &values): size(values.size()) {
                 // Initializes a vector from a std::array.
@@ -107,6 +122,12 @@ namespace pacs {
                 }
             }
 
+            /**
+             * @brief Construct a new Vector object from an integral std::array.
+             * 
+             * @tparam type 
+             * @param values 
+             */
             template<std::integral type, size_t M>
             Vector(const std::array<type, M> &values): size(values.size()) {
                 // Initializes a vector from an integral std::array.
@@ -119,11 +140,15 @@ namespace pacs {
                 }
             }
 
-            // Copy (=).
             Vector &operator =(const Vector &);
 
-            // Methods which copy values from the following structures into this->elements.
-            // Behave in a similar fashion as previous constructors.
+            /**
+             * @brief Copy operator from a floating-point std::vector.
+             * 
+             * @tparam type 
+             * @param values 
+             * @return Vector& 
+             */
             template<std::floating_point type>
             Vector &operator =(const std::vector<type> &values) {
                 #ifndef NDEBUG
@@ -137,7 +162,14 @@ namespace pacs {
 
                 return *this;
             }
-
+            
+            /**
+             * @brief Copy operator from an integral std::vector.
+             * 
+             * @tparam type 
+             * @param values 
+             * @return Vector& 
+             */
             template<std::integral type>
             Vector &operator =(const std::vector<type> &values) {
                 #ifndef NDEBUG
@@ -152,6 +184,13 @@ namespace pacs {
                 return *this;
             }
 
+            /**
+             * @brief Copy operator from a floating-point std::initializer_list.
+             * 
+             * @tparam type 
+             * @param values 
+             * @return Vector& 
+             */
             template<std::floating_point type>
             Vector &operator =(const std::initializer_list<type> &values) {
                 #ifndef NDEBUG
@@ -166,6 +205,13 @@ namespace pacs {
                 return *this;
             }
 
+            /**
+             * @brief Copy operator from an integral std::initializer_list.
+             * 
+             * @tparam type 
+             * @param values 
+             * @return Vector& 
+             */
             template<std::integral type>
             Vector &operator =(const std::initializer_list<type> &values) {
                 #ifndef NDEBUG
@@ -180,6 +226,13 @@ namespace pacs {
                 return *this;
             }
 
+            /**
+             * @brief Copy operator from a floating-point std::array.
+             * 
+             * @tparam type 
+             * @param values 
+             * @return Vector& 
+             */
             template<std::floating_point type, size_t M>
             Vector &operator =(const std::array<type, M> &values) {
                 #ifndef NDEBUG
@@ -194,6 +247,13 @@ namespace pacs {
                 return *this;
             }
 
+            /**
+             * @brief Copy operator from an integral std::array.
+             * 
+             * @tparam type 
+             * @param values 
+             * @return Vector& 
+             */
             template<std::integral type, size_t M>
             Vector &operator =(const std::array<type, M> &values) {
                 #ifndef NDEBUG
@@ -208,29 +268,26 @@ namespace pacs {
                 return *this;
             }
 
-            // Access.
             Real operator [](const size_t &) const;
             Real &operator [](const size_t &);
 
-            // METHODS.
             Real dot(const Vector &) const;
             Real norm() const;
             
-            // OPERATIONS.
-
-            // Unary operations.
             Vector operator +() const;
             Vector operator -() const;
 
-            // Binary operations.
-
-            // Vector sums.
             Vector operator +(const Vector &) const;
             Vector operator -(const Vector &) const;
             Vector &operator +=(const Vector &);
             Vector &operator -=(const Vector &);
 
-            // Scalar products.
+            /**
+             * @brief Scalar product.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector operator *(const std::floating_point auto &operand) const {
                 Vector result = Vector(this->size);
 
@@ -242,7 +299,13 @@ namespace pacs {
 
                 return result;
             }
-
+            
+            /**
+             * @brief Scalar division.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector operator /(const std::floating_point auto &operand) const {
                 Vector result = Vector(this->size);
                 
@@ -255,44 +318,95 @@ namespace pacs {
                 return result;
             }
 
+            /**
+             * @brief Operator *.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector operator *(const std::integral auto &operand) const {
                 return *this * static_cast<Real>(operand);
             }
 
+            /**
+             * @brief Operator /.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector operator /(const std::integral auto &operand) const {
                 return *this / static_cast<Real>(operand);
             }
 
+            /**
+             * @brief Operator *=.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector &operator *=(const std::integral auto &operand) {
                 return *this = *this * operand;
             }
 
+            /**
+             * @brief Operator /=.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector &operator /=(const std::integral auto &operand) {
                 return *this = *this / operand;
             }
 
+            /**
+             * @brief Operator *=.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector &operator *=(const std::floating_point auto &operand) {
                 return *this = *this * operand;
             }
 
+            /**
+             * @brief Operator /=.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             Vector &operator /=(const std::floating_point auto &operand) {
                 return *this = *this / operand;
             }
 
+            /**
+             * @brief Friend operator *.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             friend Vector operator *(const std::integral auto &operand, const Vector &vector) {
                 return vector * static_cast<Real>(operand);
             }
 
+            /**
+             * @brief Friend operator *.
+             * 
+             * @param operand 
+             * @return Vector 
+             */
             friend Vector operator *(const std::floating_point auto &operand, const Vector &vector) {
                 return vector * static_cast<Real>(operand);
             }
             
-            // Constexpr methods.
+            /**
+             * @brief Returns the length of the Vector.
+             * 
+             * @return constexpr size_t 
+             */
             constexpr size_t length() const {
                 return this->size;
             }
 
-            // Output.
             friend std::ostream &operator <<(std::ostream &, const Vector &);
     };
 

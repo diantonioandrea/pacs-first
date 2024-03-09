@@ -7,8 +7,6 @@ Andrea Di Antonio, 10655477.
 
 namespace pacs {
 
-    // Vector.
-
     /**
      * @brief Construct a new Vector object.
      * 
