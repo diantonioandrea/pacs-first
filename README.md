@@ -1,6 +1,6 @@
 # Advanced Programming for Scientific Computing - First Challenge
 
-*A gradient method for minimizing multivariate functions.*
+*A gradient method for the minimization of a multivariate function.*
 
 ## Contents
 
