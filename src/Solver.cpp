@@ -43,14 +43,10 @@ namespace pacs {
             data.previous = data.current;
             data.current = data.next;
 
-            // X_{k + 1} -> X_k.
-            data.current = data.next;
-
             // Updates data.size and data.index.
-            data.index++; // Also updates step.
-
-            // Evaluates the next step size with the given strategy.
-            data.size = strategy(data, params);
+            data.index++;
+            data.size = strategy(data, params); // Evaluates the next step size with the given strategy.
+            
         } while((data.index < max_it) && (step_con >= step_tol) && (res_con >= res_tol));
 
         // Achieved convergence.
