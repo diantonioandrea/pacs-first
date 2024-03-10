@@ -29,19 +29,6 @@ namespace pacs {
     Target::Target(Function function, Gradient gradient): target_function{function}, target_gradient{gradient} {}
 
     /**
-     * @brief Copies a Target object.
-     * 
-     * @param target 
-     * @return Target& 
-     */
-    Target &Target::operator =(const Target &target) {
-        this->target_function = target.target_function;
-        this->target_gradient = target.target_gradient;
-
-        return *this;
-    }
-
-    /**
      * @brief Evaluates the function at a given X.
      * 
      * @param x 

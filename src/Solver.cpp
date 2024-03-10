@@ -56,14 +56,14 @@ namespace pacs {
     }
 
     /**
-     * @brief Default solver routine (Newton) and strategy (Armijo).
+     * @brief Default solver routine (Newton) and strategy (Fixed).
      * 
      * @param target 
      * @param params 
      * @return Data 
      */
     Data solver(const Target &target, const Parameters &params) {
-        return solver(target, params, newton_routine, armijo_strategy);
+        return solver(target, params, newton_routine, fixed_strategy);
     }
 
     /**
@@ -171,7 +171,11 @@ namespace pacs {
      */
     void show(const Data &result) {
         std::cout << "\nMinimum at: " << result.next << std::endl;
-        std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
+
+        if(result.status)
+            std::cout << "Converged in " << result.index + 1 << " steps." << std::endl;
+        else
+            std::cout << "Not converged :(" << std::endl;
     }
 
     /**
@@ -182,7 +186,11 @@ namespace pacs {
     void show(const Data &result, const Vector &exact) {
         std::cout << "\nMinimum at: " << result.next << std::endl;
         std::cout << "\nDistance: " << (result.next - exact).norm() << std::endl;
-        std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
+
+        if(result.status)
+            std::cout << "Converged in " << result.index + 1 << " steps." << std::endl;
+        else
+            std::cout << "Not converged :(" << std::endl;
     }
 
 }
