@@ -86,6 +86,7 @@ namespace pacs {
      * @return Vector 
      */
     Vector newton_routine(const Data &data) {
+        // X_{k + 1} = X_k - Alpha_k * Df(X_k).
         return data.current - (data.size * data.target.gradient(data.current));
     }
 
@@ -98,6 +99,7 @@ namespace pacs {
     Vector hb_routine(const Data &data) {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
+        // X_{k + 1} = X_k - Alpha_k * Df(X_k) + Eta(X_k - X_{k - 1}).
         return data.current - (data.size * data.target.gradient(data.current)) + strategy_eta * (data.current - data.previous);
     }
 
@@ -110,8 +112,10 @@ namespace pacs {
     Vector nesterov_routine(const Data &data) {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
+        // y = X_k + Eta(X_k - X_{k - 1}).
+        // X_{k + 1} = y - Alpha_k * Df(y).
         Vector partial = data.current + strategy_eta * (data.current - data.previous);
-        return partial - data.size * data.target.gradient(data.current);
+        return partial - data.size * data.target.gradient(partial);
     }
 
     /**
@@ -122,6 +126,7 @@ namespace pacs {
      * @return Real 
      */
     Real exponential_strategy(const Data &data, const Parameters &params) {
+        // Alpha_{k + 1} = Alpha_0 * exp(- Mu * K).
         return params.alpha * std::exp(- params.strategy_mu * static_cast<Real>(data.index));
     }
 
@@ -133,6 +138,7 @@ namespace pacs {
      * @return Real 
      */
     Real inverse_strategy(const Data &data, const Parameters &params) {
+        // Alpha_{k + 1} = Alpha_0 / (1 + Mu * K).
         return params.alpha / (1.0L + params.strategy_mu * static_cast<Real>(data.index));
     }
 
@@ -149,7 +155,7 @@ namespace pacs {
         Vector gradient_point = data.target.gradient(data.current);
         Real gradient_point_norm = std::pow(gradient_point.norm(), 2);
 
-        // Alpha_k.
+        // Alpha_{k + 1}.
         Real step_size = params.alpha;
 
         // Armijo strategy.
