@@ -179,7 +179,7 @@ namespace pacs {
         if(result.status)
             std::cout << "Converged in " << result.index + 1 << " steps." << std::endl;
         else
-            std::cout << "Not converged :(" << std::endl;
+            std::cout << "Didn't converge :(" << std::endl;
     }
 
     /**
@@ -194,7 +194,7 @@ namespace pacs {
         if(result.status)
             std::cout << "Converged in " << result.index + 1 << " steps." << std::endl;
         else
-            std::cout << "Not converged :(" << std::endl;
+            std::cout << "Didn't converge :(" << std::endl;
     }
 
 }
