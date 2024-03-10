@@ -1,7 +1,7 @@
 /**
  * @file Parameters.hpp
- * @author Andrea Di Antonio (github.com/diantonioandrea)
- * @brief 
+ * @author Andrea Di Antonio 
+ * 
  * @date 2024-03-09
  * 
  * @copyright Copyright (c) 2024

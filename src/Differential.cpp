@@ -1,7 +1,7 @@
 /**
  * @file Differential.cpp
- * @author Andrea Di Antonio (github.com/diantonioandrea)
- * @brief 
+ * @author Andrea Di Antonio 
+ * 
  * @date 2024-03-10
  * 
  * @copyright Copyright (c) 2024
