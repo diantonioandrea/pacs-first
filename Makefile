@@ -1,5 +1,5 @@
 .PHONY: all clean
-CPPFLAGS ?= -Wall -pedantic -std=c++20 -O2 -pipe -mtune=native -march=native
+CPPFLAGS ?= -Wall -pedantic -std=c++20
 
 EXEC = main
 SOURCE = main.cpp
