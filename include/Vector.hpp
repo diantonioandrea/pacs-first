@@ -11,11 +11,15 @@
 #ifndef VECTOR_PACS
 #define VECTOR_PACS
 
+// Assertions.
 #include <cassert>
+
+// Constructors.
 #include <vector>
 #include <initializer_list>
 #include <concepts>
-#include <cmath>
+
+// Output.
 #include <iostream>
 
 namespace pacs {

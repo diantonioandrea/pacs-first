@@ -15,8 +15,11 @@
 
 namespace pacs {
 
+    // Aliases.
     using Function = Real (*) (const Vector &);
     using Gradient = Vector (*) (const Vector &);
+
+    Vector numerical_gradient(Function, const Vector &);
 
     /**
      * @brief Target function and gradient class.

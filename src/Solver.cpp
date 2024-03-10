@@ -10,6 +10,8 @@
 
 #include "../include/Solver.hpp"
 
+#include <cmath>
+
 namespace pacs {
 
     /**

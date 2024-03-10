@@ -11,12 +11,9 @@
 #ifndef SOLVER_PACS
 #define SOLVER_PACS
 
-#include <vector>
-#include <cmath>
-
+#include "Vector.hpp"
 #include "Target.hpp"
 #include "Parameters.hpp"
-#include "Vector.hpp"
 
 namespace pacs {
 

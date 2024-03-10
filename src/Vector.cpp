@@ -10,6 +10,9 @@
 
 #include "../include/Vector.hpp"
 
+// Norm.
+#include <cmath>
+
 namespace pacs {
 
     /**

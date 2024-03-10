@@ -14,6 +14,27 @@
 namespace pacs {
 
     /**
+     * @brief Evaluates the numerical gradient at a given point.
+     * 
+     * @param function 
+     * @param x 
+     * @return Vector 
+     */
+    Vector numerical_gradient(Function function, const Vector &x) {
+        Real step = 1.0E-4L;
+        Vector gradient = Vector(x.get_size());
+
+        for(size_t k = 0; k < gradient.get_size(); ++k) {
+            Vector direction = Vector(x.get_size());
+            direction[k] = step;
+
+            gradient[k] = (function(x + direction) - function(x)) / step;
+        }
+
+        return gradient;
+    }
+
+    /**
      * @brief Construct a new Target object from a given function.
      * 
      * @param function 
