@@ -24,11 +24,15 @@ namespace pacs {
      */
     struct Arguments {
         bool verbose = false;
+
+        bool numerical = false;
         bool s_strategy = false;
         bool s_routine = false;
         bool s_all = false;
+        
         Routine routine = newton_routine;
         Strategy strategy = armijo_strategy;
+        
         std::string filename = "parameters.json";
     };
 

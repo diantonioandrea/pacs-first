@@ -51,6 +51,9 @@ int main(int argc, char **argv) {
     // Default targets.
     Target target{target_func, target_grad};
 
+    if(args.numerical) // Numerical gradient.
+        target = Target{target_func, target_grad};
+        
     // Execution.
     if(args.s_all) {
 

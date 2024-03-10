@@ -170,4 +170,15 @@ namespace pacs {
         std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
     }
 
+    /**
+     * @brief Prints the results of a single run and compares to the exact result.
+     * 
+     * @param result 
+     */
+    void show(const Data &result, const Vector &exact) {
+        std::cout << "\nMinimum at: " << result.next << std::endl;
+        std::cout << "\nDistance: " << (result.next - exact).norm() << std::endl;
+        std::cout << "Convergence: " << ((result.status) ? "Yes" : "No") << std::endl;
+    }
+
 }

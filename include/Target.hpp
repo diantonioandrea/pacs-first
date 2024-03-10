@@ -24,12 +24,14 @@ namespace pacs {
      */
     class Target {
         private:
-            const Function target_function;
-            const Gradient target_gradient;
+            Function target_function;
+            Gradient target_gradient;
 
         public:
             Target(Function);
             Target(Function, Gradient);
+
+            Target &operator =(const Target &);
 
             Real function(const Vector &) const;
             Vector gradient(const Vector &) const;

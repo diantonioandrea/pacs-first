@@ -52,6 +52,7 @@ namespace pacs {
     Real armijo_strategy(const Data &, const Parameters &);
 
     void show(const Data &);
+    void show(const Data &, const Vector &);
 }
 
 #endif

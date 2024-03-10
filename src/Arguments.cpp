@@ -56,6 +56,14 @@ namespace pacs {
                 arguments.s_all = true;
             }
 
+            // Numerical solution.
+            if(option == "-n") {
+                if(arguments.verbose)
+                    std::cout << "Considering numerical gradient." << std::endl;
+
+                arguments.numerical = true;
+            }
+
             // Routine.
             if(!arguments.s_routine) {
                 if(option == "--r_newton") {
