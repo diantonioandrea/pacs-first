@@ -32,15 +32,5 @@ namespace pacs {
 
         return gradient;
     }
-
-    /**
-     * @brief Evaluates the numerical gradient at a given point.
-     * 
-     * @param x 
-     * @return Vector 
-     */
-    Vector NTarget::operator ()(const Vector &x) const {
-        return numerical_gradient(this->function, x);
-    }
     
 }

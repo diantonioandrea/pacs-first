@@ -18,15 +18,6 @@ namespace pacs {
 
     Vector numerical_gradient(Function, const Vector &);
 
-    /**
-     * @brief Numerical function and gradient functor.
-     * 
-     */
-    struct NTarget {
-        Function function;
-        Vector operator ()(const Vector &x) const;
-    };
-
 }
 
 #endif

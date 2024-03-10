@@ -23,8 +23,13 @@ namespace pacs {
      * 
      */
     struct Target {
+        Target(Function);
+        Target(Function, Gradient);
+        
         Function function;
         Gradient gradient;
+
+        Vector operator ()(const Vector &) const;
     };
 
 }

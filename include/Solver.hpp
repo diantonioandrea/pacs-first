@@ -15,7 +15,6 @@
 #include <cmath>
 
 #include "Target.hpp"
-#include "Differential.hpp"
 #include "Parameters.hpp"
 #include "Vector.hpp"
 
