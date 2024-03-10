@@ -55,12 +55,15 @@ The `./main` executable supports the following options:
 
 - `--all`: Executes the algorithm with every routine and strategy.
 
-- `--r_(ROUTINE)`: Specifies a particular routine, including:
+- `--r_(ROUTINE)`: Specifies a particular routine, including[^1]:
     - `--r_newton` for **Newton**'s routine.
     - `--r_hb` for **Heavy-Ball** routine.
     - `--r_nesterov` for **Nesterov**'s routine.
 
 - `--(STRATEGY)`: Specifies a particular strategy, including:
+    - `--fixed` for the **Fixed** strategy.
     - `--exponential` for the **Exponential Decay** strategy.
     - `--inverse` for the **Inverse Decay** strategy.
     - `--armijo` for the **Armijo** strategy.
+
+[^1]: Note that the **Nesterov** and **Heavy-Ball** routines are only compatible with the **Fixed** strategy.

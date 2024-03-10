@@ -24,6 +24,7 @@ namespace pacs {
      */
     struct Arguments {
         bool verbose = false;
+        bool help = false;
 
         bool numerical = false;
         bool s_strategy = false;
@@ -31,12 +32,12 @@ namespace pacs {
         bool s_all = false;
         
         Routine routine = newton_routine;
-        Strategy strategy = armijo_strategy;
+        Strategy strategy = fixed_strategy;
         
         std::string filename = "parameters.json";
     };
 
-    void splash(char **);
+    void challenge_splash(char **);
     Arguments parse(const int &, char **);
 }
 

@@ -22,19 +22,6 @@ namespace pacs {
      * @return Data 
      */
     Data solver(const Target &target, const Parameters &params, Routine routine, Strategy strategy) {
-        #ifndef NDEBUG
-        assert(params.alpha > 0.0L);
-
-        assert(params.step_tolerance > 0.0L);
-        assert(params.residual_tolerance > 0.0L);
-
-        assert(params.max_iterations > 0);
-
-        assert(params.strategy_mu > 0);
-        assert(params.strategy_sigma > 0);
-        assert(params.strategy_sigma < 0.5);
-        #endif
-
         // Solver's data initialization.
         Data data{target, params.start, params.start, params.start, params.alpha, 0};
 
@@ -116,6 +103,17 @@ namespace pacs {
         // X_{k + 1} = y - Alpha_k * Df(y).
         Vector partial = data.current + strategy_eta * (data.current - data.previous);
         return partial - data.size * data.target.gradient(partial);
+    }
+
+    /**
+     * @brief Fixed Alpha strategy.
+     * 
+     * @param data 
+     * @param params 
+     * @return Real 
+     */
+    Real fixed_strategy(const Data &data, const Parameters &params) {
+        return data.size;
     }
 
     /**

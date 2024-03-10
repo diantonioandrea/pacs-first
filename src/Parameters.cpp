@@ -12,6 +12,7 @@
 
 #include <string>
 #include <fstream>
+#include <cassert>
 
 #include "../include/json.hpp"
 
@@ -53,6 +54,15 @@ namespace pacs {
 
         if(verbose)
             std::cout << "\nLoaded:\n" << returns;
+
+        // Checks.
+        assert(returns.alpha > 0.0L);
+        assert(returns.step_tolerance > 0.0L);
+        assert(returns.residual_tolerance > 0.0L);
+        assert(returns.max_iterations > 0);
+        assert(returns.strategy_mu > 0);
+        assert(returns.strategy_sigma > 0);
+        assert(returns.strategy_sigma < 0.5);
 
         return returns;
     }

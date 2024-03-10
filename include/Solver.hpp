@@ -47,6 +47,7 @@ namespace pacs {
     Vector hb_routine(const Data &);
     Vector nesterov_routine(const Data &);
 
+    Real fixed_strategy(const Data &, const Parameters &);
     Real exponential_strategy(const Data &, const Parameters &);
     Real inverse_strategy(const Data &, const Parameters &);
     Real armijo_strategy(const Data &, const Parameters &);
