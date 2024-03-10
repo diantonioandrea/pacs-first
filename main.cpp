@@ -8,30 +8,11 @@
  * 
  */
 
-// Standard library.
 #include <iostream>
-#include <vector>
-#include <string>
 
-// Real type, vectors and parameters.
-#include "include/Vector.hpp"
-#include "include/Parameters.hpp"
-
-// Target structure.
-#include "include/Target.hpp"
-
-// Default targets.
-#include "include/Default.hpp"
-
-// Solver.
-#include "include/Solver.hpp"
-
-// Parser.
-#include "include/Arguments.hpp"
-
-// For readability.
-// I wouldn't use it in a bigger project.
-using namespace pacs;
+// Includes.
+#include "main.hpp"
+using namespace pacs; // Readability.
 
 int main(int argc, char **argv) {
     // Default "splash".

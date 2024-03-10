@@ -29,6 +29,8 @@ namespace pacs {
 
         // Controls and tolerances.
         Real step_con = 0.0L, res_con = 0.0L;
+
+        // Short names.
         Real step_tol = params.step_tolerance, res_tol = params.residual_tolerance;
         size_t max_it = params.max_iterations;
 
