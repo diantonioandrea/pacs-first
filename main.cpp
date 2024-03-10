@@ -17,6 +17,9 @@
 #include "include/Vector.hpp"
 #include "include/Parameters.hpp"
 
+// Target structure.
+#include "include/Target.hpp"
+
 // Default targets.
 #include "include/Default.hpp"
 
