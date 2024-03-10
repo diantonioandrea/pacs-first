@@ -14,22 +14,12 @@
 #include <vector>
 #include <cmath>
 
+#include "Target.hpp"
+#include "Differential.hpp"
 #include "Parameters.hpp"
 #include "Vector.hpp"
 
 namespace pacs {
-
-    using Function = Real (*) (const Vector &);
-    using Gradient = Vector (*) (const Vector &);
-
-    /**
-     * @brief Target functions and gradient structure.
-     * 
-     */
-    struct Target {
-        Function function;
-        Gradient gradient;
-    };
 
     /**
      * @brief Solver data structure.
