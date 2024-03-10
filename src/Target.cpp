@@ -58,8 +58,8 @@ namespace pacs {
      * @return Vector 
      */
     Vector Target::gradient(const Vector &x) const {
-        if(this->target_gradient != nullptr)
-            return this->gradient(x);
+        if(this->target_gradient)
+            return this->target_gradient(x);
 
         return numerical_gradient(this->target_function, x);
     }

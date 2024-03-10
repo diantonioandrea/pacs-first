@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
     Target target{target_func, target_grad};
 
     if(args.numerical) // Numerical gradient.
-        target = Target{target_func, target_grad};
+        target = Target{target_func};
         
     // Execution.
     if(args.s_all) {
