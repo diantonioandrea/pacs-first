@@ -1,3 +1,13 @@
+/**
+ * @file Target.cpp
+ * @author Andrea Di Antonio (github.com/diantonioandrea)
+ * @brief 
+ * @date 2024-03-10
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #include "../include/Target.hpp"
 #include "../include/Differential.hpp"
 
@@ -24,6 +34,12 @@ namespace pacs {
         this->gradient = gradient;
     }
 
+    /**
+     * @brief Gradient evaluation at a given point.
+     * 
+     * @param x 
+     * @return Vector 
+     */
     Vector Target::operator()(const Vector &x) const {
         if(this->gradient != nullptr)
             return this->gradient(x);

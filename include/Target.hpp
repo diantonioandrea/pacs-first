@@ -19,7 +19,7 @@ namespace pacs {
     using Gradient = Vector (*) (const Vector &);
 
     /**
-     * @brief Target function and gradient structure.
+     * @brief Target function and gradient struct.
      * 
      */
     struct Target {
