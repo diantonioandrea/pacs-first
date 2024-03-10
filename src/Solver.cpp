@@ -155,7 +155,7 @@ namespace pacs {
         Vector gradient_point = data.target.gradient(data.current);
         Real gradient_point_norm = std::pow(gradient_point.norm(), 2);
 
-        // Alpha_{k + 1}.
+        // Alpha_k.
         Real step_size = params.alpha;
 
         // Armijo strategy.
