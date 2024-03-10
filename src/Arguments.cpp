@@ -21,7 +21,7 @@ namespace pacs {
         std::cout << "A gradient method for the minimization of a multivariate function." << std::endl;
         std::cout << "Andrea Di Antonio, 10655477.\n" << std::endl;
         
-        std::cout << "Usage: " << argv[0] << "  [-v]  [-p (FILENAME)]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
+        std::cout << "Usage: " << argv[0] << "  [-v]  [-n]  [-p (FILENAME)]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
         std::cout << "\nExamples:" << std::endl;
         std::cout << "\t./main -v --all" << std::endl;
         std::cout << "\t./main --r_nesterov --armijo" << std::endl;

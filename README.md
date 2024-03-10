@@ -49,6 +49,8 @@ The `./main` executable supports the following options:
 
 - `-v`: Enables verbosity.
 
+- `-n`: Considers the numerical gradient for the target function.
+
 - `-p (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
 
 - `--all`: Executes the algorithm with every routine and strategy.
