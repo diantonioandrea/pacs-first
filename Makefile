@@ -4,7 +4,7 @@ CPPFLAGS ?= -Wall -pedantic -std=c++20 -O2 -pipe -mtune=native -march=native
 EXEC = main
 SOURCE = main.cpp
 OBJECT = main.o
-OBJECTS = Vector.o Solver.o Parameters.o Default.o Arguments.o Differential.o Target.o
+OBJECTS = Vector.o Solver.o Parameters.o Arguments.o Differential.o Target.o
 
 # Rules.
 all: $(EXEC)
