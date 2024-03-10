@@ -26,6 +26,9 @@
 // Parser.
 #include "include/Arguments.hpp"
 
+// Numerical differentiation.
+#include "include/Differential.hpp"
+
 // For readability.
 // I wouldn't use it in a bigger project.
 using namespace pacs;
