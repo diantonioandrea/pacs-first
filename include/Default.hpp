@@ -11,8 +11,6 @@
 #ifndef DEFAULT_PACS
 #define DEFAULT_PACS
 
-#include <iostream>
-
 #include "Vector.hpp"
 
 namespace pacs {
