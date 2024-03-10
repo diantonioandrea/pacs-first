@@ -19,7 +19,7 @@ namespace pacs {
      * 
      */
     void challenge_splash(char **argv) {
-        std::cout << "Usage: " << argv[0] << "  [-h/--help]  [-v]  [-n]  [-p (FILENAME)]  [--all]  [--r_(ROUTINE)]  [--(STRATEGY)]" << std::endl;
+        std::cout << "Usage: " << argv[0] << "  [-h/--help]  [-v]  [-n]  [-p (FILENAME)]  [--r_(ROUTINE)]  [--s_(STRATEGY)]" << std::endl;
         std::cout << "\nExamples:" << std::endl;
         std::cout << "\t./main -v --all" << std::endl;
         std::cout << "\t./main --r_nesterov --armijo" << std::endl;
@@ -96,14 +96,14 @@ namespace pacs {
 
             // Strategy.
             if(!arguments.s_strategy) {
-                if(option == "--fixed") {
+                if(option == "--s_fixed") {
                     if(arguments.verbose)
                         std::cout << "Using the Fixed strategy." << std::endl;
 
                     arguments.s_strategy = true;
                 }
 
-                if(option == "--exponential") {
+                if(option == "--s_exponential") {
                     if(arguments.verbose)
                         std::cout << "Using the Exponential Decay strategy." << std::endl;
 
@@ -111,7 +111,7 @@ namespace pacs {
                     arguments.s_strategy = true;
                 }
             
-                if(option == "--inverse") {
+                if(option == "--s_inverse") {
                     if(arguments.verbose)
                         std::cout << "Using the Inverse Decay strategy." << std::endl;
 
@@ -119,7 +119,7 @@ namespace pacs {
                     arguments.s_strategy = true;
                 }
                     
-                if(option == "--armijo") {
+                if(option == "--s_armijo") {
                     if(arguments.verbose)
                         std::cout << "Using the Armijo strategy." << std::endl;
 
@@ -132,6 +132,13 @@ namespace pacs {
             if((option == "-p") && (j < argc - 1))
                 arguments.filename = argv[j + 1];
         }
+
+        // Defaults
+        if(!(arguments.s_routine) && arguments.verbose)
+            std::cout << "Using the Newton routine." << std::endl;
+
+        if(!(arguments.s_strategy) && arguments.verbose)
+            std::cout << "Using the Fixed strategy." << std::endl;
 
         // Checks.
         if((arguments.routine == nesterov_routine) || (arguments.routine == hb_routine)) {

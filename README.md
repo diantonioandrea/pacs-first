@@ -48,22 +48,20 @@ Parameters are specified in a [parameters.json](/parameters.json) file, which is
 The `./main` executable supports the following options:
 
 - `-v`: Enables verbosity.
-
 - `-n`: Considers the numerical gradient for the target function.
+- `-h/--help`: A little help on usage.
 
 - `-p (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
-
-- `--all`: Executes the algorithm with every routine and strategy.
 
 - `--r_(ROUTINE)`: Specifies a particular routine, including[^1]:
     - `--r_newton` for **Newton**'s routine.
     - `--r_hb` for **Heavy-Ball** routine.
     - `--r_nesterov` for **Nesterov**'s routine.
 
-- `--(STRATEGY)`: Specifies a particular strategy, including:
-    - `--fixed` for the **Fixed** strategy.
-    - `--exponential` for the **Exponential Decay** strategy.
-    - `--inverse` for the **Inverse Decay** strategy.
-    - `--armijo` for the **Armijo** strategy.
+- `--s_(STRATEGY)`: Specifies a particular strategy, including:
+    - `--s_fixed` for the **Fixed** strategy.
+    - `--s_exponential` for the **Exponential Decay** strategy.
+    - `--s_inverse` for the **Inverse Decay** strategy.
+    - `--s_armijo` for the **Armijo** strategy.
 
 [^1]: Note that the **Nesterov** and **Heavy-Ball** routines are only compatible with the **Fixed** strategy.
