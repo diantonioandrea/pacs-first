@@ -38,6 +38,8 @@ int main(int argc, char **argv) {
     if(argc <= 1) {
         splash(argv);
         return 0;
+    } else {
+        std::cout << "PACS - First challenge." << std::endl; // Default output.
     }
 
     // Loads every routine and strategy.
