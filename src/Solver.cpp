@@ -23,7 +23,7 @@ namespace pacs {
      */
     Data solver(const Target &target, const Parameters &params, Routine routine, Strategy strategy) {
         // Solver's data initialization.
-        Data data{target, params.start, params.start, params.start, params.alpha, 0};
+        Data data{target, params.guess, params.guess, params.guess, params.alpha, 0};
 
         // Controls and tolerances.
         Real step_con = 0.0L, res_con = 0.0L;

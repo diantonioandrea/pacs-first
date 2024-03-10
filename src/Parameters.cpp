@@ -44,7 +44,7 @@ namespace pacs {
         file >> json_file;
 
         // Search for values.
-        returns.start = json_file.value("start", defaults.start.get_elements());
+        returns.guess = json_file.value("guess", defaults.guess.get_elements());
         returns.alpha = json_file.value("alpha", defaults.alpha);
         returns.step_tolerance = json_file.value("step_tolerance", defaults.step_tolerance);
         returns.residual_tolerance = json_file.value("residual_tolerance", defaults.residual_tolerance);
@@ -75,7 +75,7 @@ namespace pacs {
      * @return std::ostream& 
      */
     std::ostream &operator <<(std::ostream &ost, const Parameters &params) {
-        ost << "\tstart: " << params.start << std::endl;
+        ost << "\tguess: " << params.guess << std::endl;
 
         ost << "\talpha: " << params.alpha << std::endl;
 

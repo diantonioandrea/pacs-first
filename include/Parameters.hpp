@@ -22,7 +22,7 @@ namespace pacs {
      * 
      */
     struct Parameters {
-        Vector start = Vector(2);
+        Vector guess = Vector(2);
         Real alpha = 1.0E-1L;
         Real step_tolerance = 1.0E-6L;
         Real residual_tolerance = 1.0E-6L;
