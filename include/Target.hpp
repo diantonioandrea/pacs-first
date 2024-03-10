@@ -26,10 +26,11 @@ namespace pacs {
         Target(Function);
         Target(Function, Gradient);
         
-        Function function;
-        Gradient gradient;
+        const Function function;
+        const Gradient gradient;
 
-        Vector operator ()(const Vector &) const;
+        Real func_eval(const Vector &) const;
+        Vector grad_eval(const Vector &) const;
     };
 
 }

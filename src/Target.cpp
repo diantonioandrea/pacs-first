@@ -18,10 +18,7 @@ namespace pacs {
      * 
      * @param function 
      */
-    Target::Target(Function function) {
-        this->function = function;
-        this->gradient = nullptr;
-    }
+    Target::Target(Function function): function{function}, gradient{nullptr} {}
 
     /**
      * @brief Construct a new Target object from a given function and its gradient.
@@ -29,21 +26,29 @@ namespace pacs {
      * @param function 
      * @param gradient 
      */
-    Target::Target(Function function, Gradient gradient) {
-        this->function = function;
-        this->gradient = gradient;
+    Target::Target(Function function, Gradient gradient): function{function}, gradient{gradient} {}
+
+    /**
+     * @brief Evaluates the function at a given X.
+     * 
+     * @param x 
+     * @return Real 
+     */
+    Real Target::func_eval(const Vector &x) const {
+        return this->function(x);
     }
 
     /**
-     * @brief Gradient evaluation at a given point.
+     * @brief Evaluates the gradient at a given X.
      * 
      * @param x 
      * @return Vector 
      */
-    Vector Target::operator()(const Vector &x) const {
+    Vector Target::grad_eval(const Vector &x) const {
         if(this->gradient != nullptr)
             return this->gradient(x);
 
         return numerical_gradient(this->function, x);
     }
+
 }
