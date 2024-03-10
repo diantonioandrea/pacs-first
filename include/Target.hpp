@@ -19,18 +19,20 @@ namespace pacs {
     using Gradient = Vector (*) (const Vector &);
 
     /**
-     * @brief Target function and gradient struct.
+     * @brief Target function and gradient class.
      * 
      */
-    struct Target {
-        Target(Function);
-        Target(Function, Gradient);
-        
-        const Function function;
-        const Gradient gradient;
+    class Target {
+        private:
+            const Function target_function;
+            const Gradient target_gradient;
 
-        Real func_eval(const Vector &) const;
-        Vector grad_eval(const Vector &) const;
+        public:
+            Target(Function);
+            Target(Function, Gradient);
+
+            Real function(const Vector &) const;
+            Vector gradient(const Vector &) const;
     };
 
 }

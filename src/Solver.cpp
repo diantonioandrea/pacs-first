@@ -49,7 +49,7 @@ namespace pacs {
 
             // Control values.
             step_con = (data.next - data.current).norm();
-            res_con = target.grad_eval(data.next).norm();
+            res_con = target.gradient(data.next).norm();
 
             // X_{k - 1} and X_{k}.
             data.previous = data.current; // Needed for Heavy-Ball and Nesterov.
@@ -86,7 +86,7 @@ namespace pacs {
      * @return Vector 
      */
     Vector newton_routine(const Data &data) {
-        return data.current - (data.size * data.target.grad_eval(data.current));
+        return data.current - (data.size * data.target.gradient(data.current));
     }
 
     /**
@@ -98,7 +98,7 @@ namespace pacs {
     Vector hb_routine(const Data &data) {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
-        return data.current - (data.size * data.target.grad_eval(data.current)) + strategy_eta * (data.current - data.previous);
+        return data.current - (data.size * data.target.gradient(data.current)) + strategy_eta * (data.current - data.previous);
     }
 
     /**
@@ -111,7 +111,7 @@ namespace pacs {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
         Vector partial = data.current + strategy_eta * (data.current - data.previous);
-        return partial - data.size * data.target.grad_eval(data.current);
+        return partial - data.size * data.target.gradient(data.current);
     }
 
     /**
@@ -145,15 +145,15 @@ namespace pacs {
      */
     Real armijo_strategy(const Data &data, const Parameters &params) {
         // Target function and gradient at X_k.
-        Real target_point = data.target.func_eval(data.current);
-        Vector gradient_point = data.target.grad_eval(data.current);
+        Real target_point = data.target.function(data.current);
+        Vector gradient_point = data.target.gradient(data.current);
         Real gradient_point_norm = std::pow(gradient_point.norm(), 2);
 
         // Alpha_k.
         Real step_size = params.alpha;
 
         // Armijo strategy.
-        while(target_point - data.target.func_eval(data.current - step_size * gradient_point) < params.strategy_sigma * step_size * gradient_point_norm) {
+        while(target_point - data.target.function(data.current - step_size * gradient_point) < params.strategy_sigma * step_size * gradient_point_norm) {
             step_size /= 2.0L;
         }
 
