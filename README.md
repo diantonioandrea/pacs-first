@@ -4,12 +4,39 @@
 
 ## Contents
 
+- [Description](#description)
 - [Getting Started](#getting-started)
     - [Cloning the Repository](#cloning-the-repository)
     - [Compiling and Executing the Code](#compiling-and-executing-the-code)
 - [Usage](#usage)
     - [Parameters](#parameters)
     - [Options](#options)
+
+## Description
+
+This repository offers an implementation of a gradient-based method designed for minimizing multivariate functions.
+
+It introduces new classes and structures, including:
+
+- `pacs::Vector`: Responsible for managing vectors in $\mathbb{R}^n$.
+- `pacs::Target`: Manages the target function to be minimized along with its gradient. This can be provided as an input or evaluated numerically via finite differences.
+- `pacs::Data`: Handles the output of the solver and facilitates communication with various routines and strategies.
+- `pacs::Arguments` and `pacs::Parameters`: These classes manage command-line arguments and parameters. They utilize a custom, straightforward `argv` parser and leverage the `nholmann::json` class.
+
+The implemented solver necessitates the following parameters for the target function minimization:
+
+- Initial guess $x_0$
+- Initial learning rate value $\alpha_0$
+- Tolerances $\varepsilon_s$ and $\varepsilon_r$
+- Maximum number of iterations
+- Strategy parameters $\mu$ and $\sigma$
+
+Additionally, it requires two components:
+
+1. A routine for evaluating the next point $x_{k + 1}$. (Defaults to the Newton routine).
+2. A strategy for determining the learning rate value $\alpha_{k}$. (Defaults to the Fixed strategy).
+
+Refer to [Options](#options) for the available routines and strategies.
 
 ## Getting Started
 
