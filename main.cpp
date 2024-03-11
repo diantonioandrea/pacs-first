@@ -12,30 +12,29 @@
 
 // Includes.
 #include "main.hpp"
-using namespace pacs; // Readability.
 
 int main(int argc, char **argv) {
     // Default "splash".
     std::cout << "PACS - First challenge." << std::endl;
 
     // Arguments.
-    Arguments args = parse(argc, argv);
+    pacs::Arguments args = pacs::parse(argc, argv);
 
     // Help.
     if(args.help) {
-        challenge_splash(argv);
+        pacs::challenge_splash(argv);
         return 0;
     }
 
     // Parameters.
-    Parameters parameters = read_json(args.filename, args.verbose);
+    pacs::Parameters parameters = pacs::read_json(args.filename, args.verbose);
 
     // Default targets.
     // Checks for numerical option.
-    Target target = (args.numerical) ? Target{target_func} : Target{target_func, target_grad};
+    pacs::Target target = (args.numerical) ? pacs::Target{pacs::target_func} : pacs::Target{pacs::target_func, pacs::target_grad};
 
     // Single run with the specified routine and strategy.
     // Default: Newton + Fixed.
-    show(solver(target, parameters, args.routine, args.strategy));
+    pacs::show(pacs::solver(target, parameters, args.routine, args.strategy));
     return 0;
 }
