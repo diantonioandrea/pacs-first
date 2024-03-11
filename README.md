@@ -21,7 +21,7 @@ It introduces new classes and structures, including:
 - `pacs::Vector`: Responsible for managing vectors in $\mathbb{R}^n$.
 - `pacs::Target`: Manages the target function to be minimized along with its gradient. This can be provided as an input or evaluated numerically via finite differences.
 - `pacs::Data`: Handles the output of the solver and facilitates communication with various routines and strategies.
-- `pacs::Arguments` and `pacs::Parameters`: These classes manage command-line arguments and parameters. They utilize a custom, straightforward `argv` parser and leverage the `nholmann::json` class.
+- `pacs::Arguments` and `pacs::Parameters`: These classes manage command-line arguments and parameters. They utilize a custom, straightforward `argv` parser and leverage the `nlohmann::json` class.
 
 The implemented solver necessitates the following parameters for the target function minimization:
 
