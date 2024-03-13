@@ -48,11 +48,7 @@ To get started, clone the repository from [here](https://github.com/diantonioand
 
 ### Compiling and Executing the Code
 
-You can compile the code by running:
-
-    make all
-
-Or simply:
+You can compile the code by simply running:
 
     make
 
