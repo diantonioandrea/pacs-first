@@ -77,12 +77,12 @@ The `./main` executable supports the following options:
 - `-p/--parameters (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
 
 - `--r_(ROUTINE)`: Specifies a particular routine, including[^1]:
-    - `--r_newton` for **Newton**'s routine.
+    - `--r_newton` for **Newton**'s routine (default).
     - `--r_hb` for **Heavy-Ball** routine.
     - `--r_nesterov` for **Nesterov**'s routine.
 
 - `--s_(STRATEGY)`: Specifies a particular strategy, including:
-    - `--s_fixed` for the **Fixed** strategy.
+    - `--s_fixed` for the **Fixed** strategy (default).
     - `--s_exponential` for the **Exponential Decay** strategy.
     - `--s_inverse` for the **Inverse Decay** strategy.
     - `--s_armijo` for the **Armijo** strategy.
