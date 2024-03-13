@@ -19,7 +19,7 @@ namespace pacs {
      * 
      */
     void challenge_splash(char **argv) {
-        std::cout << "Usage: " << argv[0] << "  [-h/--help]  [-v]  [-n]  [-p (FILENAME)]  [--r_(ROUTINE)]  [--s_(STRATEGY)]" << std::endl;
+        std::cout << "Usage: " << argv[0] << "  [-h/--help]  [-v/--verbose]  [-n/--numerical]  [-p/--parameters (FILENAME)]  [--r_(ROUTINE)]  [--s_(STRATEGY)]" << std::endl;
         std::cout << "\nExamples:" << std::endl;
         std::cout << "\t./main -v --all" << std::endl;
         std::cout << "\t./main --r_nesterov --armijo" << std::endl;
@@ -39,7 +39,7 @@ namespace pacs {
         for(size_t j = 1; j < argc; j++) {        
             std::string option = argv[j];
 
-            if(option == "-v")
+            if((option == "-v") || (option == "--verbose"))
                 arguments.verbose = true;
 
             if((option == "-h") || (option == "--help")) {
@@ -52,15 +52,8 @@ namespace pacs {
         for(size_t j = 1; j < argc; j++) {        
             std::string option = argv[j];
 
-            if(option == "--all") {
-                if(arguments.verbose)
-                    std::cout << "Using every routine and strategy." << std::endl;
-
-                arguments.s_all = true;
-            }
-
             // Numerical solution.
-            if(option == "-n") {
+            if((option == "-n") || (option == "--numerical")) {
                 if(arguments.verbose)
                     std::cout << "Considering numerical gradient." << std::endl;
 
@@ -129,7 +122,7 @@ namespace pacs {
             }
 
             // Parameters file.
-            if((option == "-p") && (j < argc - 1))
+            if(((option == "-p") || (option == "--parameters")) && (j < argc - 1))
                 arguments.filename = argv[j + 1];
         }
 

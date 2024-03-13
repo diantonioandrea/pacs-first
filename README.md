@@ -70,11 +70,11 @@ Parameters are specified in a [parameters.json](/parameters.json) file, which is
 
 The `./main` executable supports the following options:
 
-- `-v`: Enables verbosity.
-- `-n`: Considers the numerical gradient for the target function.
+- `-v/--verbose`: Enables verbosity.
+- `-n/--numerical`: Considers the numerical gradient for the target function.
 - `-h/--help`: A little help on usage.
 
-- `-p (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
+- `-p/--parameters (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
 
 - `--r_(ROUTINE)`: Specifies a particular routine, including[^1]:
     - `--r_newton` for **Newton**'s routine.
