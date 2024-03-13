@@ -44,7 +44,7 @@ Refer to [Options](#options) for the available routines and strategies.
 
 To get started, clone the repository from [here](https://github.com/diantonioandrea/pacs-first):
 
-    git clone https://github.com/diantonioandrea/pacs-first
+    git clone git@github.com:diantonioandrea/pacs-first.git
 
 ### Compiling and Executing the Code
 
