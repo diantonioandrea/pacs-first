@@ -21,8 +21,8 @@ namespace pacs {
     void challenge_splash(char **argv) {
         std::cout << "Usage: " << argv[0] << "  [-h/--help]  [-v/--verbose]  [-n/--numerical]  [-p/--parameters (FILENAME)]  [--r_(ROUTINE)]  [--s_(STRATEGY)]" << std::endl;
         std::cout << "\nExamples:" << std::endl;
-        std::cout << "\t./main -v --all" << std::endl;
-        std::cout << "\t./main --r_nesterov --armijo" << std::endl;
+        std::cout << "\t./main --verbose" << std::endl;
+        std::cout << "\t./main --numerical --s_armijo" << std::endl;
     }
 
     /**
