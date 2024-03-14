@@ -48,6 +48,8 @@ To get started, clone the repository from [here](https://github.com/diantonioand
 
 ### Compiling and Executing the Code
 
+Please make sure that the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples`.
+
 You can compile the code by simply running:
 
     make
