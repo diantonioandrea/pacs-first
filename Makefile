@@ -27,3 +27,4 @@ $(PARAMETERS): defaults.json
 clean:
 	$(RM) *.o
 	$(RM) $(EXEC)
+	$(RM) $(PARAMETERS)
