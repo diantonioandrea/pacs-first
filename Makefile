@@ -9,10 +9,9 @@ PARAMETERS = parameters.json
 DEFAULTS = defaults.json
 
 # Rules.
-all: $(EXEC)
+all: $(EXEC) $(PARAMETERS)
 
 $(EXEC): $(OBJECTS) $(OBJECT)
-	$(MAKE) $(PARAMETERS)
 	$(CXX) $(CPPFLAGS) $^ -o $(EXEC)
 
 $(OBJECT): $(SOURCE)
@@ -22,7 +21,7 @@ $(OBJECTS): %.o: ./src/%.cpp
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 $(PARAMETERS): $(DEFAULTS)
-	@cp $(DEFAULTS) $(PARAMETERS)
+	cp $(DEFAULTS) $(PARAMETERS)
 
 # Clean.
 clean:
