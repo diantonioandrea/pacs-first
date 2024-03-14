@@ -1,0 +1,9 @@
+{
+    "guess": [0, 0],
+    "alpha": 0.1,
+    "step_tolerance": 1.0e-6,
+    "residual_tolerance": 1.0e-6,
+    "max_iterations": 10000,
+    "strategy_mu": 0.2,
+    "strategy_sigma": 0.25
+}
