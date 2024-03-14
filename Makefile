@@ -6,6 +6,7 @@ SOURCE = main.cpp
 OBJECT = main.o
 OBJECTS = Vector.o Solver.o Parameters.o Arguments.o Target.o
 PARAMETERS = parameters.json
+DEFAULTS = defaults.json
 
 # Rules.
 all: $(EXEC)
@@ -20,8 +21,8 @@ $(OBJECT): $(SOURCE)
 $(OBJECTS): %.o: ./src/%.cpp
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
-$(PARAMETERS): defaults.json
-	@cp defaults.json parameters.json
+$(PARAMETERS): $(DEFAULTS)
+	@cp $(DEFAULTS) $(PARAMETERS)
 
 # Clean.
 clean:
