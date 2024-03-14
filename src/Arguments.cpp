@@ -36,7 +36,7 @@ namespace pacs {
         Arguments arguments;
 
         // Looks for the arguments.verbose and arguments.help flag separately.
-        for(size_t j = 1; j < argc; j++) {        
+        for(int j = 1; j < argc; j++) {        
             std::string option = argv[j];
 
             if((option == "-v") || (option == "--verbose"))
@@ -49,7 +49,7 @@ namespace pacs {
         }
 
         // Parses argv.
-        for(size_t j = 1; j < argc; j++) {        
+        for(int j = 1; j < argc; j++) {        
             std::string option = argv[j];
 
             // Numerical solution.
