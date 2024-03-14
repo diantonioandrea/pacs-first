@@ -14,7 +14,7 @@
 #include <fstream>
 #include <cassert>
 
-#include "../include/json.hpp"
+#include <json.hpp>
 
 namespace pacs {
     
