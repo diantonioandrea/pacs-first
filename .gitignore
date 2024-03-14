@@ -5,4 +5,5 @@
 **/*.o
 main
 
-# Local js
+# Local json.hpp
+include/json.hpp
