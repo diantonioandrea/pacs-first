@@ -8,7 +8,7 @@
  * 
  */
 
-#include "../include/Arguments.hpp"
+#include <Arguments.hpp>
 
 #include <cassert>
 

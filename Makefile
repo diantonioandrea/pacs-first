@@ -1,5 +1,5 @@
 .PHONY: all clean
-CPPFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include
+CPPFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include -I./include
 
 EXEC = main
 SOURCE = main.cpp

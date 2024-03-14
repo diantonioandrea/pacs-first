@@ -14,7 +14,7 @@
 #include <iostream>
 #include <string>
 
-#include "../include/Solver.hpp"
+#include <Solver.hpp>
 
 namespace pacs {
 

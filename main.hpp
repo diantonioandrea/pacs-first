@@ -2,21 +2,21 @@
 #define MAIN_PACS
 
 // Real type and vectors.
-#include "include/Vector.hpp"
+#include <Vector.hpp>
 
 // Parameters.
-#include "include/Parameters.hpp"
+#include <Parameters.hpp>
 
 // Target structure.
-#include "include/Target.hpp"
+#include <Target.hpp>
 
 // Default targets.
-#include "include/Default.hpp"
+#include <Default.hpp>
 
 // Solver.
-#include "include/Solver.hpp"
+#include <Solver.hpp>
 
 // Parser.
-#include "include/Arguments.hpp"
+#include <Arguments.hpp>
 
 #endif

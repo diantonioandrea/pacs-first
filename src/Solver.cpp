@@ -8,7 +8,7 @@
  * 
  */
 
-#include "../include/Solver.hpp"
+#include <Solver.hpp>
 
 #include <cmath>
 

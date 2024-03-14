@@ -8,7 +8,7 @@
  * 
  */
 
-#include "../include/Vector.hpp"
+#include <Vector.hpp>
 
 // Norm.
 #include <cmath>

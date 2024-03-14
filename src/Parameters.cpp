@@ -8,7 +8,7 @@
  * 
  */
 
-#include "../include/Parameters.hpp"
+#include <Parameters.hpp>
 
 #include <string>
 #include <fstream>
