@@ -74,7 +74,7 @@ The `./main` executable supports the following options:
 
 - `-v/--verbose`: Enables verbosity.
 - `-n/--numerical`: Considers the numerical gradient for the target function.
-- `-m/--muparser`: Parses the `parser` parameters as the target function[^2].
+- `-m/--muparser`: Parses the `parser` parameter as the target function[^2].
 - `-h/--help`: A little help on usage.
 
 - `-p/--parameters (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
