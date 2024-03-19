@@ -15,7 +15,7 @@
 
 int main(int argc, char **argv) {
     // Default "splash".
-    std::cout << "PACS - First challenge." << std::endl;
+    std::cout << "PACS - First challenge - Andrea Di Antonio." << std::endl;
 
     // Arguments.
     pacs::Arguments args = pacs::parse(argc, argv);
@@ -30,12 +30,11 @@ int main(int argc, char **argv) {
     pacs::Parameters parameters = pacs::read_json(args.filename, args.verbose);
 
     // Single run with the specified routine and strategy.
-    // Default: Newton + Fixed.
-    if(args.muparser) {
+    if(args.muparser) { // Uses MuParser to define the target function.
         pacs::show(pacs::solver(parameters, args.routine, args.strategy));
-    } else if(args.numerical) {
+    } else if(args.numerical) { // Default target function (numerical gradient).
         pacs::show(pacs::solver(parameters, args.routine, args.strategy, pacs::target_func));
-    } else {
+    } else { // Default target function and gradient.
         pacs::show(pacs::solver(parameters, args.routine, args.strategy, pacs::target_func, pacs::target_grad));
     }
 
