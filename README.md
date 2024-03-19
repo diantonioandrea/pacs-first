@@ -11,6 +11,7 @@
 - [Usage](#usage)
     - [Parameters](#parameters)
     - [Options](#options)
+    - [_MuParser_ Functions](#muparser-functions)
 
 ## Description
 
@@ -30,12 +31,13 @@ The implemented solver necessitates the following parameters for the target func
 - Tolerances $\varepsilon_s$ and $\varepsilon_r$
 - Maximum number of iterations
 - Strategy parameters $\mu$ and $\sigma$
-- A function string for _MuParser_ (Optional).
 
 Additionally, it requires two components:
 
 1. A routine for evaluating the next point $x_{k + 1}$. (Defaults to the Newton routine).
 2. A strategy for determining the learning rate value $\alpha_{k}$. (Defaults to the Fixed strategy).
+
+Optionally, it accepts a string which _MuParser_ parses as the target function[^1].
 
 Refer to [Options](#options) for the available routines and strategies.
 
@@ -49,7 +51,7 @@ To get started, clone the repository from [here](https://github.com/diantonioand
 
 ### Compiling and Executing the Code
 
-**Please make sure that the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and the `LD_LIBRARY_PATH` is set to also include `${PACS_ROOT}/lib`, as needed by _MuParser_.**
+:warning: Please make sure that the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and the `LD_LIBRARY_PATH` is set to also include `${PACS_ROOT}/lib`, as needed by _MuParser_.
 
 You can compile the code by simply running:
 
@@ -75,12 +77,12 @@ The `./main` executable supports the following options:
 
 - `-v/--verbose`: Enables verbosity.
 - `-n/--numerical`: Considers the numerical gradient for the target function.
-- `-m/--muparser`: Parses the `parser` parameter as the target function[^2].
+- `-m/--muparser`: Parses the `parser` parameter as the target function.
 - `-h/--help`: A little help on usage.
 
 - `-p/--parameters (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
 
-- `--r_(ROUTINE)`: Specifies a particular routine, including[^1]:
+- `--r_(ROUTINE)`: Specifies a particular routine, including[^2]:
     - `--r_newton` for **Newton**'s routine (default).
     - `--r_hb` for **Heavy-Ball** routine.
     - `--r_nesterov` for **Nesterov**'s routine.
@@ -91,6 +93,14 @@ The `./main` executable supports the following options:
     - `--s_inverse` for the **Inverse Decay** strategy.
     - `--s_armijo` for the **Armijo** strategy.
 
-[^1]: Note that the **Nesterov** and **Heavy-Ball** routines are only compatible with the **Fixed** strategy.
+### _MuParser_ Functions
 
-[^2]: Numerical gradient evaluated.
+Functions' variables should be defined as an `x` followed by its index, starting from zero. Here it follows an example:
+
+```json
+"parser": "x0 + 2 * x1 - x2"
+```
+
+[^1]: Evaluates then its numerical gradient.
+
+[^2]: Note that the **Nesterov** and **Heavy-Ball** routines are only compatible with the **Fixed** strategy.
