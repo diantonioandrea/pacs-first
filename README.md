@@ -1,19 +1,20 @@
-# Advanced Programming for Scientific Computing - First Challenge
+# Advanced Programming for Scientific Computing - Initial Challenge
 
-*A gradient method for the minimization of a multivariate function.*
+*Gradient Method for Multivariate Function Minimization*
 
-## Contents
+## Table of Contents
 
-- [Description](#description)
-- [Getting Started](#getting-started)
+- [Introduction](#introduction)
+- [Overview](#overview)
+- [Setup](#setup)
     - [Cloning the Repository](#cloning-the-repository)
-    - [Compiling and Executing the Code](#compiling-and-executing-the-code)
+    - [Compilation and Execution](#compilation-and-execution)
 - [Usage](#usage)
     - [Parameters](#parameters)
     - [Options](#options)
-    - [_MuParser_ Functions](#muparser-functions)
+    - [MuParser Functions](#muparser-functions)
 
-## Description
+## Introduction
 
 This repository offers an implementation of a gradient-based method designed for minimizing multivariate functions.
 
@@ -37,70 +38,82 @@ Additionally, it requires two components:
 1. A routine for evaluating the next point $x_{k + 1}$. (Defaults to the Newton routine).
 2. A strategy for determining the learning rate value $\alpha_{k}$. (Defaults to the Fixed strategy).
 
-Optionally, it accepts a string which _MuParser_ parses as the target function[^1].
+Optionally, it accepts a string which _MuParser_ parses as the target function.
 
 Refer to [Options](#options) for the available routines and strategies.
 
-## Getting Started
+## Overview
+
+Key components include:
+
+- `main.cpp`: Core script serving as a testing suite.
+- `main.hpp`: Primary includes for `main.cpp`.
+- `include/`:
+    - `Solver.hpp`: Central solver method and associated routines/strategies.
+    - `Arguments.hpp`: Methods for parsing command-line arguments.
+    - `Parameters.hpp`: Methods for evaluating parameters from `parameters.json`.
+    - `Vector.hpp`: Definition for the Vector class.
+    - `Target.hpp`: Definition for the Target class, encapsulating the target function and its gradient or numerical evaluation.
+    - `Default.hpp`: Definition of default target function and its gradient.
+
+`src/` contains the implementations of the methods defined earlier.
+
+## Setup
 
 ### Cloning the Repository
 
-To get started, clone the repository from [here](https://github.com/diantonioandrea/pacs-first):
+To begin, clone the repository from [here](https://github.com/diantonioandrea/pacs-first):
 
     git clone git@github.com:diantonioandrea/pacs-first.git
 
-### Compiling and Executing the Code
+### Compilation and Execution
 
-:warning: Please make sure that the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and the `LD_LIBRARY_PATH` is set to also include `${PACS_ROOT}/lib`, as needed by _MuParser_.
+Ensure the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and `LD_LIBRARY_PATH` includes `${PACS_ROOT}/lib` as required by MuParser.
 
-You can compile the code by simply running:
+Compile the code:
 
     make
 
-To execute the code, use:
+Execute the code:
 
     ./main
 
-For further details on options and parameters, refer to [Usage](#usage).
+For further details on options and parameters, refer to the [Usage](#usage) section.
 
 ## Usage
 
-Below is a summary of parameters and command-line options for the first challenge.
+Below is a summary of parameters and command-line options for this challenge.
 
 ### Parameters
 
-Parameters are specified in a [parameters.json](/parameters.json) file, which is parsed during execution.
+Parameters are specified in a [parameters.json](/parameters.json) file, parsed during execution.
 
 ### Options
 
 The `./main` executable supports the following options:
 
-- `-v/--verbose`: Enables verbosity.
-- `-n/--numerical`: Considers the numerical gradient for the target function.
-- `-m/--muparser`: Parses the `parser` parameter as the target function.
-- `-h/--help`: A little help on usage.
+- `-v/--verbose`: Enable verbosity.
+- `-n/--numerical`: Consider numerical gradient for the target function.
+- `-m/--muparser`: Parse `parser` parameter as the target function.
+- `-h/--help`: Display usage help.
 
-- `-p/--parameters (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
+- `-p/--parameters (FILENAME)`: Specify parameters filename (default: `parameters.json`).
 
-- `--r_(ROUTINE)`: Specifies a particular routine, including[^2]:
+- `--r_(ROUTINE)`: Specify a routine, including:
     - `--r_newton` for **Newton**'s routine (default).
     - `--r_hb` for **Heavy-Ball** routine.
     - `--r_nesterov` for **Nesterov**'s routine.
 
-- `--s_(STRATEGY)`: Specifies a particular strategy, including:
-    - `--s_fixed` for the **Fixed** strategy (default).
-    - `--s_exponential` for the **Exponential Decay** strategy.
-    - `--s_inverse` for the **Inverse Decay** strategy.
-    - `--s_armijo` for the **Armijo** strategy.
+- `--s_(STRATEGY)`: Specify a strategy, including:
+    - `--s_fixed` for **Fixed** strategy (default).
+    - `--s_exponential` for **Exponential Decay** strategy.
+    - `--s_inverse` for **Inverse Decay** strategy.
+    - `--s_armijo` for **Armijo** strategy.
 
-### _MuParser_ Functions
+### MuParser Functions
 
-Functions' variables should be defined as an `x` followed by its index, starting from zero. Here it follows an example:
+Define functions' variables as `x` followed by its index, starting from zero. Example:
 
 ```json
 "parser": "x0 + 2 * x1 - x2"
 ```
-
-[^1]: Evaluates then its numerical gradient.
-
-[^2]: Note that the **Nesterov** and **Heavy-Ball** routines are only compatible with the **Fixed** strategy.
