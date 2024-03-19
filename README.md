@@ -12,7 +12,7 @@
 - [Usage](#usage)
     - [Parameters](#parameters)
     - [Options](#options)
-    - [MuParser Functions](#muparser-functions)
+    - [_MuParser_ Functions](#muparser-functions)
 
 ## Introduction
 
@@ -68,7 +68,7 @@ To begin, clone the repository from [here](https://github.com/diantonioandrea/pa
 
 ### Compilation and Execution
 
-Ensure the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and `LD_LIBRARY_PATH` includes `${PACS_ROOT}/lib` as required by MuParser.
+Ensure the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and `LD_LIBRARY_PATH` includes `${PACS_ROOT}/lib` as required by _MuParser_.
 
 Compile the code:
 
@@ -110,7 +110,7 @@ The `./main` executable supports the following options:
     - `--s_inverse` for **Inverse Decay** strategy.
     - `--s_armijo` for **Armijo** strategy.
 
-### MuParser Functions
+### _MuParser_ Functions
 
 Define functions' variables as `x` followed by its index, starting from zero. Example:
 
