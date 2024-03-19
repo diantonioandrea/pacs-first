@@ -34,24 +34,24 @@ namespace pacs {
         bool status = false;
     };
 
-    using Strategy = Real (*) (Data &, const Parameters &);
-    using Routine = Vector (*) (Data &);
+    using Strategy = Real (*) (const Data &, const Parameters &);
+    using Routine = Vector (*) (const Data &);
 
     Data solver(const Parameters &, Routine, Strategy, Function, Gradient);
     Data solver(const Parameters &, Routine, Strategy, Function);
     Data solver(const Parameters &, Routine, Strategy);
 
-    Vector newton_routine(Data &);
-    Vector hb_routine(Data &);
-    Vector nesterov_routine(Data &);
+    Vector newton_routine(const Data &);
+    Vector hb_routine(const Data &);
+    Vector nesterov_routine(const Data &);
 
-    Real fixed_strategy(Data &, const Parameters &);
-    Real exponential_strategy(Data &, const Parameters &);
-    Real inverse_strategy(Data &, const Parameters &);
-    Real armijo_strategy(Data &, const Parameters &);
+    Real fixed_strategy(const Data &, const Parameters &);
+    Real exponential_strategy(const Data &, const Parameters &);
+    Real inverse_strategy(const Data &, const Parameters &);
+    Real armijo_strategy(const Data &, const Parameters &);
 
-    void show(Data &);
-    void show(Data &, const Vector &);
+    void show(const Data &);
+    void show(const Data &, const Vector &);
 }
 
 #endif

@@ -27,6 +27,8 @@ namespace pacs {
         bool help = false;
 
         bool numerical = false;
+        bool muparser = false;
+
         bool s_strategy = false;
         bool s_routine = false;
         bool s_all = false;

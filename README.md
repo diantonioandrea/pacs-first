@@ -48,7 +48,7 @@ To get started, clone the repository from [here](https://github.com/diantonioand
 
 ### Compiling and Executing the Code
 
-Please make sure that the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples`.
+Please make sure that the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and the `LD_LIBRARY_FLAG` is set to also include `${PACS_ROOT}/lib`, as needed by *muparser*.
 
 You can compile the code by simply running:
 
@@ -74,6 +74,7 @@ The `./main` executable supports the following options:
 
 - `-v/--verbose`: Enables verbosity.
 - `-n/--numerical`: Considers the numerical gradient for the target function.
+- `-m/--muparser`: Parses the `parser` parameters as the target function[^2].
 - `-h/--help`: A little help on usage.
 
 - `-p/--parameters (FILENAME)`: Specifies the parameters filename (defaults to `parameters.json`).
@@ -90,3 +91,5 @@ The `./main` executable supports the following options:
     - `--s_armijo` for the **Armijo** strategy.
 
 [^1]: Note that the **Nesterov** and **Heavy-Ball** routines are only compatible with the **Fixed** strategy.
+
+[^2]: Numerical gradient evaluated.
