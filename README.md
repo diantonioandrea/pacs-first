@@ -30,6 +30,7 @@ The implemented solver necessitates the following parameters for the target func
 - Tolerances $\varepsilon_s$ and $\varepsilon_r$
 - Maximum number of iterations
 - Strategy parameters $\mu$ and $\sigma$
+- A function string for _MuParser_ (Optional).
 
 Additionally, it requires two components:
 
