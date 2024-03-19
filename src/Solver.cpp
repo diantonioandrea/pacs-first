@@ -63,10 +63,27 @@ namespace pacs {
         return data;
     }
 
+    /**
+     * @brief Solver with no function (Numerical gradient).
+     * 
+     * @param params 
+     * @param routine 
+     * @param strategy 
+     * @param function 
+     * @return Data 
+     */
     Data solver(const Parameters &params, Routine routine, Strategy strategy, Function function) {
         return solver(params, routine, strategy, function, nullptr);
     }
 
+    /**
+     * @brief Solver with no function and gradient (MuParser).
+     * 
+     * @param params 
+     * @param routine 
+     * @param strategy 
+     * @return Data 
+     */
     Data solver(const Parameters &params, Routine routine, Strategy strategy) {
         return solver(params, routine, strategy, nullptr, nullptr);
     }
