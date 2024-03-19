@@ -1,5 +1,5 @@
 .PHONY: all clean
-CPPFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include -I./include
+CPPFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include -I./include -L$(PACS_ROOT)/lib -lmuparser
 
 EXEC = main
 SOURCE = main.cpp

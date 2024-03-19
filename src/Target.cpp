@@ -11,26 +11,24 @@
 #include <Target.hpp>
 
 namespace pacs {
-
+    
     /**
-     * @brief Evaluates the numerical gradient at a given point.
+     * @brief Construct a new Target object from the parameters (muparser).
      * 
-     * @param function 
-     * @param x 
-     * @return Vector 
+     * @param str 
      */
-    Vector numerical_gradient(Function function, const Vector &x) {
-        Real step = 1.0E-4L;
-        Vector gradient = Vector(x.get_size());
+    Target::Target(const Parameters &params): point{params.guess}, target_function{nullptr}, target_gradient{nullptr} {
+        try {
+            for(unsigned int j = 0; j < this->point.get_size(); ++j) {
+                std::string variable = "x" + std::to_string(j);
 
-        for(size_t k = 0; k < gradient.get_size(); ++k) {
-            Vector direction = Vector(x.get_size());
-            direction[k] = step;
+                this->target_parser.DefineVar(variable, &this->point[j]);
+            }
 
-            gradient[k] = (function(x + direction) - function(x)) / step;
+            this->target_parser.SetExpr(params.parser);
+        } catch(mu::Parser::exception_type &e) {
+            std::cerr << e.GetMsg() << std::endl;
         }
-
-        return gradient;
     }
 
     /**
@@ -55,7 +53,11 @@ namespace pacs {
      * @return Real 
      */
     Real Target::function(const Vector &x) const {
-        return this->target_function(x);
+        if(this->target_function)
+            return this->target_function(x);
+
+        this->point = x;
+        return static_cast<Real>(this->target_parser.Eval());
     }
 
     /**
@@ -68,7 +70,30 @@ namespace pacs {
         if(this->target_gradient)
             return this->target_gradient(x);
 
-        return numerical_gradient(this->target_function, x);
+        Real step = 1.0E-4L;
+        Vector gradient = Vector(x.get_size());
+
+        Real point_evaluation, direction_evaluation;
+
+        for(size_t k = 0; k < gradient.get_size(); ++k) {
+            Vector direction = Vector(x.get_size());
+            direction[k] = step;
+
+            if(this->target_function) {
+                point_evaluation = this->target_function(x);
+                direction_evaluation = this->target_function(x + direction);
+            } else {
+                this->point = x;
+                point_evaluation = this->target_parser.Eval();
+
+                this->point += direction;
+                direction_evaluation = this->target_parser.Eval();
+            }
+
+            gradient[k] = (direction_evaluation - point_evaluation) / step;
+        }
+
+        return gradient;
     }
 
 }

@@ -30,11 +30,10 @@ int main(int argc, char **argv) {
     pacs::Parameters parameters = pacs::read_json(args.filename, args.verbose);
 
     // Default targets.
-    // Checks for numerical option.
-    pacs::Target target = (args.numerical) ? pacs::Target{pacs::target_func} : pacs::Target{pacs::target_func, pacs::target_grad};
+    // Checks for numerical or parser option.
 
     // Single run with the specified routine and strategy.
     // Default: Newton + Fixed.
-    pacs::show(pacs::solver(target, parameters, args.routine, args.strategy));
+    pacs::show(pacs::solver(parameters, args.routine, args.strategy));
     return 0;
 }

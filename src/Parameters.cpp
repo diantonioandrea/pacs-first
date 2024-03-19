@@ -49,6 +49,7 @@ namespace pacs {
         returns.step_tolerance = json_file.value("step_tolerance", defaults.step_tolerance);
         returns.residual_tolerance = json_file.value("residual_tolerance", defaults.residual_tolerance);
         returns.max_iterations = json_file.value("max_iterations", defaults.max_iterations);
+        returns.parser = json_file.value("parser", defaults.parser);
         returns.strategy_mu = json_file.value("strategy_mu", defaults.strategy_mu);
         returns.strategy_sigma = json_file.value("strategy_sigma", defaults.strategy_sigma);
 

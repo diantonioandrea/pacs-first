@@ -23,10 +23,14 @@ namespace pacs {
      * @param strategy Solver strategy for the next Alpha value.
      * @return Data 
      */
-    Data solver(const Target &target, const Parameters &params, Routine routine, Strategy strategy) {
-        // Solver's data initialization.
-        Data data{target, params.guess, params.guess, params.guess, params.alpha, 0};
+    Data solver(const Parameters &params, Routine routine, Strategy strategy, Function function, Gradient gradient) {
+        // Solver checks.
+        bool parser = (!(function) && !(gradient));
+        bool numerical = (function) && !(gradient);
 
+        // Data conditional initialization.
+        Data data{parser? Target{params} : (numerical? Target{function} : Target{function, gradient}), params.guess, params.guess, params.guess, params.alpha, 0};
+    
         // Controls and tolerances.
         Real step_con = 0.0L, res_con = 0.0L;
 
@@ -40,7 +44,7 @@ namespace pacs {
 
             // Control values.
             step_con = (data.next - data.current).norm();
-            res_con = target.gradient(data.next).norm();
+            res_con = data.target.gradient(data.next).norm();
 
             // X_{k - 1} and X_{k}.
             data.previous = data.current; // Needed for Heavy-Ball and Nesterov.
@@ -59,15 +63,12 @@ namespace pacs {
         return data;
     }
 
-    /**
-     * @brief Default solver routine (Newton) and strategy (Fixed).
-     * 
-     * @param target 
-     * @param params 
-     * @return Data 
-     */
-    Data solver(const Target &target, const Parameters &params) {
-        return solver(target, params, newton_routine, fixed_strategy);
+    Data solver(const Parameters &params, Routine routine, Strategy strategy, Function function) {
+        return solver(params, routine, strategy, function, nullptr);
+    }
+
+    Data solver(const Parameters &params, Routine routine, Strategy strategy) {
+        return solver(params, routine, strategy, nullptr, nullptr);
     }
 
     /**
@@ -76,7 +77,7 @@ namespace pacs {
      * @param data 
      * @return Vector 
      */
-    Vector newton_routine(const Data &data) {
+    Vector newton_routine(Data &data) {
         // X_{k + 1} = X_k - Alpha_k * Df(X_k).
         return data.current - (data.size * data.target.gradient(data.current));
     }
@@ -87,7 +88,7 @@ namespace pacs {
      * @param data 
      * @return Vector 
      */
-    Vector hb_routine(const Data &data) {
+    Vector hb_routine(Data &data) {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
         // X_{k + 1} = X_k - Alpha_k * Df(X_k) + Eta(X_k - X_{k - 1}).
@@ -100,7 +101,7 @@ namespace pacs {
      * @param data 
      * @return Vector 
      */
-    Vector nesterov_routine(const Data &data) {
+    Vector nesterov_routine(Data &data) {
         Real strategy_eta = (data.size < 1.0L) ? 1.0L - data.size : 0.9L;
 
         // y = X_k + Eta(X_k - X_{k - 1}).
@@ -116,7 +117,7 @@ namespace pacs {
      * @param params 
      * @return Real 
      */
-    Real fixed_strategy(const Data &data, const Parameters &params) {
+    Real fixed_strategy(Data &data, const Parameters &params) {
         return data.size;
     }
 
@@ -127,7 +128,7 @@ namespace pacs {
      * @param params 
      * @return Real 
      */
-    Real exponential_strategy(const Data &data, const Parameters &params) {
+    Real exponential_strategy(Data &data, const Parameters &params) {
         // Alpha_{k + 1} = Alpha_0 * exp(- Mu * K).
         return params.alpha * std::exp(- params.strategy_mu * static_cast<Real>(data.index));
     }
@@ -139,7 +140,7 @@ namespace pacs {
      * @param params 
      * @return Real 
      */
-    Real inverse_strategy(const Data &data, const Parameters &params) {
+    Real inverse_strategy(Data &data, const Parameters &params) {
         // Alpha_{k + 1} = Alpha_0 / (1 + Mu * K).
         return params.alpha / (1.0L + params.strategy_mu * static_cast<Real>(data.index));
     }
@@ -151,7 +152,7 @@ namespace pacs {
      * @param params 
      * @return Real 
      */
-    Real armijo_strategy(const Data &data, const Parameters &params) {
+    Real armijo_strategy(Data &data, const Parameters &params) {
         // Target function and gradient at X_k.
         Real target_point = data.target.function(data.current);
         Vector gradient_point = data.target.gradient(data.current);
@@ -173,7 +174,7 @@ namespace pacs {
      * 
      * @param result 
      */
-    void show(const Data &result) {
+    void show(Data &result) {
         std::cout << "\nMinimum at: " << result.next << std::endl;
 
         if(result.status)
@@ -187,7 +188,7 @@ namespace pacs {
      * 
      * @param result 
      */
-    void show(const Data &result, const Vector &exact) {
+    void show(Data &result, const Vector &exact) {
         std::cout << "\nMinimum at: " << result.next << std::endl;
         std::cout << "\nDistance: " << (result.next - exact).norm() << std::endl;
 

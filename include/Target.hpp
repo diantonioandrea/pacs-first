@@ -11,7 +11,10 @@
 #ifndef TARGET_PACS
 #define TARGET_PACS
 
+#include <muParser.h>
+
 #include <Vector.hpp>
+#include <Parameters.hpp>
 
 namespace pacs {
 
@@ -19,18 +22,21 @@ namespace pacs {
     using Function = Real (*) (const Vector &);
     using Gradient = Vector (*) (const Vector &);
 
-    Vector numerical_gradient(Function, const Vector &);
-
     /**
      * @brief Target function and gradient class.
      * 
      */
     class Target {
         private:
+            mutable Vector point;
+            
             const Function target_function;
             const Gradient target_gradient;
+            
+            mutable mu::Parser target_parser;
 
         public:
+            Target(const Parameters &);
             Target(Function);
             Target(Function, Gradient);
 

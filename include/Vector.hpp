@@ -25,7 +25,7 @@
 
 namespace pacs {
 
-    using Real = long double;
+    using Real = double;
 
     /**
      * @brief Vector class.
