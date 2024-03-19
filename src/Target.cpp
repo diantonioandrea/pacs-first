@@ -56,6 +56,7 @@ namespace pacs {
         if(this->target_function)
             return this->target_function(x);
 
+        // MuParser function definition.
         this->point = x;
         return static_cast<Real>(this->target_parser.Eval());
     }
@@ -70,6 +71,7 @@ namespace pacs {
         if(this->target_gradient)
             return this->target_gradient(x);
 
+        // Numerical gradient by finite differences.
         Real step = 1.0E-4L;
         Vector gradient = Vector(x.get_size());
 
@@ -80,9 +82,13 @@ namespace pacs {
             direction[k] = step;
 
             if(this->target_function) {
+
+                // Standard function definition.
                 point_evaluation = this->target_function(x);
                 direction_evaluation = this->target_function(x + direction);
             } else {
+
+                // MuParser function definition.
                 this->point = x;
                 point_evaluation = this->target_parser.Eval();
 
@@ -90,6 +96,7 @@ namespace pacs {
                 direction_evaluation = this->target_parser.Eval();
             }
 
+            // k-th partial derivative.
             gradient[k] = (direction_evaluation - point_evaluation) / step;
         }
 

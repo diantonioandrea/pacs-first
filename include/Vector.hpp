@@ -25,6 +25,7 @@
 
 namespace pacs {
 
+    // pacs::Real type.
     using Real = double;
 
     /**
@@ -418,7 +419,7 @@ namespace pacs {
             }
             
             /**
-             * @brief Returns the elements of the Vector.
+             * @brief Returns the elements of the Vector as a std::vector.
              * 
              * @return std::vector<Real> 
              */

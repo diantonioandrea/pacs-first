@@ -28,15 +28,16 @@ namespace pacs {
         bool parser = (!(function) && !(gradient));
         bool numerical = (function) && !(gradient);
 
-        // Data conditional initialization.
-        Data data{parser? Target{params} : (numerical? Target{function} : Target{function, gradient}), params.guess, params.guess, params.guess, params.alpha, 0};
-    
-        // Controls and tolerances.
-        Real step_con = 0.0L, res_con = 0.0L;
-
         // Short names.
         Real step_tol = params.step_tolerance, res_tol = params.residual_tolerance;
         size_t max_it = params.max_iterations;
+        Vector guess = params.guess;
+
+        // Data conditional initialization.
+        Data data{parser? Target{params} : (numerical? Target{function} : Target{function, gradient}), guess, guess, guess, params.alpha, 0};
+    
+        // Controls and tolerances.
+        Real step_con = 0.0L, res_con = 0.0L;
 
         do {
             // Evaluates the next point with the given routine.
