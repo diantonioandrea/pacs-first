@@ -1,5 +1,6 @@
 .PHONY: all clean
-CPPFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include -I./include -L$(PACS_ROOT)/lib -lmuparser
+CPPFLAGS ?=  -L$(PACS_ROOT)/lib -lmuparser
+CXXFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include -I./include
 
 EXEC = main
 SOURCE = main.cpp
@@ -15,10 +16,10 @@ $(EXEC): $(OBJECTS) $(OBJECT)
 	$(CXX) $(CPPFLAGS) $^ -o $(EXEC)
 
 $(OBJECT): $(SOURCE)
-	$(CXX) $(CPPFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(OBJECTS): %.o: ./src/%.cpp
-	$(CXX) $(CPPFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(PARAMETERS): $(DEFAULTS)
 	cp $(DEFAULTS) $(PARAMETERS)
