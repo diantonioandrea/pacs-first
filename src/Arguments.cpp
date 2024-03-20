@@ -24,6 +24,7 @@ namespace pacs {
         std::cout << "\t./main --verbose" << std::endl;
         std::cout << "\t./main --numerical --s_armijo" << std::endl;
         std::cout << "\t./main --muparser --r_nesterov" << std::endl;
+        std::cout << "\t./main -m -v -p params.json" << std::endl;
     }
 
     /**
