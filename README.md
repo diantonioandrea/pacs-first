@@ -95,6 +95,21 @@ Below is a summary of parameters and command-line options for this challenge.
 
 Parameters are specified in a [parameters.json](/parameters.json) file, parsed during execution.
 
+Here are the [default](./defaults.json) values:
+
+```json
+{
+    "guess": [0, 0],
+    "alpha": 0.1,
+    "step_tolerance": 1.0e-6,
+    "residual_tolerance": 1.0e-6,
+    "max_iterations": 10000,
+    "parser": "x0 * x1 + 4 * x0 * x0 * x0 * x0 + x1 * x1 + 3 * x0",
+    "strategy_mu": 0.2,
+    "strategy_sigma": 0.25
+}
+```
+
 ### Options
 
 The `./main` executable supports the following options:
