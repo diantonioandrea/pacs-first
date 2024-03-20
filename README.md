@@ -124,3 +124,5 @@ Define functions' variables as `x` followed by its index, starting from zero. Ex
 ```json
 "parser": "x0 + 2 * x1 - x2"
 ```
+
+The number of variables in the _MuParser_ string **must** match the dimension of the `guess` vector.
