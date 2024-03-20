@@ -2,8 +2,9 @@
 CXXFLAGS = -Wall -pedantic -std=c++20  -I./include
 
 # MuParser and json.
-CXXFLAGS += -I$(PACS_ROOT)/include
-CPPFLAGS = -L$(PACS_ROOT)/lib -lmuparser
+CPPFLAGS = -I$(PACS_ROOT)/include
+LDFLAGS = -L$(PACS_ROOT)/lib
+LDLIBS = -lmuparser
 
 # Optimization.
 # CXXFLAGS += -O2 -DNDEBUG
@@ -19,13 +20,13 @@ DEFAULTS = defaults.json
 all: $(EXEC) $(PARAMETERS)
 
 $(EXEC): $(OBJECTS) $(OBJECT)
-	$(CXX) $(CPPFLAGS) $^ -o $(EXEC)
+	$(CXX) $(LDFLAGS) $(LDLIBS) $^ -o $(EXEC)
 
 $(OBJECT): $(SOURCE)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(OBJECTS): %.o: ./src/%.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(PARAMETERS): $(DEFAULTS)
 	cp $(DEFAULTS) $(PARAMETERS)
