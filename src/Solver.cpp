@@ -17,10 +17,11 @@ namespace pacs {
     /**
      * @brief Solver function for the minimum problem.
      * 
-     * @param target Target struct containing the target function and gradient.
-     * @param params Parameters struct containing the solver parameters.
-     * @param routine Solver routine for the next X value.
-     * @param strategy Solver strategy for the next Alpha value.
+     * @param params Solver paramaters.
+     * @param routine Evaluation of the next value for X.
+     * @param strategy Evaluation of the next value for Alpha.
+     * @param function : Vector -> Real function pointer.
+     * @param gradient : Vector -> Vector function pointer.
      * @return Data 
      */
     Data solver(const Parameters &params, Routine routine, Strategy strategy, Function function, Gradient gradient) {
