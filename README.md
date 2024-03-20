@@ -68,7 +68,13 @@ To begin, clone the repository from [here](https://github.com/diantonioandrea/pa
 
 ### Compilation and Execution
 
-Ensure the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and `LD_LIBRARY_PATH` includes `${PACS_ROOT}/lib` as required by _MuParser_.
+Ensure the `PACS_ROOT` variable is set to `/path/to/pacs-examples/Examples` and `LD_LIBRARY_PATH` includes `${PACS_ROOT}/lib` as required by _MuParser_. Furthermore, the executable could potentially be accelerated by removing the comment from the following line in the [Makefile](./Makefile)[^1]:
+
+[^1]: This ignores some safety checks for the `pacs::Vector` class.
+
+```make
+# CXXFLAGS += -O2 -DNDEBUG
+```
 
 Compile the code:
 

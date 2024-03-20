@@ -1,6 +1,8 @@
 .PHONY: all clean
-CPPFLAGS ?=  -L$(PACS_ROOT)/lib -lmuparser
+CPPFLAGS ?= -L$(PACS_ROOT)/lib -lmuparser
 CXXFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include -I./include
+
+# CXXFLAGS += -O2 -DNDEBUG
 
 EXEC = main
 SOURCE = main.cpp
