@@ -72,7 +72,7 @@ namespace pacs {
             return this->target_gradient(x);
 
         // Numerical gradient by finite differences.
-        Real step = 1.0E-4L;
+        Real step = 1.0E-5L;
         Vector gradient = Vector(x.get_size());
 
         Real point_evaluation, direction_evaluation;
