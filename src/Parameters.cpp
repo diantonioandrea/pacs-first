@@ -28,7 +28,7 @@ namespace pacs {
     Parameters read_json(std::string const &filename, const bool &verbose) {
 
         // Default and return values.
-        Parameters defaults, returns;
+        Parameters defaults;
 
         // File check.
         std::ifstream file(filename);
@@ -44,7 +44,8 @@ namespace pacs {
         file >> json_file;
 
         // Search for values.
-        returns.guess = json_file.value("guess", defaults.guess.get_elements());
+        Parameters returns{json_file.value("guess", defaults.guess.get_elements())};
+        
         returns.alpha = json_file.value("alpha", defaults.alpha);
         returns.step_tolerance = json_file.value("step_tolerance", defaults.step_tolerance);
         returns.residual_tolerance = json_file.value("residual_tolerance", defaults.residual_tolerance);
