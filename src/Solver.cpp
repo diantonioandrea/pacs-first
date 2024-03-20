@@ -30,7 +30,7 @@ namespace pacs {
 
         // Short names.
         Real step_tol = params.step_tolerance, res_tol = params.residual_tolerance;
-        size_t max_it = params.max_iterations;
+        std::size_t max_it = params.max_iterations;
         Vector guess = params.guess;
 
         // Data conditional initialization.

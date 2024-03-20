@@ -77,7 +77,7 @@ namespace pacs {
 
         Real point_evaluation, direction_evaluation;
 
-        for(size_t k = 0; k < gradient.get_size(); ++k) {
+        for(std::size_t k = 0; k < gradient.get_size(); ++k) {
             Vector direction = Vector(x.get_size());
             direction[k] = step;
 

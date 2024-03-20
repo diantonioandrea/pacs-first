@@ -30,7 +30,7 @@ namespace pacs {
      * 
      * @param N 
      */
-    Vector::Vector(const size_t &N): size(N) {
+    Vector::Vector(const std::size_t &N): size(N) {
         // Initializes an empty vector.
         #ifndef NDEBUG
         assert(N > 0);
@@ -85,7 +85,7 @@ namespace pacs {
      * @param index 
      * @return Real 
      */
-    Real Vector::operator [](const size_t &index) const {
+    Real Vector::operator [](const std::size_t &index) const {
         #ifndef NDEBUG
         assert(index < this->size);
         #endif
@@ -99,7 +99,7 @@ namespace pacs {
      * @param index 
      * @return Real& 
      */
-    Real &Vector::operator [](const size_t &index) {
+    Real &Vector::operator [](const std::size_t &index) {
         #ifndef NDEBUG
         assert(index < this->size);
         #endif
@@ -134,7 +134,7 @@ namespace pacs {
      * @return Real 
      */
     Real Vector::norm() const {
-        return std::sqrt(this->dot(*this));
+        return std::pow(this->dot(*this), 0.5L);
     }
 
     /**
@@ -247,7 +247,7 @@ namespace pacs {
     std::ostream &operator <<(std::ostream &ost, const Vector &vector) {
         ost << "(";
 
-        for(size_t j = 0; j < vector.size - 1; ++j) {
+        for(std::size_t j = 0; j < vector.size - 1; ++j) {
             ost << vector.elements[j] << ", ";
         }
 

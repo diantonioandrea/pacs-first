@@ -29,7 +29,7 @@ namespace pacs {
         Vector previous;
 
         Real size;
-        size_t index;
+        std::size_t index;
 
         bool status = false;
     };

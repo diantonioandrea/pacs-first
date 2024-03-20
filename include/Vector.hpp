@@ -34,12 +34,12 @@ namespace pacs {
      */
     class Vector {
         private:
-            const size_t size;
+            const std::size_t size;
             std::vector<Real> elements;
 
         public:
             Vector();
-            Vector(const size_t &);
+            Vector(const std::size_t &);
             Vector(const Vector &);
 
             /**
@@ -121,7 +121,7 @@ namespace pacs {
              * @tparam type 
              * @param values 
              */
-            template<std::floating_point type, size_t M>
+            template<std::floating_point type, std::size_t M>
             Vector(const std::array<type, M> &values): size(values.size()) {
                 // Initializes a vector from a std::array.
                 this->elements.clear();
@@ -139,7 +139,7 @@ namespace pacs {
              * @tparam type 
              * @param values 
              */
-            template<std::integral type, size_t M>
+            template<std::integral type, std::size_t M>
             Vector(const std::array<type, M> &values): size(values.size()) {
                 // Initializes a vector from an integral std::array.
                 this->elements.clear();
@@ -244,7 +244,7 @@ namespace pacs {
              * @param values 
              * @return Vector& 
              */
-            template<std::floating_point type, size_t M>
+            template<std::floating_point type, std::size_t M>
             Vector &operator =(const std::array<type, M> &values) {
                 #ifndef NDEBUG
                 assert(this->size == M);
@@ -265,7 +265,7 @@ namespace pacs {
              * @param values 
              * @return Vector& 
              */
-            template<std::integral type, size_t M>
+            template<std::integral type, std::size_t M>
             Vector &operator =(const std::array<type, M> &values) {
                 #ifndef NDEBUG
                 assert(this->size == M);
@@ -279,8 +279,8 @@ namespace pacs {
                 return *this;
             }
 
-            Real operator [](const size_t &) const;
-            Real &operator [](const size_t &);
+            Real operator [](const std::size_t &) const;
+            Real &operator [](const std::size_t &);
 
             Real dot(const Vector &) const;
             Real norm() const;
@@ -412,9 +412,9 @@ namespace pacs {
             /**
              * @brief Returns the size of the Vector.
              * 
-             * @return constexpr size_t 
+             * @return constexpr std::size_t 
              */
-            constexpr size_t get_size() const {
+            constexpr std::size_t get_size() const {
                 return this->size;
             }
             

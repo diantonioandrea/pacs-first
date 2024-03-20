@@ -34,7 +34,7 @@ namespace pacs {
             Real alpha = 1.0E-1L;
             Real step_tolerance = 1.0E-6L;
             Real residual_tolerance = 1.0E-6L;
-            size_t max_iterations = 10000;
+            std::size_t max_iterations = 10000;
             std::string parser = "x0 * x1 + 4 * x0 * x0 * x0 * x0 + x1 * x1 + 3 * x0";
             Real strategy_mu = 0.2L;
             Real strategy_sigma = 0.25L;
