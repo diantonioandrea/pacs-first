@@ -13,7 +13,7 @@
 namespace pacs {
     
     /**
-     * @brief Construct a new Target object from the parameters (muparser).
+     * @brief Construct a new Target object from the parameters (MuParser).
      * 
      * @param str 
      */

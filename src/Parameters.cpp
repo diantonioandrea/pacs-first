@@ -40,19 +40,19 @@ namespace pacs {
         }
 
         // Reads JSON from the opened file.
-        nlohmann::json json_file;
-        file >> json_file;
+        nlohmann::json js;
+        file >> js;
 
         // Search for values.
-        Parameters returns{json_file.value("guess", defaults.guess.get_elements())};
+        Parameters returns{js.value("guess", defaults.guess.get_elements())};
         
-        returns.alpha = json_file.value("alpha", defaults.alpha);
-        returns.step_tolerance = json_file.value("step_tolerance", defaults.step_tolerance);
-        returns.residual_tolerance = json_file.value("residual_tolerance", defaults.residual_tolerance);
-        returns.max_iterations = json_file.value("max_iterations", defaults.max_iterations);
-        returns.parser = json_file.value("parser", defaults.parser);
-        returns.strategy_mu = json_file.value("strategy_mu", defaults.strategy_mu);
-        returns.strategy_sigma = json_file.value("strategy_sigma", defaults.strategy_sigma);
+        returns.alpha = js.value("alpha", defaults.alpha);
+        returns.step_tolerance = js.value("step_tolerance", defaults.step_tolerance);
+        returns.residual_tolerance = js.value("residual_tolerance", defaults.residual_tolerance);
+        returns.max_iterations = js.value("max_iterations", defaults.max_iterations);
+        returns.parser = js.value("parser", defaults.parser);
+        returns.strategy_mu = js.value("strategy_mu", defaults.strategy_mu);
+        returns.strategy_sigma = js.value("strategy_sigma", defaults.strategy_sigma);
 
         if(verbose)
             std::cout << "\nLoaded:\n" << returns;
