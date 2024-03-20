@@ -34,5 +34,7 @@ $(PARAMETERS): $(DEFAULTS)
 # Clean.
 clean:
 	$(RM) *.o
+
+distclean: clean
 	$(RM) $(EXEC)
 	$(RM) $(PARAMETERS)
