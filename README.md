@@ -23,22 +23,21 @@ It introduces new classes and structures, including:
 - `pacs::Vector`: Responsible for managing vectors in $\mathbb{R}^n$.
 - `pacs::Target`: Manages the target function to be minimized along with its gradient. This can be provided as an input or evaluated numerically via finite differences.
 - `pacs::Data`: Handles the output of the solver and facilitates communication with various routines and strategies.
-- `pacs::Arguments` and `pacs::Parameters`: These classes manage command-line arguments and parameters. They utilize a custom, straightforward `argv` parser and leverage the `nlohmann::json` class.
+- `pacs::Arguments` and `pacs::Parameters`: These classes manage command-line arguments and parameters. They utilize a custom and simple `argv` parser and the `nlohmann::json` class.
 
-The implemented solver necessitates the following parameters for the target function minimization:
+The implemented solver needs the following parameters for the target function minimization:
 
 - Initial guess $x_0$
 - Initial learning rate value $\alpha_0$
 - Tolerances $\varepsilon_s$ and $\varepsilon_r$
 - Maximum number of iterations
+- An optional parser string for _MuParser_
 - Strategy parameters $\mu$ and $\sigma$
 
 Additionally, it requires two components:
 
 1. A routine for evaluating the next point $x_{k + 1}$. (Defaults to the Newton routine).
 2. A strategy for determining the learning rate value $\alpha_{k}$. (Defaults to the Fixed strategy).
-
-Optionally, it accepts a string which _MuParser_ parses as the target function.
 
 Refer to [Options](#options) for the available routines and strategies.
 

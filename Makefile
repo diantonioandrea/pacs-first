@@ -1,7 +1,11 @@
 .PHONY: all clean
-CPPFLAGS ?= -L$(PACS_ROOT)/lib -lmuparser
-CXXFLAGS ?= -Wall -pedantic -std=c++20 -I$(PACS_ROOT)/include -I./include
+CXXFLAGS = -Wall -pedantic -std=c++20  -I./include
 
+# MuParser and json.
+CXXFLAGS += -I$(PACS_ROOT)/include
+CPPFLAGS = -L$(PACS_ROOT)/lib -lmuparser
+
+# Optimization.
 # CXXFLAGS += -O2 -DNDEBUG
 
 EXEC = main

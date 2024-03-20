@@ -25,12 +25,13 @@ namespace pacs {
      */
     class Parameters {
         public:
-            Parameters() {}
+            Parameters(): guess{2} {}
 
             // Needed as pacs::Vector.size is a constant.
             Parameters(const std::vector<Real> &vector): guess{vector} {}
+            Parameters(const Vector &vector): guess{vector} {}
 
-            Vector guess = Vector(2);
+            Vector guess;
             Real alpha = 1.0E-1L;
             Real step_tolerance = 1.0E-6L;
             Real residual_tolerance = 1.0E-6L;

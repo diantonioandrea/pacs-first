@@ -86,6 +86,8 @@ namespace pacs {
 
         ost << "\tmax_iterations: " << params.max_iterations << std::endl;
 
+        ost << "\tparser: " << params.parser << std::endl;
+
         ost << "\tstrategy_mu: " << params.strategy_mu << std::endl;
         ost << "\tstrategy_sigma: " << params.strategy_sigma << std::endl;
 
