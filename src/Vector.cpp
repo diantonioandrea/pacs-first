@@ -23,6 +23,7 @@ namespace pacs {
         // Initializes an empty 1D vector.
         this->elements.clear();
         this->elements.resize(1);
+        this->elements[0] = 0.0L;
     }
 
     /**
