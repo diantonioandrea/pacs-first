@@ -145,6 +145,7 @@ namespace pacs {
 
         // Checks.
         if((arguments.routine == nesterov_routine) || (arguments.routine == hb_routine)) {
+            // Nesterov and Heavy-Ball are only compatible with the Fixed strategy.
             assert(arguments.strategy == fixed_strategy);
         }
 
