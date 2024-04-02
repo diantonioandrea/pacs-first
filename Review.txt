@@ -1,0 +1,7 @@
+
+The main output of the solver is handled by the method show. This allows a clean print of the output.
+The different options that the user can give are handled by overaloading the constructor.
+The student implemented fixed_strategy, exponential_strategy, inverse strategy, armijo_strategy. Also, as extra method, heavy ball and Nesterov were implemented.
+
+The overall code is excellent.
+From the commits and the quality of the work I can see the dedication and the skill. Very good job!
