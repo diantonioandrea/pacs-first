@@ -1,4 +1,4 @@
-# Advanced Programming for Scientific Computing - Initial Challenge
+# Advanced Programming for Scientific Computing - First Challenge
 
 _A Gradient Method for Multivariate Function Minimization_
 
